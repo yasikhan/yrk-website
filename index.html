@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yasi Khan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IBM+Plex+Mono:wght@300;400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .shelf-view {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 2rem 2rem 4rem;
+  }
+  .shelf-greeting {
+    font-family: var(--serif); font-size: 2.8rem;
+    font-weight: 400; color: var(--ink);
+    letter-spacing: -0.015em; text-align: center;
+    margin-bottom: 0.15rem;
+  }
+  .shelf-sub {
+    font-family: var(--mono); font-size: 0.7rem;
+    color: var(--ink3); margin-bottom: 2.8rem;
+    text-align: center; letter-spacing: 0.04em;
+  }
+  .scene {
+    position: relative;
+    width: 920px; max-width: 96vw;
+    aspect-ratio: 920 / 520;
+  }
+  .scene canvas {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+  }
+  .scene-img {
+    position: absolute; cursor: pointer;
+    display: flex; align-items: flex-end; justify-content: center;
+    transition: filter 0.2s ease;
+  }
+  .scene-img:hover { filter: brightness(0.95); }
+  .scene-img img {
+    width: 100%; height: 100%;
+    object-fit: contain; object-position: bottom;
+    mix-blend-mode: multiply;
+  }
+  .scene-img .placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 0.55rem;
+    color: var(--ink4); text-align: center; line-height: 1.4;
+  }
+  .hover-label {
+    position: absolute; bottom: -34px;
+    left: 0; width: 100%;
+    display: flex; justify-content: center;
+    pointer-events: none;
+    opacity: 0; transition: opacity 0.18s ease;
+  }
+  .hover-label.visible { opacity: 1; }
+  .hover-label span {
+    font-family: var(--hand); font-size: 1.2rem;
+    color: var(--ink2); background: var(--highlight);
+    padding: 0.15rem 0.65rem; border-radius: 2px;
+  }
+  .shelf-hint {
+    margin-top: 2.8rem; font-family: var(--mono);
+    font-size: 0.64rem; color: var(--ink4);
+    text-align: center; letter-spacing: 0.02em;
+  }
+  .shelf-footer {
+    position: fixed; bottom: 1.5rem; left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--mono); font-size: 0.66rem;
+    color: var(--ink4); display: flex; gap: 1.1rem;
+  }
+  .shelf-footer a {
+    color: var(--ink4); text-decoration: none; transition: color 0.15s;
+  }
+  .shelf-footer a:hover { color: var(--ink2); }
+
+  @media (max-width: 768px) {
+    .shelf-greeting { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="shelf-view" id="shelfView">
+  <h1 class="shelf-greeting">Yasi Khan</h1>
+  <p class="shelf-sub">product · research · writing</p>
+
+  <div class="scene" id="scene">
+    <canvas id="shelfCanvas"></canvas>
+
+    <div class="scene-img" id="cameraImg"
+         style="left: 5%; bottom: 26%; width: 12%; height: 34%;">
+      <img src="assets/camera-sketch.png" alt="Fujifilm X-T50"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;">
+        place<br>camera-sketch.png<br>here
+      </div>
+    </div>
+
+    <div class="scene-img" id="phoneImg"
+         style="right: 5%; bottom: 26%; width: 10%; height: 28%;">
+      <img src="assets/phone-sketch.png" alt="Rotary phone"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;">
+        place<br>phone-sketch.png<br>here
+      </div>
+    </div>
+
+    <div class="hover-label" id="hoverLabel"><span id="hoverText"></span></div>
+  </div>
+
+  <p class="shelf-hint">click a spine to explore</p>
+  <div class="shelf-footer">
+    <a href="https://www.linkedin.com/in/yasmeena-khan/">LinkedIn</a>
+    <a href="https://twitter.com/yasmeena_khan">Twitter</a>
+    <a href="https://www.instagram.com/yasmeena_khan/">Instagram</a>
+  </div>
+</div>
+
+<script src="https://unpkg.com/roughjs/bundled/rough.js"></script>
+<script>
+if (typeof rough === 'undefined') {
+  document.write('<script src="https://cdn.jsdelivr.net/npm/roughjs/bundled/rough.js"><\/script>');
+}
+</script>
+<script src="js/shelf.js"></script>
+</body>
+</html>

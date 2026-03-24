@@ -1,0 +1,110 @@
+/* ============ FONTS ============ */
+@font-face {
+  font-family: 'YasiHand';
+  src: url('../assets/YasiHand-Regular.woff2') format('woff2'),
+       url('../assets/YasiHand-Regular.ttf') format('truetype');
+  font-weight: normal; font-style: normal; font-display: swap;
+}
+
+/* ============ VARIABLES ============ */
+:root {
+  --page: #f5f1e8;
+  --ink: #1a1a1a;
+  --ink2: #3a3a3a;
+  --ink3: #777;
+  --ink4: #aaa;
+  --highlight: rgba(253, 237, 120, 0.55);
+  --highlight-strong: rgba(253, 237, 120, 0.8);
+  --hand: 'YasiHand', 'Caveat', cursive;
+  --serif: 'Cormorant', Georgia, serif;
+  --body: 'Newsreader', Georgia, serif;
+  --mono: 'IBM Plex Mono', monospace;
+}
+
+/* ============ RESET & BASE ============ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 17px; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--body); color: var(--ink);
+  background: var(--page); min-height: 100vh; overflow-x: hidden;
+}
+::selection { background: var(--highlight-strong); }
+
+/* ============ CONTENT PAGE LAYOUT ============ */
+.content-nav {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--page);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  padding: 0.9rem 2rem;
+  display: flex; align-items: baseline; justify-content: space-between;
+}
+.back-btn {
+  font-family: var(--hand); font-size: 1.15rem;
+  color: var(--ink3); background: none; border: none;
+  cursor: pointer; padding: 0.2rem 0.5rem; position: relative;
+  transition: color 0.15s; text-decoration: none;
+}
+.back-btn::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--highlight); opacity: 0; z-index: -1;
+  border-radius: 2px; transition: opacity 0.15s;
+}
+.back-btn:hover::before { opacity: 1; }
+.back-btn:hover { color: var(--ink); }
+.content-title {
+  font-family: var(--serif); font-size: 1.05rem;
+  font-weight: 500; color: var(--ink);
+}
+.content-body {
+  max-width: 640px; margin: 0 auto; padding: 4rem 2rem 6rem;
+}
+.content-body h1 {
+  font-family: var(--serif); font-size: 2.2rem;
+  font-weight: 400; margin-bottom: 1.5rem; line-height: 1.15;
+}
+.content-body h2 {
+  font-family: var(--hand); font-size: 1.4rem;
+  font-weight: 400; color: var(--ink);
+  margin: 2.5rem 0 1rem; position: relative; display: inline-block;
+}
+.content-body h2::after {
+  content: ''; position: absolute;
+  left: -2px; right: -2px; bottom: 2px;
+  height: 5px; background: var(--highlight); z-index: -1;
+}
+.content-body p {
+  font-size: 1.03rem; line-height: 1.78;
+  color: var(--ink2); margin-bottom: 1rem;
+}
+.content-body a {
+  color: #3a4f6a; text-decoration: underline;
+  text-decoration-color: rgba(58,79,106,0.3);
+  text-underline-offset: 3px;
+}
+.content-body a:hover { text-decoration-color: #3a4f6a; }
+
+/* ============ ENTRIES (research, writing, projects) ============ */
+.entry {
+  padding: 1rem 0; border-bottom: 1px solid rgba(0,0,0,0.06);
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 1rem; align-items: baseline; transition: padding-left 0.15s;
+}
+.entry:first-of-type { border-top: 1px solid rgba(0,0,0,0.06); }
+.entry:hover { padding-left: 0.3rem; }
+.entry-title { font-size: 1rem; font-weight: 500; color: var(--ink); line-height: 1.35; }
+.entry-desc { font-size: 0.85rem; font-weight: 300; font-style: italic; color: var(--ink3); margin-top: 0.1rem; }
+.entry-meta { font-family: var(--mono); font-size: 0.68rem; color: var(--ink3); white-space: nowrap; }
+
+/* ============ CONTACT ============ */
+.contact-links {
+  margin-top: 1rem; line-height: 2.2;
+  font-family: var(--mono); font-size: 0.82rem; color: var(--ink2);
+}
+.contact-links a { color: #3a4f6a; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .content-body { padding: 2.5rem 1.2rem 4rem; }
+  .content-body h1 { font-size: 1.7rem; }
+  .entry { grid-template-columns: 1fr; gap: 0.2rem; }
+}
