@@ -143,7 +143,7 @@
 
   /* Hover label */
   .hover-label {
-    position: absolute; top: -2px;
+    position: absolute; top: 9.5%;
     left: 0; width: 100%;
     display: flex; justify-content: center;
     pointer-events: none;
@@ -157,9 +157,10 @@
   }
 
   .shelf-hint {
-    margin-top: 2.8rem; font-family: var(--mono);
+    margin-top: -6rem; font-family: var(--mono);
     font-size: 0.64rem; color: var(--ink4);
     text-align: center; letter-spacing: 0.02em;
+    position: relative; z-index: 10;
   }
   .shelf-footer {
     position: fixed; bottom: 0; left: 0; right: 0;
@@ -172,8 +173,18 @@
     z-index: 100;
   }
   .shelf-footer a {
-    color: var(--ink4); text-decoration: none; transition: color 0.15s;
+    color: var(--ink4); text-decoration: none;
+    padding: 0.15rem 0.4rem; position: relative;
+    transition: color 0.15s; isolation: isolate;
   }
+  .shelf-footer a::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--highlight); opacity: 0; z-index: -1;
+    border-radius: 3px 1px 4px 2px;
+    transform: rotate(-0.5deg);
+    transition: opacity 0.15s;
+  }
+  .shelf-footer a:hover::before { opacity: 1; }
   .shelf-footer a:hover { color: var(--ink2); }
   .shelf-footer .sep {
     color: var(--ink4);
@@ -276,7 +287,7 @@
     <div class="hover-label" id="hoverLabel"><span id="hoverText"></span></div>
   </div>
 
-  <p class="shelf-hint">click a spine to explore</p>
+  <p class="shelf-hint">click to explore</p>
   <div class="shelf-footer">
     <a href="https://www.linkedin.com/in/yasmeena-khan/">linkedin</a>
     <span class="sep">&ndash;</span>
