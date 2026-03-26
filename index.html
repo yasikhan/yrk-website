@@ -88,13 +88,17 @@
   .resume-link {
     font-family: var(--hand);
     font-size: clamp(0.7rem, 1.4vw, 1rem);
-    color: rgba(26,26,26,0.45);
+    color: rgba(26,26,26,0.55);
     text-decoration: none;
-    transition: color 0.15s;
+    background: var(--highlight);
+    padding: 1px 5px;
+    border-radius: 3px 1px 4px 2px;
+    transition: background 0.15s, color 0.15s;
     pointer-events: auto;
   }
   .resume-link:hover {
-    color: rgba(26,26,26,0.7);
+    background: var(--highlight-strong);
+    color: rgba(26,26,26,0.75);
   }
   .notebook-bio {
     font-family: var(--body);
