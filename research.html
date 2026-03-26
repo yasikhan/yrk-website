@@ -149,7 +149,7 @@ if (location.hash) {
   var id = location.hash.slice(1);
   var tab = document.querySelector('.section-tab[data-section="' + id + '"]');
   if (tab) tab.click();
-  window.scrollTo(0, 0);
+  setTimeout(function() { window.scrollTo(0, 0); }, 0);
 }
 </script>
 </body>
