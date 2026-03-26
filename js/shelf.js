@@ -68,7 +68,7 @@ const pageMap = {
   research: 'research.html',
   writing: 'writing.html',
   projects: 'projects.html',
-  photography: 'photography.html',
+  photography: 'projects.html#photography',
   contact: 'contact.html'
 };
 
