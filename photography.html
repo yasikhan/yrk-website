@@ -11,9 +11,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IBM+Plex+Mono:wght@300;400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <style>
+  .content-body.gallery-page {
+    max-width: 1100px;
+  }
   .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
     margin-top: 2rem;
   }
@@ -51,11 +54,11 @@
     margin-top: 2rem;
   }
 
+  @media (max-width: 1000px) {
+    .gallery { grid-template-columns: repeat(3, 1fr); }
+  }
   @media (max-width: 768px) {
-    .gallery {
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1.5rem;
-    }
+    .gallery { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
   }
   @media (max-width: 480px) {
     .gallery {
@@ -73,7 +76,7 @@
   <a class="back-btn" href="index.html">&larr; bookshelf</a>
   <span class="content-title">photography</span>
 </nav>
-<div class="content-body">
+<div class="content-body gallery-page">
   <h1>photography</h1>
   <p>Amateur photographer, love focusing on landscapes.</p>
   <div class="gallery" id="gallery"></div>
@@ -95,10 +98,14 @@
       }
 
       files.forEach(file => {
+        const name = file.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
+        // Check if name looks like a camera default (e.g. IMG 1234, DSCF0029)
+        const isDefault = /^(IMG|DSCF|DSC|P)\s*\d+$/i.test(name);
         const polaroid = document.createElement('div');
         polaroid.className = 'polaroid';
         polaroid.innerHTML =
-          '<img src="' + photoDir + file + '" alt="" loading="lazy">';
+          '<img src="' + photoDir + file + '" alt="' + (isDefault ? '' : name) + '" loading="lazy">' +
+          (isDefault ? '' : '<div class="polaroid-caption">' + name + '</div>');
         gallery.appendChild(polaroid);
       });
     })
