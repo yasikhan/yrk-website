@@ -10,6 +10,63 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IBM+Plex+Mono:wght@300;400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<style>
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  .polaroid {
+    background: #fff;
+    padding: 0.8rem 0.8rem 2.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06);
+    transform: rotate(var(--rot, 0deg));
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .polaroid:nth-child(odd)  { --rot: -1.2deg; }
+  .polaroid:nth-child(even) { --rot: 1.5deg; }
+  .polaroid:nth-child(3n)   { --rot: -0.6deg; }
+  .polaroid:hover {
+    transform: rotate(0deg) scale(1.03);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+  .polaroid img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+  }
+  .polaroid-caption {
+    font-family: var(--hand);
+    font-size: 0.9rem;
+    color: var(--ink3);
+    text-align: center;
+    margin-top: 0.6rem;
+  }
+  .gallery-empty {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--ink4);
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .gallery {
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.5rem;
+    }
+  }
+  @media (max-width: 480px) {
+    .gallery {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+</style>
 </head>
 <body>
 <nav class="content-nav">
@@ -18,7 +75,53 @@
 </nav>
 <div class="content-body">
   <h1>photography</h1>
-  <p>Shot on Fujifilm X-T50. Gallery coming soon.</p>
+  <p>Amateur photographer, love focusing on landscapes.</p>
+  <div class="gallery" id="gallery"></div>
+  <p class="gallery-empty" id="galleryEmpty" style="display:none;">No photos yet — drop images into the <code>photos/</code> folder.</p>
 </div>
+
+<script>
+(function() {
+  const gallery = document.getElementById('gallery');
+  const emptyMsg = document.getElementById('galleryEmpty');
+  const photoDir = 'photos/';
+  const extensions = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+
+  // Fetch the photos directory listing and parse image filenames
+  fetch(photoDir)
+    .then(r => r.text())
+    .then(html => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const links = Array.from(doc.querySelectorAll('a'));
+      const files = links
+        .map(a => a.getAttribute('href'))
+        .filter(href => {
+          if (!href) return false;
+          const ext = href.split('.').pop().toLowerCase();
+          return extensions.includes(ext);
+        })
+        .sort();
+
+      if (files.length === 0) {
+        emptyMsg.style.display = 'block';
+        return;
+      }
+
+      files.forEach(file => {
+        const name = file.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
+        const polaroid = document.createElement('div');
+        polaroid.className = 'polaroid';
+        polaroid.innerHTML =
+          '<img src="' + photoDir + file + '" alt="' + name + '" loading="lazy">' +
+          '<div class="polaroid-caption">' + name + '</div>';
+        gallery.appendChild(polaroid);
+      });
+    })
+    .catch(() => {
+      emptyMsg.style.display = 'block';
+    });
+})();
+</script>
 </body>
 </html>
