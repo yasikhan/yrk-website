@@ -32,6 +32,23 @@ function draw() {
   rc.line(CW - 100, SHELF_Y, CW - 100, SHELF_Y + 14, ink(SEED + 3, { strokeWidth: 2.2 }));
 }
 
+// ============ NAVIGATION ============
+const pageMap = {
+  about: 'about.html',
+  'research-academic': 'research.html#academic',
+  'research-professional': 'research.html#professional',
+  'writing-technology': 'writing.html#technology',
+  'writing-baseball': 'writing.html#baseball',
+  'projects-technical': 'projects.html#technical',
+  photography: 'projects.html#photography',
+  contact: 'contact.html'
+};
+
+function navigateTo(id) {
+  const page = pageMap[id];
+  if (page) window.location.href = page;
+}
+
 // ============ HOVER LABELS ============
 function bindHover(el, label) {
   el.addEventListener('mouseenter', () => {
@@ -43,7 +60,7 @@ function bindHover(el, label) {
   });
 }
 
-// Camera & phone (may be hidden)
+// Camera & phone
 const cameraImg = document.getElementById('cameraImg');
 const phoneImg = document.getElementById('phoneImg');
 
@@ -61,26 +78,6 @@ document.querySelectorAll('.book-img').forEach(el => {
   bindHover(el, el.dataset.label);
   el.addEventListener('click', () => navigateTo(el.dataset.nav));
 });
-
-// ============ NAVIGATION ============
-const pageMap = {
-  about: 'about.html',
-  research: 'research.html',
-  writing: 'writing.html',
-  projects: 'projects.html',
-  'research-academic': 'research.html#academic',
-  'research-professional': 'research.html#professional',
-  'writing-technology': 'writing.html#technology',
-  'writing-baseball': 'writing.html#baseball',
-  'projects-technical': 'projects.html#technical',
-  photography: 'projects.html#photography',
-  contact: 'contact.html'
-};
-
-function navigateTo(id) {
-  const page = pageMap[id];
-  if (page) window.location.href = page;
-}
 
 // ============ INIT ============
 draw();
