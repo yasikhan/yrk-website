@@ -18,21 +18,26 @@
     columns: 4;
     column-gap: 2rem;
     margin-top: 2rem;
+    border: none;
+  }
+  .gallery * {
+    border-top: none;
+    border-bottom: none;
   }
   .polaroid {
     background: #fff;
     padding: 0.8rem 0.8rem 2.5rem;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06);
     transform: rotate(var(--rot, 0deg));
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: box-shadow 0.2s ease;
     break-inside: avoid;
     margin-bottom: 2rem;
+    border: none;
   }
   .polaroid:nth-child(odd)  { --rot: -1.2deg; }
   .polaroid:nth-child(even) { --rot: 1.5deg; }
   .polaroid:nth-child(3n)   { --rot: -0.6deg; }
   .polaroid:hover {
-    transform: rotate(0deg) scale(1.03);
     box-shadow: 0 6px 20px rgba(0,0,0,0.15);
   }
   .polaroid img {
