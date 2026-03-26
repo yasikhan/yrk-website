@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yasi Khan</title>
+<meta name="description" content="Yasmeena Khan — researcher, writer, and product thinker. Oxford MSc, Stanford BS in Symbolic Systems. Research on Silicon Valley ideology and the race for AGI.">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -82,6 +83,18 @@
     margin-bottom: 0.4em;
     border-bottom: 1px solid rgba(26,26,26,0.08);
     padding-bottom: 0.2em;
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .resume-link {
+    font-family: var(--hand);
+    font-size: clamp(0.7rem, 1.4vw, 1rem);
+    color: rgba(26,26,26,0.45);
+    text-decoration: none;
+    transition: color 0.15s;
+    pointer-events: auto;
+  }
+  .resume-link:hover {
+    color: rgba(26,26,26,0.7);
   }
   .notebook-bio {
     font-family: var(--body);
@@ -221,7 +234,7 @@
   <div class="notebook-section" id="notebookSection">
     <img src="assets/notebook-sketch.png" alt="Notebook">
     <div class="notebook-overlay">
-      <div class="notebook-header">hi, i'm yasi</div>
+      <div class="notebook-header"><span>hi, i'm yasi</span><a href="assets/resume.pdf" class="resume-link">resume/cv</a></div>
       <div class="notebook-bio">
         My research focuses on the evolution of ideology in Silicon Valley, and ideology's particular impact on the race for AGI. I hold an MSc with Distinction
         from the University of Oxford in Social Science of the Internet,
