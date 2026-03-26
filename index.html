@@ -106,70 +106,52 @@
     text-align: center;
   }
 
-  /* ===== Notebook (standalone, full width) ===== */
-  .notebook-section {
-    width: 607px; max-width: 63vw;
-    position: relative;
-    margin-bottom: 1.4rem;
+  /* ===== Intro section ===== */
+  .intro-section {
+    display: flex;
+    align-items: flex-start;
+    gap: 2.5rem;
+    max-width: 700px;
+    margin-bottom: 2rem;
   }
-  .notebook-section img {
-    width: 100%; height: auto;
-    display: block;
-    pointer-events: none;
+  .intro-text {
+    flex: 1;
   }
-  .notebook-overlay {
-    position: absolute;
-    top: 18%; left: 11%; right: 7%; bottom: 12%;
-    overflow: hidden;
-    pointer-events: none;
-  }
-  .notebook-overlay * {
-    pointer-events: auto;
-  }
-  .notebook-header {
+  .intro-header {
     font-family: var(--hand);
-    font-size: clamp(1rem, 2.2vw, 1.6rem);
+    font-size: 1.6rem;
     font-weight: 600;
     color: rgba(26,26,26,0.6);
     margin-bottom: 0.4em;
-    border-bottom: 1px solid rgba(26,26,26,0.08);
-    padding-bottom: 0.2em;
     display: flex; justify-content: space-between; align-items: baseline;
   }
   .resume-link {
     font-family: var(--hand);
-    font-size: clamp(0.7rem, 1.4vw, 1rem);
+    font-size: 1rem;
     color: rgba(26,26,26,0.55);
     text-decoration: none;
     background: var(--highlight);
     padding: 1px 5px;
     border-radius: 3px 1px 4px 2px;
     transition: background 0.15s, color 0.15s;
-    pointer-events: auto;
   }
   .resume-link:hover {
     background: var(--highlight-strong);
     color: rgba(26,26,26,0.75);
   }
-  .notebook-bio {
+  .intro-bio {
     font-family: var(--body);
-    font-size: clamp(0.6rem, 1.3vw, 0.95rem);
-    line-height: 1.7;
-    color: rgba(26,26,26,0.42);
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: var(--ink2);
   }
-  .notebook-bio .hl {
-    background: var(--highlight);
-    color: rgba(26,26,26,0.65);
-    text-decoration: none;
-    padding: 1px 3px;
-    border-radius: 3px 1px 4px 2px;
-    cursor: pointer;
-    transition: background 0.15s;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-  }
-  .notebook-bio .hl:hover {
-    background: var(--highlight-strong);
+  .intro-photo {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    margin-top: 0.3rem;
   }
 
   /* ===== Bookshelf scene ===== */
@@ -276,20 +258,16 @@
       width: 100%; max-width: 100%;
       margin-bottom: 1rem;
     }
-    .notebook-overlay {
-      top: 16%; left: 10%; right: 6%; bottom: 10%;
+    .intro-section {
+      gap: 1.5rem;
     }
-    .notebook-header {
-      font-size: 0.85rem;
+    .intro-photo {
+      width: 100px;
+      height: 100px;
     }
-    .notebook-bio {
-      font-size: 0.6rem;
-      line-height: 1.55;
-    }
-    .resume-link {
-      font-size: 0.6rem;
-      padding: 0 3px;
-    }
+    .intro-header { font-size: 1.2rem; }
+    .intro-bio { font-size: 0.85rem; }
+    .resume-link { font-size: 0.8rem; }
     .scene {
       aspect-ratio: 920 / 620;
     }
@@ -316,12 +294,24 @@
       font-size: 0.58rem;
     }
     .site-nav .sep { display: none; }
-    .notebook-bio {
-      font-size: 0.52rem;
-      line-height: 1.45;
+    .intro-section {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
     }
-    .notebook-header { font-size: 0.75rem; }
-    .resume-link { font-size: 0.5rem; }
+    .intro-header {
+      justify-content: center;
+      gap: 1rem;
+      font-size: 1.1rem;
+    }
+    .intro-bio { font-size: 0.82rem; }
+    .intro-photo {
+      width: 110px;
+      height: 110px;
+      order: -1;
+    }
+    .resume-link { font-size: 0.75rem; }
     .scene {
       aspect-ratio: 920 / 700;
     }
@@ -376,12 +366,11 @@
     <a href="contact.html">Contact</a>
   </nav>
 
-  <!-- Notebook (standalone, same width as shelf) -->
-  <div class="notebook-section" id="notebookSection">
-    <img src="assets/notebook-sketch.png" alt="Notebook">
-    <div class="notebook-overlay">
-      <div class="notebook-header"><span>hi, i'm yasi</span><a href="assets/resume.pdf" class="resume-link">resume/cv</a></div>
-      <div class="notebook-bio">
+  <!-- Intro -->
+  <div class="intro-section">
+    <div class="intro-text">
+      <div class="intro-header"><span>hi, i'm yasi</span><a href="assets/resume.pdf" class="resume-link">resume/cv</a></div>
+      <div class="intro-bio">
         My research focuses on the evolution of ideology in Silicon Valley, and ideology's particular impact on the race for AGI. I hold an MSc with Distinction
         from the University of Oxford in Social Science of the Internet,
         and a Bachelor's with Honors and Distinction from Stanford University
@@ -394,6 +383,7 @@
         in Poetry.
       </div>
     </div>
+    <img class="intro-photo" src="assets/yasi-image.jpg" alt="Yasi Khan">
   </div>
 
   <!-- Bookshelf: camera, 4 books, phone -->
