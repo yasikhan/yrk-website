@@ -4,12 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projects — Yasi Khan</title>
-<meta name="description" content="Projects by Yasmeena Khan — code and photography.">
+<meta name="description" content="Projects by Yasmeena Khan — coding and photography.">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IBM+Plex+Mono:wght@300;400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<style>
+  .section-tabs {
+    display: flex; gap: 0.5rem;
+    margin-bottom: 2rem;
+    font-family: var(--mono); font-size: 0.72rem;
+  }
+  .section-tab {
+    padding: 0.3rem 0.8rem;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 3px;
+    background: none; color: var(--ink3);
+    cursor: pointer; transition: all 0.15s;
+    font-family: inherit; font-size: inherit;
+  }
+  .section-tab:hover { border-color: rgba(0,0,0,0.2); color: var(--ink2); }
+  .section-tab.active {
+    background: var(--highlight-strong);
+    border-color: transparent; color: var(--ink);
+  }
+  .projects-section { display: none; }
+  .projects-section.active { display: block; }
+</style>
 </head>
 <body>
 <nav class="content-nav">
@@ -18,20 +40,56 @@
 </nav>
 <div class="content-body">
   <h1>Projects</h1>
-  <div class="entry">
-    <div>
-      <div class="entry-title">Code</div>
-      <div class="entry-desc">Literatus, Oura integration, NCAA Run Expectancy, and more.</div>
-    </div>
-    <div class="entry-meta"><a href="code.html">view</a></div>
+
+  <div class="section-tabs">
+    <button class="section-tab active" data-section="coding">coding</button>
+    <button class="section-tab" data-section="photography">photography</button>
   </div>
-  <div class="entry">
-    <div>
-      <div class="entry-title">Photography</div>
-      <div class="entry-desc">Things I thought were worth looking at again.</div>
+
+  <div class="projects-section active" id="coding">
+    <div class="entry">
+      <div>
+        <div class="entry-title">Literatus</div>
+        <div class="entry-desc">Designed, created, and hosted Literatus - a new way to rate and keep track of books using a binary search algorithm.</div>
+      </div>
+      <div class="entry-meta"><a href="https://literatusapp.com">literatusapp.com</a></div>
     </div>
-    <div class="entry-meta"><a href="photography.html">view</a></div>
+    <div class="entry">
+      <div>
+        <div class="entry-title">Oura &lt;&gt; Poke Integration</div>
+        <div class="entry-desc">Built an Oura Ring integration for Poke to sync sleep and activity data.</div>
+      </div>
+      <div class="entry-meta"><a href="https://github.com/yasikhan/oura-integration">repo</a></div>
+    </div>
+    <div class="entry">
+      <div>
+        <div class="entry-title">NCAA Run Expectancy</div>
+        <div class="entry-desc">Computed run expectancy tables in order to create xwOBA+ and WAR statistics for D1 college baseball.</div>
+      </div>
+      <div class="entry-meta"><a href="https://github.com/yasmeenakhan/ncaa-re24">repo</a></div>
+    </div>
+  </div>
+
+  <div class="projects-section" id="photography">
+    <p>Things I thought were worth looking at again.</p>
+    <p style="margin-top: 0.5rem;"><a href="photography.html">View gallery &rarr;</a></p>
   </div>
 </div>
+
+<script>
+document.querySelectorAll('.section-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.projects-section').forEach(s => s.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.section).classList.add('active');
+  });
+});
+if (location.hash) {
+  var id = location.hash.slice(1);
+  var tab = document.querySelector('.section-tab[data-section="' + id + '"]');
+  if (tab) tab.click();
+}
+</script>
 </body>
 </html>
