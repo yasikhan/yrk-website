@@ -31,6 +31,67 @@
   }
   .projects-section { display: none; }
   .projects-section.active { display: block; }
+
+  /* Gallery */
+  .content-body.gallery-wide { max-width: 1100px; }
+  .gallery {
+    columns: 4;
+    column-gap: 2rem;
+    margin-top: 2rem;
+  }
+  .polaroid {
+    display: inline-block;
+    width: 100%;
+    background: #fff;
+    padding: 0.8rem 0.8rem 2.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06);
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 2rem;
+    overflow: hidden;
+  }
+  .polaroid img {
+    width: 100%;
+    display: block;
+  }
+  .polaroid-caption {
+    text-align: center;
+    margin-top: 0.6rem;
+  }
+  .polaroid-title {
+    font-family: var(--hand);
+    font-size: 0.9rem;
+    color: var(--ink2);
+  }
+  .polaroid-meta {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    color: var(--ink4);
+    margin-top: 0.15rem;
+  }
+  .gallery-empty {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--ink4);
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 1000px) {
+    .gallery { columns: 3; }
+  }
+  @media (max-width: 768px) {
+    .gallery { columns: 2; column-gap: 1.5rem; }
+    .polaroid { margin-bottom: 1.5rem; }
+  }
+  @media (max-width: 480px) {
+    .gallery {
+      columns: 1;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
 </style>
 </head>
 <body>
@@ -38,7 +99,7 @@
   <a class="back-btn" href="index.html">&larr; homepage</a>
   <span class="content-title">Projects</span>
 </nav>
-<div class="content-body">
+<div class="content-body" id="contentBody">
   <h1>Projects</h1>
 
   <div class="section-tabs">
@@ -72,23 +133,83 @@
 
   <div class="projects-section" id="photography">
     <p>Things I thought were worth looking at again.</p>
-    <p style="margin-top: 0.5rem;"><a href="photography.html">View gallery &rarr;</a></p>
+    <div class="gallery" id="gallery"></div>
+    <p class="gallery-empty" id="galleryEmpty" style="display:none;">No photos yet.</p>
   </div>
 </div>
 
 <script>
+var contentBody = document.getElementById('contentBody');
+
+function switchTab(tab) {
+  document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.projects-section').forEach(s => s.classList.remove('active'));
+  tab.classList.add('active');
+  document.getElementById(tab.dataset.section).classList.add('active');
+  if (tab.dataset.section === 'photography') {
+    contentBody.classList.add('gallery-wide');
+    loadGallery();
+  } else {
+    contentBody.classList.remove('gallery-wide');
+  }
+}
+
 document.querySelectorAll('.section-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.projects-section').forEach(s => s.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById(tab.dataset.section).classList.add('active');
-  });
+  tab.addEventListener('click', () => switchTab(tab));
 });
+
 if (location.hash) {
   var id = location.hash.slice(1);
   var tab = document.querySelector('.section-tab[data-section="' + id + '"]');
-  if (tab) tab.click();
+  if (tab) switchTab(tab);
+}
+
+var galleryLoaded = false;
+function loadGallery() {
+  if (galleryLoaded) return;
+  galleryLoaded = true;
+  var gallery = document.getElementById('gallery');
+  var emptyMsg = document.getElementById('galleryEmpty');
+  var photoDir = 'photos/';
+
+  fetch(photoDir + 'manifest.json')
+    .then(function(r) { return r.json(); })
+    .then(function(files) {
+      if (files.length === 0) {
+        emptyMsg.style.display = 'block';
+        return;
+      }
+      files.forEach(function(file) {
+        var raw = file.replace(/\.[^.]+$/, '');
+        var isDefault = /^(IMG|DSCF|DSC|P)\s*\d+$/i.test(raw.replace(/[-_]/g, ' '));
+        var caption = '';
+        if (!isDefault) {
+          var yearMatch = raw.match(/[\s,\-]+(\d{4})$/);
+          var year = yearMatch ? yearMatch[1] : '';
+          var rest = yearMatch ? raw.substring(0, raw.length - yearMatch[0].length).trim() : raw;
+          var comma = rest.indexOf(',');
+          var title = comma > -1 ? rest.substring(0, comma).trim() : rest.trim();
+          var location = comma > -1 ? rest.substring(comma + 1).trim() : '';
+          var meta = [location, year].filter(Boolean).join(', ');
+          caption = '<div class="polaroid-caption">' +
+            '<div class="polaroid-title">' + title + '</div>' +
+            (meta ? '<div class="polaroid-meta">' + meta + '</div>' : '') +
+            '</div>';
+        }
+        var polaroid = document.createElement('div');
+        polaroid.className = 'polaroid';
+        var img = new Image();
+        img.loading = 'lazy';
+        img.alt = isDefault ? '' : raw;
+        img.src = photoDir + encodeURIComponent(file);
+        polaroid.appendChild(img);
+        if (caption) polaroid.insertAdjacentHTML('beforeend', caption);
+        gallery.appendChild(polaroid);
+      });
+    })
+    .catch(function() {
+      emptyMsg.style.display = 'block';
+    });
 }
 </script>
 </body>
