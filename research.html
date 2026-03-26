@@ -8,6 +8,34 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IBM+Plex+Mono:wght@300;400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<style>
+  .section-tabs {
+    display: flex; gap: 0.5rem;
+    margin-bottom: 2rem;
+    font-family: var(--mono); font-size: 0.72rem;
+  }
+  .section-tab {
+    padding: 0.3rem 0.8rem;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 3px;
+    background: none; color: var(--ink3);
+    cursor: pointer; transition: all 0.15s;
+    font-family: inherit; font-size: inherit;
+  }
+  .section-tab:hover { border-color: rgba(0,0,0,0.2); color: var(--ink2); }
+  .section-tab.active {
+    background: var(--highlight-strong);
+    border-color: transparent; color: var(--ink);
+  }
+  .research-section { display: none; }
+  .research-section.active { display: block; }
+  .abstract {
+    font-size: 0.88rem; line-height: 1.7;
+    color: var(--ink3); margin-top: 0.5rem;
+    padding-left: 0.8rem;
+    border-left: 2px solid rgba(0,0,0,0.06);
+  }
+</style>
 </head>
 <body>
 <nav class="content-nav">
@@ -17,27 +45,76 @@
 <div class="content-body">
   <h1>research</h1>
   <p>My research explores how AI systems shape political discourse and public reason, and the ideologies underlying their construction.</p>
-  <div class="entry">
-    <div>
-      <div class="entry-title">How College Students Can Depolarize</div>
-      <div class="entry-desc">Evidence for political moderation within homogeneous groups</div>
-    </div>
-    <div class="entry-meta">Khan &amp; Siu, 2023</div>
+
+  <div class="section-tabs">
+    <button class="section-tab active" data-section="academic">academic</button>
+    <button class="section-tab" data-section="professional">professional</button>
   </div>
-  <div class="entry">
-    <div>
-      <div class="entry-title">Do LLMs Dream of Electric Speech?</div>
-      <div class="entry-desc">Vacuous ghosts, selfhood, and freedom of speech jurisprudence</div>
+
+  <div class="research-section active" id="academic">
+    <div class="entry">
+      <div>
+        <div class="entry-title">How College Students Can Depolarize</div>
+        <div class="entry-desc">Evidence for political moderation within homogeneous groups</div>
+        <div class="abstract">This paper demonstrates that, after deliberation (using an AI-moderated platform), college students showed immense moderation potential and affective depolarization, especially even given their homogeneity as a bloc within American politics. These findings offer optimism for future research in homogeneous groups through understanding that group polarization can be avoided with the right precautionary measures.</div>
+      </div>
+      <div class="entry-meta">Khan &amp; Siu, 2023</div>
     </div>
-    <div class="entry-meta">Oxford, 2025</div>
+    <div class="entry">
+      <div>
+        <div class="entry-title">Do LLMs Dream of Electric Speech?</div>
+        <div class="entry-desc">Vacuous ghosts, selfhood, and freedom of speech jurisprudence</div>
+        <div class="abstract">This paper investigates the philosophical underpinnings of selfhood and large language models in light of evolving First Amendment and European Union jurisprudence on freedom of speech and freedom of expression. It argues that traditional free-speech doctrines are predicated on core assumptions (intentionality and selfhood) that LLMs categorically lack, and proposes establishing LLM outputs as a new category of <em>language</em> as opposed to <em>speech</em>.</div>
+      </div>
+      <div class="entry-meta">Oxford, 2025</div>
+    </div>
+    <div class="entry">
+      <div>
+        <div class="entry-title">The Rise of the Corporation-State</div>
+        <div class="entry-desc">How the British East India Company colonized the Subcontinent</div>
+        <div class="abstract">This paper explores the creation of a novel type of governance structure: the corporation-state, which combines private ownership with sovereign power. Through archival and theoretical analysis, it investigates how the British East India Company presented the first example of this structure, underscoring broader tensions about empire, legitimacy, and corporate autonomy.</div>
+      </div>
+      <div class="entry-meta">Stanford, 2022</div>
+    </div>
   </div>
-  <div class="entry">
-    <div>
-      <div class="entry-title">The Rise of the Corporation-State</div>
-      <div class="entry-desc">How the British East India Company colonized the Subcontinent</div>
+
+  <div class="research-section" id="professional">
+    <div class="entry">
+      <div>
+        <div class="entry-title">McKinsey &amp; Company</div>
+        <div class="entry-desc">Business Analyst, Washington D.C. (2022–2024)</div>
+        <div class="abstract">Advised clients across sectors — financial services, manufacturing, education — on strategic AI deployment, balancing value creation with risk mitigation.</div>
+      </div>
+      <div class="entry-meta">2022–2024</div>
     </div>
-    <div class="entry-meta">Stanford, 2022</div>
+    <div class="entry">
+      <div>
+        <div class="entry-title">The Interaction Company (poke.com)</div>
+        <div class="entry-desc">Product &amp; Analytics</div>
+        <div class="abstract">Working on product and analytics for the Interaction Company of California, makers of <a href="https://poke.com/">poke.com</a>.</div>
+      </div>
+      <div class="entry-meta">current</div>
+    </div>
+    <div class="entry">
+      <div>
+        <div class="entry-title">Deliberative Democracy Lab, Stanford</div>
+        <div class="entry-desc">Freelance researcher &amp; panelist</div>
+        <div class="abstract">Expert panelist on a Stanford &times; DeepMind &times; CloseUp panel on "Youth Perspectives on GenAI" (July 2025). Moderator for "National Deliberative Poll on AI Policies" (September 2025).</div>
+      </div>
+      <div class="entry-meta">ongoing</div>
+    </div>
   </div>
 </div>
+
+<script>
+document.querySelectorAll('.section-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.research-section').forEach(s => s.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.section).classList.add('active');
+  });
+});
+</script>
 </body>
 </html>
