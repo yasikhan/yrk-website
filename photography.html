@@ -128,7 +128,7 @@
         var img = new Image();
         img.loading = 'lazy';
         img.alt = isDefault ? '' : raw;
-        img.src = photoDir + encodeURIComponent(file);
+        img.src = photoDir + file.replace(/ /g, '%20');
         polaroid.appendChild(img);
         if (caption) polaroid.insertAdjacentHTML('beforeend', caption);
         gallery.appendChild(polaroid);
