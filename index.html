@@ -78,11 +78,16 @@
   .notebook-section img {
     width: 100%; height: auto;
     display: block;
+    pointer-events: none;
   }
   .notebook-overlay {
     position: absolute;
     top: 18%; left: 11%; right: 7%; bottom: 12%;
     overflow: hidden;
+    pointer-events: none;
+  }
+  .notebook-overlay * {
+    pointer-events: auto;
   }
   .notebook-header {
     font-family: var(--hand);
