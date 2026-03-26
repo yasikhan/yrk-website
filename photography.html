@@ -18,21 +18,20 @@
     columns: 4;
     column-gap: 2rem;
     margin-top: 2rem;
-    border: none;
-  }
-  .gallery * {
-    border-top: none;
-    border-bottom: none;
   }
   .polaroid {
+    display: inline-block;
+    width: 100%;
     background: #fff;
     padding: 0.8rem 0.8rem 2.5rem;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06);
     transform: rotate(var(--rot, 0deg));
     transition: box-shadow 0.2s ease;
     break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
     margin-bottom: 2rem;
-    border: none;
+    overflow: hidden;
   }
   .polaroid:nth-child(odd)  { --rot: -1.2deg; }
   .polaroid:nth-child(even) { --rot: 1.5deg; }
