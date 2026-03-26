@@ -85,36 +85,20 @@
   const gallery = document.getElementById('gallery');
   const emptyMsg = document.getElementById('galleryEmpty');
   const photoDir = 'photos/';
-  const extensions = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
 
-  // Fetch the photos directory listing and parse image filenames
-  fetch(photoDir)
-    .then(r => r.text())
-    .then(html => {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-      const links = Array.from(doc.querySelectorAll('a'));
-      const files = links
-        .map(a => a.getAttribute('href'))
-        .filter(href => {
-          if (!href) return false;
-          const ext = href.split('.').pop().toLowerCase();
-          return extensions.includes(ext);
-        })
-        .sort();
-
+  fetch(photoDir + 'manifest.json')
+    .then(r => r.json())
+    .then(files => {
       if (files.length === 0) {
         emptyMsg.style.display = 'block';
         return;
       }
 
       files.forEach(file => {
-        const name = file.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
         const polaroid = document.createElement('div');
         polaroid.className = 'polaroid';
         polaroid.innerHTML =
-          '<img src="' + photoDir + file + '" alt="' + name + '" loading="lazy">' +
-          '<div class="polaroid-caption">' + name + '</div>';
+          '<img src="' + photoDir + file + '" alt="" loading="lazy">';
         gallery.appendChild(polaroid);
       });
     })
