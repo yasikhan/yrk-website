@@ -111,7 +111,21 @@ body {
 
 /* ============ RESPONSIVE ============ */
 @media (max-width: 768px) {
-  .content-body { padding: 2.5rem 1.2rem 4rem; }
+  .content-nav { padding: 0.7rem 1rem; }
+  .back-btn { font-size: 1rem; }
+  .content-title { font-size: 0.9rem; }
+  .content-body { padding: 2rem 1.2rem 4rem; }
   .content-body h1 { font-size: 1.7rem; }
+  .content-body p { font-size: 0.92rem; }
   .entry { grid-template-columns: 1fr; gap: 0.2rem; }
+  .entry-title { font-size: 0.92rem; }
+  .entry-meta { font-size: 0.62rem; }
+}
+
+@media (max-width: 480px) {
+  .content-body { padding: 1.5rem 1rem 3rem; }
+  .content-body h1 { font-size: 1.4rem; }
+  .content-body h2 { font-size: 1.2rem; }
+  .content-body p { font-size: 0.85rem; line-height: 1.65; }
+  .entry-title { font-size: 0.85rem; }
 }

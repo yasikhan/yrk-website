@@ -224,8 +224,81 @@
   }
 
   @media (max-width: 768px) {
-    .shelf-greeting { font-size: 2rem; }
-    .flourish { width: 110px; }
+    .shelf-view {
+      padding: 1.5rem 1rem 5rem;
+    }
+    .flourish { width: 90px; margin-bottom: 0.6rem; }
+    .shelf-greeting { font-size: 1.8rem; }
+    .site-nav {
+      flex-wrap: wrap; justify-content: center;
+      gap: 0.4rem 0.8rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.65rem;
+    }
+    .notebook-section {
+      width: 100%; max-width: 100%;
+      margin-bottom: 1rem;
+    }
+    .notebook-overlay {
+      top: 16%; left: 10%; right: 6%; bottom: 10%;
+    }
+    .notebook-header {
+      font-size: 0.85rem;
+    }
+    .notebook-bio {
+      font-size: 0.5rem;
+      line-height: 1.5;
+    }
+    .resume-link {
+      font-size: 0.55rem;
+      padding: 0 3px;
+    }
+    .scene {
+      aspect-ratio: 920 / 620;
+    }
+    .hover-label { display: none; }
+    .shelf-hint {
+      margin-top: -4rem;
+      font-size: 0.55rem;
+    }
+    .book-spine-label {
+      font-size: 0.55rem;
+    }
+    .shelf-footer {
+      gap: 0.6rem;
+      font-size: 0.55rem;
+      padding: 0.6rem 0.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .shelf-greeting { font-size: 1.4rem; }
+    .flourish { width: 70px; }
+    .site-nav {
+      gap: 0.3rem 0.5rem;
+      font-size: 0.58rem;
+    }
+    .site-nav .sep { display: none; }
+    .notebook-bio {
+      font-size: 0.42rem;
+      line-height: 1.4;
+    }
+    .notebook-header { font-size: 0.7rem; }
+    .resume-link { font-size: 0.45rem; }
+    .scene {
+      aspect-ratio: 920 / 700;
+    }
+    .book-spine-label {
+      font-size: 0.45rem;
+    }
+    .shelf-hint {
+      margin-top: -3rem;
+    }
+    .shelf-footer .sep { display: none; }
+    .shelf-footer {
+      gap: 0.8rem;
+      font-size: 0.5rem;
+    }
   }
 </style>
 </head>
