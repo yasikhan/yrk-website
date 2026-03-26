@@ -68,6 +68,11 @@ const pageMap = {
   research: 'research.html',
   writing: 'writing.html',
   projects: 'projects.html',
+  'research-academic': 'research.html#academic',
+  'research-professional': 'research.html#professional',
+  'writing-technology': 'writing.html#technology',
+  'writing-baseball': 'writing.html#baseball',
+  'projects-technical': 'projects.html#technical',
   photography: 'projects.html#photography',
   contact: 'contact.html'
 };
