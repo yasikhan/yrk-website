@@ -41,11 +41,19 @@
     display: block;
   }
   .polaroid-caption {
-    font-family: var(--hand);
-    font-size: 0.9rem;
-    color: var(--ink3);
     text-align: center;
     margin-top: 0.6rem;
+  }
+  .polaroid-title {
+    font-family: var(--hand);
+    font-size: 0.9rem;
+    color: var(--ink2);
+  }
+  .polaroid-meta {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    color: var(--ink4);
+    margin-top: 0.15rem;
   }
   .gallery-empty {
     font-family: var(--mono);
@@ -98,14 +106,27 @@
       }
 
       files.forEach(file => {
-        const name = file.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
-        // Check if name looks like a camera default (e.g. IMG 1234, DSCF0029)
-        const isDefault = /^(IMG|DSCF|DSC|P)\s*\d+$/i.test(name);
-        const polaroid = document.createElement('div');
+        const raw = file.replace(/\.[^.]+$/, '');
+        const isDefault = /^(IMG|DSCF|DSC|P)\s*\d+$/i.test(raw.replace(/[-_]/g, ' '));
+        var caption = '';
+        if (!isDefault) {
+          // Parse "title, location - year" or "title, location, year"
+          var yearMatch = raw.match(/[\s,\-]+(\d{4})$/);
+          var year = yearMatch ? yearMatch[1] : '';
+          var rest = yearMatch ? raw.substring(0, raw.length - yearMatch[0].length).trim() : raw;
+          var comma = rest.indexOf(',');
+          var title = comma > -1 ? rest.substring(0, comma).trim() : rest.trim();
+          var location = comma > -1 ? rest.substring(comma + 1).trim() : '';
+          var meta = [location, year].filter(Boolean).join(', ');
+          caption = '<div class="polaroid-caption">' +
+            '<div class="polaroid-title">' + title + '</div>' +
+            (meta ? '<div class="polaroid-meta">' + meta + '</div>' : '') +
+            '</div>';
+        }
+        var polaroid = document.createElement('div');
         polaroid.className = 'polaroid';
         polaroid.innerHTML =
-          '<img src="' + photoDir + file + '" alt="' + (isDefault ? '' : name) + '" loading="lazy">' +
-          (isDefault ? '' : '<div class="polaroid-caption">' + name + '</div>');
+          '<img src="' + photoDir + encodeURIComponent(file) + '" alt="' + raw + '" loading="lazy">' + caption;
         gallery.appendChild(polaroid);
       });
     })
