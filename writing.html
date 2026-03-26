@@ -119,6 +119,11 @@ document.querySelectorAll('.section-tab').forEach(tab => {
     document.getElementById(tab.dataset.section).classList.add('active');
   });
 });
+if (location.hash) {
+  var id = location.hash.slice(1);
+  var tab = document.querySelector('.section-tab[data-section="' + id + '"]');
+  if (tab) tab.click();
+}
 </script>
 </body>
 </html>

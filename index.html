@@ -68,6 +68,35 @@
     color: var(--ink4);
     user-select: none;
   }
+  .nav-item {
+    position: relative;
+  }
+  .nav-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--page);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 4px;
+    padding: 0.4rem 0;
+    margin-top: 0.3rem;
+    min-width: 120px;
+    z-index: 200;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .nav-item:hover .nav-dropdown {
+    display: block;
+  }
+  .nav-dropdown a {
+    display: block;
+    padding: 0.25rem 0.8rem;
+    white-space: nowrap;
+    font-size: 0.65rem;
+    color: var(--ink3);
+    text-align: center;
+  }
 
   /* ===== Notebook (standalone, full width) ===== */
   .notebook-section {
@@ -312,11 +341,28 @@
   <nav class="site-nav">
     <a href="about.html">about me</a>
     <span class="sep">&ndash;</span>
-    <a href="research.html">research</a>
+    <span class="nav-item">
+      <a href="research.html">research</a>
+      <div class="nav-dropdown">
+        <a href="research.html#academic">academic</a>
+        <a href="research.html#professional">professional</a>
+      </div>
+    </span>
     <span class="sep">&ndash;</span>
-    <a href="writing.html">writing</a>
+    <span class="nav-item">
+      <a href="writing.html">writing</a>
+      <div class="nav-dropdown">
+        <a href="writing.html#baseball">baseball</a>
+        <a href="writing.html#silicon-valley">silicon valley</a>
+      </div>
+    </span>
     <span class="sep">&ndash;</span>
-    <a href="projects.html">projects</a>
+    <span class="nav-item">
+      <a href="projects.html">projects</a>
+      <div class="nav-dropdown">
+        <a href="photography.html">photography</a>
+      </div>
+    </span>
     <span class="sep">&ndash;</span>
     <a href="contact.html">contact</a>
   </nav>
@@ -393,7 +439,6 @@
     <div class="hover-label" id="hoverLabel"><span id="hoverText"></span></div>
   </div>
 
-  <p class="shelf-hint">click to explore</p>
   <div class="shelf-footer">
     <a href="https://www.linkedin.com/in/yasmeena-khan/">linkedin</a>
     <span class="sep">&ndash;</span>
