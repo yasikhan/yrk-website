@@ -39,7 +39,7 @@ body {
   display: flex; align-items: baseline; justify-content: space-between;
 }
 .back-btn {
-  font-family: var(--hand); font-size: 1.15rem;
+  font-family: var(--serif); font-size: 1.15rem;
   color: var(--ink3); background: none; border: none;
   cursor: pointer; padding: 0.2rem 0.5rem; position: relative;
   transition: color 0.15s; text-decoration: none;
@@ -70,7 +70,7 @@ body {
   border-radius: 2px 1px 3px 1px;
 }
 .content-body h2 {
-  font-family: var(--hand); font-size: 1.4rem;
+  font-family: var(--serif); font-size: 1.4rem;
   font-weight: 400; color: var(--ink);
   margin: 2.5rem 0 1rem; position: relative; display: inline-block;
 }
