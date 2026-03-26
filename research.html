@@ -31,6 +31,21 @@
   }
   .research-section { display: none; }
   .research-section.active { display: block; }
+  .org-header {
+    font-size: 1rem; font-weight: 500; color: var(--ink);
+    margin-top: 1.5rem; margin-bottom: 0.2rem;
+  }
+  .org-header .entry-meta {
+    font-weight: 300;
+  }
+  .sub-entry {
+    padding-left: 1.2rem;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding-top: 0.6rem; padding-bottom: 0.6rem;
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 1rem; align-items: baseline;
+  }
+  .sub-entry .entry-title { font-size: 0.92rem; }
   .abstract {
     font-size: 0.88rem; line-height: 1.7;
     color: var(--ink3); margin-top: 0.5rem;
@@ -81,27 +96,42 @@
   </div>
 
   <div class="research-section" id="professional">
-    <div class="entry">
-      <div>
-        <div class="entry-title">Deliberative Democracy Lab, Stanford</div>
-        <div class="entry-desc">Freelance researcher &amp; panelist</div>
-        <div class="abstract">Expert panelist on a Stanford &times; DeepMind &times; CloseUp panel on "Youth Perspectives on GenAI" (July 2025). Moderator for "National Deliberative Poll on AI Policies" (September 2025).</div>
-      </div>
+    <div class="entry org-header">
+      <div>Deliberative Democracy Lab, Stanford</div>
       <div class="entry-meta">ongoing</div>
     </div>
-    <div class="entry">
+    <div class="sub-entry">
+      <div>
+        <div class="entry-title">Youth Perspectives on GenAI</div>
+        <div class="entry-desc">Stanford &times; DeepMind &times; CloseUp panel</div>
+      </div>
+      <div class="entry-meta">expert · Jul 2025</div>
+    </div>
+    <div class="sub-entry">
+      <div>
+        <div class="entry-title">National Deliberative Poll on AI Policies</div>
+        <div class="entry-desc">Stanford Deliberative Democracy Lab</div>
+      </div>
+      <div class="entry-meta">moderator · Sep 2025</div>
+    </div>
+
+    <div class="entry org-header">
+      <div>McKinsey &amp; Company</div>
+      <div class="entry-meta">2022–2024</div>
+    </div>
+    <div class="sub-entry">
       <div>
         <div class="entry-title"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-2024">The State of AI in 2024</a></div>
         <div class="entry-desc">McKinsey Global Survey on AI adoption and impact</div>
       </div>
-      <div class="entry-meta">McKinsey, 2024</div>
+      <div class="entry-meta">researcher · 2024</div>
     </div>
-    <div class="entry">
+    <div class="sub-entry">
       <div>
         <div class="entry-title"><a href="https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/tech-forward/insights-on-responsible-ai-from-the-global-ai-trust-maturity-survey">Insights on Responsible AI</a></div>
         <div class="entry-desc">From the Global AI Trust Maturity Survey</div>
       </div>
-      <div class="entry-meta">McKinsey, 2024</div>
+      <div class="entry-meta">researcher · 2024</div>
     </div>
   </div>
 </div>
