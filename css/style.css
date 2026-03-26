@@ -59,7 +59,7 @@ body {
   max-width: 640px; margin: 0 auto; padding: 4rem 2rem 6rem;
 }
 .content-body h1 {
-  font-family: var(--hand); font-size: 2.6rem;
+  font-family: var(--serif); font-size: 2.6rem;
   font-weight: 400; margin-bottom: 1.5rem; line-height: 1.15;
   position: relative; display: inline-block;
 }
