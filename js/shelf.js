@@ -43,12 +43,18 @@ function bindHover(el, label) {
   });
 }
 
-// Camera & phone
-bindHover(document.getElementById('cameraImg'), 'photography');
-bindHover(document.getElementById('phoneImg'), 'contact me');
+// Camera & phone (may be hidden)
+const cameraImg = document.getElementById('cameraImg');
+const phoneImg = document.getElementById('phoneImg');
 
-document.getElementById('cameraImg').addEventListener('click', () => navigateTo('photography'));
-document.getElementById('phoneImg').addEventListener('click', () => navigateTo('contact'));
+if (cameraImg) {
+  bindHover(cameraImg, 'photography');
+  cameraImg.addEventListener('click', () => navigateTo('photography'));
+}
+if (phoneImg) {
+  bindHover(phoneImg, 'contact me');
+  phoneImg.addEventListener('click', () => navigateTo('contact'));
+}
 
 // Books
 document.querySelectorAll('.book-img').forEach(el => {
