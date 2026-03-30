@@ -34,66 +34,110 @@
 
   /* Technical cards */
   .project-card {
-    border: 1px solid rgba(0,0,0,0.08);
-    border-radius: 6px;
-    padding: 1.4rem 1.6rem;
-    margin-bottom: 1.2rem;
-    transition: border-color 0.15s;
+    position: relative;
+    padding: 1.6rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    opacity: 0;
+    transform: translateY(12px);
+    animation: cardIn 0.4s ease forwards;
   }
-  .project-card:hover {
-    border-color: rgba(0,0,0,0.18);
+  .project-card:first-child { border-top: 1px solid rgba(0,0,0,0.06); }
+  .project-card:nth-child(1) { animation-delay: 0.05s; }
+  .project-card:nth-child(2) { animation-delay: 0.1s; }
+  .project-card:nth-child(3) { animation-delay: 0.15s; }
+  .project-card:nth-child(4) { animation-delay: 0.2s; }
+  .project-card:nth-child(5) { animation-delay: 0.25s; }
+  @keyframes cardIn {
+    to { opacity: 1; transform: translateY(0); }
   }
   .project-card-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 0.5rem;
+    gap: 1rem;
+    margin-bottom: 0.45rem;
   }
   .project-card-title {
     font-family: var(--serif);
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     font-weight: 500;
     color: var(--ink);
+    line-height: 1.3;
   }
-  .project-card-link {
+  .project-card-year {
     font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--ink3);
-  }
-  .project-card-link a {
-    color: #3a4f6a;
-    text-decoration: underline;
-    text-decoration-color: rgba(58,79,106,0.3);
-    text-underline-offset: 3px;
-  }
-  .project-card-link a:hover {
-    text-decoration-color: #3a4f6a;
+    font-size: 0.62rem;
+    color: var(--ink4);
+    white-space: nowrap;
+    flex-shrink: 0;
   }
   .project-card-desc {
     font-size: 0.88rem;
     line-height: 1.65;
     color: var(--ink2);
+    margin-bottom: 0.8rem;
   }
+  .project-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .project-outputs {
+    display: flex;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+  }
+  .project-output {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: #3a4f6a;
+    text-decoration: none;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid rgba(58,79,106,0.25);
+    border-radius: 3px;
+    transition: all 0.15s;
+    letter-spacing: 0.01em;
+  }
+  .project-output:hover {
+    background: rgba(58,79,106,0.08);
+    border-color: rgba(58,79,106,0.45);
+    text-decoration: none;
+  }
+  .project-output::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .project-output[data-type="website"]::before { background: #5a9e6f; }
+  .project-output[data-type="repo"]::before { background: #8b7355; }
+  .project-output[data-type="paper"]::before { background: #7a6fa0; }
+  .project-output[data-type="poster"]::before { background: #b07a5b; }
   .project-card-tags {
-    margin-top: 0.7rem;
     display: flex;
     gap: 0.4rem;
     flex-wrap: wrap;
-    align-items: center;
-  }
-  .project-card-year {
-    font-family: var(--mono);
-    font-size: 0.58rem;
-    color: var(--ink4);
-    margin-left: auto;
   }
   .project-tag {
     font-family: var(--mono);
-    font-size: 0.58rem;
+    font-size: 0.55rem;
+    padding: 0.12rem 0.45rem;
+    border-radius: 3px;
+  }
+  .project-tag[data-kind="lang"] {
+    color: #4a6741;
+    background: rgba(90, 130, 80, 0.15);
+  }
+  .project-tag[data-kind="subject"] {
     color: var(--ink3);
     background: var(--highlight);
-    padding: 0.15rem 0.5rem;
-    border-radius: 3px;
   }
 
   /* Gallery */
@@ -147,6 +191,8 @@
   @media (max-width: 768px) {
     .gallery { columns: 2; column-gap: 1.5rem; }
     .polaroid { margin-bottom: 1.5rem; }
+    .project-card-footer { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+    .project-card-title { font-size: 1.05rem; }
   }
   @media (max-width: 480px) {
     .gallery {
@@ -155,6 +201,9 @@
       margin-left: auto;
       margin-right: auto;
     }
+    .project-card { padding: 1.2rem 0; }
+    .project-card-title { font-size: 0.95rem; }
+    .project-card-desc { font-size: 0.82rem; }
   }
 </style>
 </head>
@@ -174,68 +223,91 @@
   <div class="projects-section active" id="technical">
     <div class="project-card">
       <div class="project-card-header">
-        <div class="project-card-title">yrkhan.com</div>
-        <div class="project-card-link"><a href="https://github.com/yasikhan/yrk-website">repo</a></div>
+        <div class="project-card-title">Personal Website</div>
+        <span class="project-card-year">2026</span>
       </div>
-      <div class="project-card-desc">Personal website with a hand-illustrated bookshelf UI, custom typography, and interactive sketch-style navigation. Built from scratch with static HTML, CSS, and vanilla JavaScript.</div>
-      <div class="project-card-tags">
-        <span class="project-tag">html/css</span>
-        <span class="project-tag">javascript</span>
-        <span class="project-tag">design</span>
-        <span class="project-card-year">2025</span>
+      <div class="project-card-desc">Personal website with a hand-illustrated bookshelf UI, custom typography, and interactive sketch-style navigation. Built from scratch with static HTML, CSS, and JavaScript.</div>
+      <div class="project-card-footer">
+        <div class="project-outputs">
+          <a href="https://yrkhan.com" class="project-output" data-type="website">website</a>
+          <a href="https://github.com/yasikhan/yrk-website" class="project-output" data-type="repo">repo</a>
+        </div>
+        <div class="project-card-tags">
+          <span class="project-tag" data-kind="lang">html/css</span>
+          <span class="project-tag" data-kind="lang">javascript</span>
+          <span class="project-tag" data-kind="subject">design</span>
+          <span class="project-tag" data-kind="subject">personal</span>
+        </div>
       </div>
     </div>
     <div class="project-card">
       <div class="project-card-header">
         <div class="project-card-title">Literatus</div>
-        <div class="project-card-link"><a href="https://literatusapp.com">literatusapp.com</a></div>
-      </div>
-      <div class="project-card-desc">Designed, created, and hosted Literatus &mdash; a new way to rate and keep track of books using a binary search algorithm.</div>
-      <div class="project-card-tags">
-        <span class="project-tag">python</span>
-        <span class="project-tag">javascript</span>
-        <span class="project-tag">app</span>
-        <span class="project-tag">humanities</span>
         <span class="project-card-year">2024</span>
       </div>
+      <div class="project-card-desc">Designed, created, and hosted Literatus &mdash; a new way to rate and keep track of books using a binary search algorithm.</div>
+      <div class="project-card-footer">
+        <div class="project-outputs">
+          <a href="https://literatusapp.com" class="project-output" data-type="website">website</a>
+        </div>
+        <div class="project-card-tags">
+          <span class="project-tag" data-kind="lang">python</span>
+          <span class="project-tag" data-kind="lang">javascript</span>
+          <span class="project-tag" data-kind="subject">literature</span>
+          <span class="project-tag" data-kind="subject">humanities</span>
+        </div>
+      </div>
     </div>
     <div class="project-card">
       <div class="project-card-header">
-        <div class="project-card-title">Shaping Our Future Analytics</div>
-        <div class="project-card-link"><a href="https://github.com/yasmeenakhan/thesis">repo</a></div>
-      </div>
-      <div class="project-card-desc">Statistical analysis of a deliberative democracy event with a representative sample of college students to measure depolarization. Led to the paper <a href="assets/college-students-depolarize.pdf">How College Students Can Depolarize</a>.</div>
-      <div class="project-card-tags">
-        <span class="project-tag">R</span>
-        <span class="project-tag">data analytics</span>
-        <span class="project-tag">political science</span>
+        <div class="project-card-title">Depolarization Analytics</div>
         <span class="project-card-year">2022</span>
       </div>
+      <div class="project-card-desc">Statistical analysis of a deliberative democracy event with a representative sample of college students to measure depolarization. Analysis completed for undergraduate thesis, awarded the Robert Glushko Prize and later published in a peer-reviewed journal.</div>
+      <div class="project-card-footer">
+        <div class="project-outputs">
+          <a href="assets/college-students-depolarize.pdf" class="project-output" data-type="paper">paper</a>
+          <a href="https://github.com/yasmeenakhan/thesis" class="project-output" data-type="repo">repo</a>
+        </div>
+        <div class="project-card-tags">
+          <span class="project-tag" data-kind="lang">R</span>
+          <span class="project-tag" data-kind="subject">political science</span>
+          <span class="project-tag" data-kind="subject">deliberative democracy</span>
+        </div>
+      </div>
     </div>
     <div class="project-card">
       <div class="project-card-header">
-        <div class="project-card-title">NCAA Run Expectancy</div>
-        <div class="project-card-link"><a href="https://github.com/yasmeenakhan/ncaa-re24">repo</a></div>
-      </div>
-      <div class="project-card-desc">Computed run expectancy tables in order to create xwOBA+ and WAR statistics for D1 college baseball.</div>
-      <div class="project-card-tags">
-        <span class="project-tag">R</span>
-        <span class="project-tag">sabermetrics</span>
-        <span class="project-tag">data analytics</span>
+        <div class="project-card-title">College Baseball Sabermetrics</div>
         <span class="project-card-year">2020</span>
       </div>
+      <div class="project-card-desc">Computed run expectancy tables in order to create xwOBA+ and WAR statistics for D1 college baseball. Work completed as part of my time as Co-President of the Stanford Sports Analytics Club.</div>
+      <div class="project-card-footer">
+        <div class="project-outputs">
+          <a href="https://github.com/yasmeenakhan/ncaa-re24" class="project-output" data-type="repo">repo</a>
+        </div>
+        <div class="project-card-tags">
+          <span class="project-tag" data-kind="lang">R</span>
+          <span class="project-tag" data-kind="subject">sabermetrics</span>
+          <span class="project-tag" data-kind="subject">baseball</span>
+        </div>
+      </div>
     </div>
     <div class="project-card">
       <div class="project-card-header">
-        <div class="project-card-title">Investigating JUNQ: Protein Sequestration and Aggregation in Yeast</div>
-        <div class="project-card-link"><a href="assets/protein_sequestration.pdf">poster</a></div>
-      </div>
-      <div class="project-card-desc">Studied how misfolded proteins are sequestered into the juxtanuclear quality control compartment (JUNQ) in <em>S. cerevisiae</em> under proteotoxic stress.</div>
-      <div class="project-card-tags">
-        <span class="project-tag">wet lab</span>
-        <span class="project-tag">research</span>
-        <span class="project-tag">biology</span>
+        <div class="project-card-title">Protein Sequestration in Yeast</div>
         <span class="project-card-year">2019</span>
+      </div>
+      <div class="project-card-desc">Studied how misfolded proteins, implicated in Alzheimer's, Huntington's, and Parkinson's disease, are sequestered into the juxtanuclear quality control compartment (JUNQ) in <em>S. cerevisiae</em> under proteotoxic stress. Research completed as part of the Biology Undergraduate Summer Research Program at the Frydman Lab, Stanford.</div>
+      <div class="project-card-footer">
+        <div class="project-outputs">
+          <a href="assets/protein_sequestration.pdf" class="project-output" data-type="poster">poster</a>
+        </div>
+        <div class="project-card-tags">
+          <span class="project-tag" data-kind="lang">wet lab</span>
+          <span class="project-tag" data-kind="subject">neuroscience</span>
+          <span class="project-tag" data-kind="subject">biology</span>
+        </div>
       </div>
     </div>
   </div>
