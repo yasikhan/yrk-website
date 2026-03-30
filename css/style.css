@@ -109,6 +109,21 @@ body {
 }
 .contact-links a { color: #3a4f6a; }
 
+/* ============ SITE FOOTER ============ */
+.site-footer {
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--ink4);
+  padding: 2rem 1rem;
+}
+.site-footer a {
+  color: var(--ink3);
+  text-decoration: underline;
+  text-decoration-color: rgba(0,0,0,0.15);
+  text-underline-offset: 2px;
+}
+
 /* ============ RESPONSIVE ============ */
 @media (max-width: 768px) {
   .content-nav { padding: 0.7rem 1rem; }
