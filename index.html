@@ -17,7 +17,7 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=IBM+Plex+Mono:wght@300;400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=IBM+Plex+Mono:wght@300;400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,400&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <style>
   .shelf-view {
@@ -469,12 +469,7 @@
 
 <footer class="site-footer" style="padding-bottom:4rem;">designed and coded by yasmeena khan &copy; 2026 &ndash; <a href="https://github.com/yasikhan/yrk-website">repo</a></footer>
 
-<script src="https://unpkg.com/roughjs/bundled/rough.js"></script>
-<script>
-if (typeof rough === 'undefined') {
-  document.write('<script src="https://cdn.jsdelivr.net/npm/roughjs/bundled/rough.js"><\/script>');
-}
-</script>
-<script src="js/shelf.js"></script>
+<script src="https://unpkg.com/roughjs/bundled/rough.js" defer onerror="var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/roughjs/bundled/rough.js';s.defer=true;document.head.appendChild(s);"></script>
+<script src="js/shelf.js" defer></script>
 </body>
 </html>
