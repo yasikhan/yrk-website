@@ -178,6 +178,12 @@
     object-fit: contain; object-position: bottom;
     mix-blend-mode: multiply;
   }
+  /* Camera & phone sketches: disable multiply blend so they
+     render opaque on Chrome's off-white background */
+  #cameraImg img,
+  #phoneImg img {
+    mix-blend-mode: normal;
+  }
 
   /* Books */
   .book-img {
