@@ -215,8 +215,33 @@
     text-align: center; letter-spacing: 0.02em;
     position: relative; z-index: 10;
   }
-  .shelf-view .site-footer {
-    padding: 1rem 1rem 1.5rem;
+  .shelf-footer {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    display: flex; align-items: center; justify-content: center;
+    gap: 1.1rem;
+    padding: 0.8rem 1rem;
+    font-family: var(--mono); font-size: 0.66rem;
+    color: var(--ink4);
+    background: linear-gradient(to top, var(--page) 60%, transparent);
+    z-index: 100;
+  }
+  .shelf-footer a {
+    color: var(--ink4); text-decoration: none;
+    padding: 0.15rem 0.4rem; position: relative;
+    transition: color 0.15s; isolation: isolate;
+  }
+  .shelf-footer a::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--highlight); opacity: 0; z-index: -1;
+    border-radius: 3px 1px 4px 2px;
+    transform: rotate(-0.5deg);
+    transition: opacity 0.15s;
+  }
+  .shelf-footer a:hover::before { opacity: 1; }
+  .shelf-footer a:hover { color: var(--ink2); }
+  .shelf-footer .sep {
+    color: var(--ink4);
+    user-select: none;
   }
 
   @media (max-width: 768px) {
@@ -256,6 +281,11 @@
     .book-spine-label {
       font-size: 0.55rem;
     }
+    .shelf-footer {
+      gap: 0.6rem;
+      font-size: 0.55rem;
+      padding: 0.6rem 0.5rem;
+    }
   }
 
   @media (max-width: 480px) {
@@ -292,6 +322,11 @@
     }
     .shelf-hint {
       margin-top: -3rem;
+    }
+    .shelf-footer .sep { display: none; }
+    .shelf-footer {
+      gap: 0.8rem;
+      font-size: 0.5rem;
     }
   }
 </style>
@@ -421,19 +456,18 @@
     <div class="hover-label" id="hoverLabel"><span id="hoverText"></span></div>
   </div>
 
-  <footer class="site-footer">
-    <div class="site-footer-links">
-      <a href="https://www.linkedin.com/in/yasmeena-khan/">linkedin</a>
-      <span class="sep">&ndash;</span>
-      <a href="https://twitter.com/yasmeena_khan">twitter</a>
-      <span class="sep">&ndash;</span>
-      <a href="https://www.instagram.com/yasmeena_khan/">instagram</a>
-      <span class="sep">&ndash;</span>
-      <a href="https://github.com/yasikhan">github</a>
-    </div>
-    <div class="site-footer-credit">designed and coded by yasmeena khan &copy; 2026 &ndash; <a href="https://github.com/yasikhan/yrk-website">repo</a></div>
-  </footer>
+  <div class="shelf-footer">
+    <a href="https://www.linkedin.com/in/yasmeena-khan/">linkedin</a>
+    <span class="sep">&ndash;</span>
+    <a href="https://twitter.com/yasmeena_khan">twitter</a>
+    <span class="sep">&ndash;</span>
+    <a href="https://www.instagram.com/yasmeena_khan/">instagram</a>
+    <span class="sep">&ndash;</span>
+    <a href="https://github.com/yasikhan">github</a>
+  </div>
 </div>
+
+<footer class="site-footer" style="padding-bottom:3.5rem;">designed and coded by yasmeena khan &copy; 2026 &ndash; <a href="https://github.com/yasikhan/yrk-website">repo</a></footer>
 
 <script src="https://unpkg.com/roughjs/bundled/rough.js"></script>
 <script>
