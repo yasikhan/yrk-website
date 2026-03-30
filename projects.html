@@ -32,50 +32,47 @@
   .projects-section { display: none; }
   .projects-section.active { display: block; }
 
-  /* Technical cards */
+  /* Technical cards — 2-column grid */
+  .project-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
   .project-card {
     border: 1px solid rgba(0,0,0,0.08);
     border-radius: 6px;
     padding: 1.4rem 1.6rem;
-    margin-bottom: 1.2rem;
     transition: border-color 0.15s;
+    display: flex;
+    flex-direction: column;
   }
   .project-card:hover {
     border-color: rgba(0,0,0,0.18);
   }
-  .project-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 0.5rem;
-  }
   .project-card-title {
     font-family: var(--serif);
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     font-weight: 500;
     color: var(--ink);
+    margin-bottom: 0.4rem;
   }
-  .project-card-link {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--ink3);
+  .project-card-desc {
+    font-size: 0.84rem;
+    line-height: 1.65;
+    color: var(--ink2);
+    flex: 1;
   }
-  .project-card-link a {
+  .project-card-desc a {
     color: #3a4f6a;
     text-decoration: underline;
     text-decoration-color: rgba(58,79,106,0.3);
     text-underline-offset: 3px;
   }
-  .project-card-link a:hover {
+  .project-card-desc a:hover {
     text-decoration-color: #3a4f6a;
   }
-  .project-card-desc {
-    font-size: 0.88rem;
-    line-height: 1.65;
-    color: var(--ink2);
-  }
-  .project-card-tags {
-    margin-top: 0.7rem;
+  .project-card-meta {
+    margin-top: 0.8rem;
     display: flex;
     gap: 0.4rem;
     flex-wrap: wrap;
@@ -95,6 +92,22 @@
     padding: 0.15rem 0.5rem;
     border-radius: 3px;
   }
+  .project-card-link {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+  }
+  .project-card-link a {
+    color: #3a4f6a;
+    text-decoration: underline;
+    text-decoration-color: rgba(58,79,106,0.3);
+    text-underline-offset: 3px;
+  }
+  .project-card-link a:hover {
+    text-decoration-color: #3a4f6a;
+  }
+
+  /* Widen content for grid */
+  #contentBody { max-width: 860px; }
 
   /* Gallery */
   .content-body.gallery-wide { max-width: 1100px; }
@@ -145,6 +158,7 @@
     .gallery { columns: 3; }
   }
   @media (max-width: 768px) {
+    .project-grid { grid-template-columns: 1fr; }
     .gallery { columns: 2; column-gap: 1.5rem; }
     .polaroid { margin-bottom: 1.5rem; }
   }
@@ -172,70 +186,61 @@
   </div>
 
   <div class="projects-section active" id="technical">
-    <div class="project-card">
-      <div class="project-card-header">
+    <div class="project-grid">
+      <div class="project-card">
         <div class="project-card-title">yrkhan.com</div>
-        <div class="project-card-link"><a href="https://github.com/yasikhan/yrk-website">repo</a></div>
+        <div class="project-card-desc">Personal website with a hand-illustrated bookshelf UI, custom typography, and interactive sketch-style navigation. Built from scratch with HTML, CSS, and JavaScript.</div>
+        <div class="project-card-meta">
+          <span class="project-tag">html/css</span>
+          <span class="project-tag">javascript</span>
+          <span class="project-tag">design</span>
+          <span class="project-card-link"><a href="https://github.com/yasikhan/yrk-website">repo</a></span>
+          <span class="project-card-year">2025</span>
+        </div>
       </div>
-      <div class="project-card-desc">Personal website with a hand-illustrated bookshelf UI, custom typography, and interactive sketch-style navigation. Built from scratch with static HTML, CSS, and vanilla JavaScript.</div>
-      <div class="project-card-tags">
-        <span class="project-tag">html/css</span>
-        <span class="project-tag">javascript</span>
-        <span class="project-tag">design</span>
-        <span class="project-card-year">2025</span>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-card-header">
+      <div class="project-card">
         <div class="project-card-title">Literatus</div>
-        <div class="project-card-link"><a href="https://literatusapp.com">literatusapp.com</a></div>
+        <div class="project-card-desc">Designed, created, and hosted Literatus &mdash; a new way to rate and keep track of books using a binary search algorithm.</div>
+        <div class="project-card-meta">
+          <span class="project-tag">python</span>
+          <span class="project-tag">javascript</span>
+          <span class="project-tag">app</span>
+          <span class="project-card-link"><a href="https://literatusapp.com">literatusapp.com</a></span>
+          <span class="project-card-year">2024</span>
+        </div>
       </div>
-      <div class="project-card-desc">Designed, created, and hosted Literatus &mdash; a new way to rate and keep track of books using a binary search algorithm.</div>
-      <div class="project-card-tags">
-        <span class="project-tag">python</span>
-        <span class="project-tag">javascript</span>
-        <span class="project-tag">app</span>
-        <span class="project-tag">humanities</span>
-        <span class="project-card-year">2024</span>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-card-header">
+      <div class="project-card">
         <div class="project-card-title">Shaping Our Future Analytics</div>
-        <div class="project-card-link"><a href="https://github.com/yasmeenakhan/thesis">repo</a></div>
+        <div class="project-card-desc">Statistical analysis of a deliberative democracy event with a representative sample of college students to measure depolarization. Led to the paper <a href="assets/college-students-depolarize.pdf">How College Students Can Depolarize</a>.</div>
+        <div class="project-card-meta">
+          <span class="project-tag">R</span>
+          <span class="project-tag">data analytics</span>
+          <span class="project-tag">political science</span>
+          <span class="project-card-link"><a href="https://github.com/yasmeenakhan/thesis">repo</a></span>
+          <span class="project-card-year">2022</span>
+        </div>
       </div>
-      <div class="project-card-desc">Statistical analysis of a deliberative democracy event with a representative sample of college students to measure depolarization. Led to the paper <a href="assets/college-students-depolarize.pdf">How College Students Can Depolarize</a>.</div>
-      <div class="project-card-tags">
-        <span class="project-tag">R</span>
-        <span class="project-tag">data analytics</span>
-        <span class="project-tag">political science</span>
-        <span class="project-card-year">2022</span>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-card-header">
+      <div class="project-card">
         <div class="project-card-title">NCAA Run Expectancy</div>
-        <div class="project-card-link"><a href="https://github.com/yasmeenakhan/ncaa-re24">repo</a></div>
+        <div class="project-card-desc">Computed run expectancy tables in order to create xwOBA+ and WAR statistics for D1 college baseball.</div>
+        <div class="project-card-meta">
+          <span class="project-tag">R</span>
+          <span class="project-tag">sabermetrics</span>
+          <span class="project-tag">data analytics</span>
+          <span class="project-card-link"><a href="https://github.com/yasmeenakhan/ncaa-re24">repo</a></span>
+          <span class="project-card-year">2020</span>
+        </div>
       </div>
-      <div class="project-card-desc">Computed run expectancy tables in order to create xwOBA+ and WAR statistics for D1 college baseball.</div>
-      <div class="project-card-tags">
-        <span class="project-tag">R</span>
-        <span class="project-tag">sabermetrics</span>
-        <span class="project-tag">data analytics</span>
-        <span class="project-card-year">2020</span>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-card-header">
+      <div class="project-card">
         <div class="project-card-title">Investigating JUNQ: Protein Sequestration and Aggregation in Yeast</div>
-        <div class="project-card-link"><a href="assets/protein_sequestration.pdf">poster</a></div>
-      </div>
-      <div class="project-card-desc">Studied how misfolded proteins are sequestered into the juxtanuclear quality control compartment (JUNQ) in <em>S. cerevisiae</em> under proteotoxic stress.</div>
-      <div class="project-card-tags">
-        <span class="project-tag">wet lab</span>
-        <span class="project-tag">research</span>
-        <span class="project-tag">biology</span>
-        <span class="project-card-year">2019</span>
+        <div class="project-card-desc">Studied how misfolded proteins are sequestered into the juxtanuclear quality control compartment (JUNQ) in <em>S. cerevisiae</em> under proteotoxic stress.</div>
+        <div class="project-card-meta">
+          <span class="project-tag">wet lab</span>
+          <span class="project-tag">research</span>
+          <span class="project-tag">biology</span>
+          <span class="project-card-link"><a href="assets/protein_sequestration.pdf">poster</a></span>
+          <span class="project-card-year">2019</span>
+        </div>
       </div>
     </div>
   </div>
@@ -322,5 +327,17 @@ function loadGallery() {
     });
 }
 </script>
+<footer class="site-footer">
+  <div class="site-footer-links">
+    <a href="https://www.linkedin.com/in/yasmeena-khan/">linkedin</a>
+    <span class="sep">&ndash;</span>
+    <a href="https://twitter.com/yasmeena_khan">twitter</a>
+    <span class="sep">&ndash;</span>
+    <a href="https://www.instagram.com/yasmeena_khan/">instagram</a>
+    <span class="sep">&ndash;</span>
+    <a href="https://github.com/yasikhan">github</a>
+  </div>
+  <div class="site-footer-credit">designed and coded by yasmeena khan &copy; 2026 &ndash; <a href="https://github.com/yasikhan/yrk-website">repo</a></div>
+</footer>
 </body>
 </html>
