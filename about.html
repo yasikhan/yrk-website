@@ -95,18 +95,18 @@
     height: 100%;
   }
 
-  /* Link highlight (always on) */
+  /* Ink-shift links */
   .content-body a {
     text-decoration: none;
-    padding: 0.05em 0.2em;
-    margin: -0.05em -0.2em;
-    border-radius: 2px;
-    background: var(--highlight);
-    transition: background 0.2s ease, color 0.2s ease;
+    color: #8b4513;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
   }
   .content-body a:hover {
-    background: var(--highlight-strong);
-    color: var(--ink);
+    color: #6b2f0a;
+    text-decoration: underline;
+    text-decoration-color: #6b2f0a;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
   }
 
   /* Elsewhere fade-in */
@@ -181,16 +181,24 @@
     position: relative;
     display: inline;
   }
-  .caret-text {
+  .caret-symbol {
+    font-family: var(--hand);
+    font-size: 1.1rem;
+    color: rgba(26,26,26,0.45);
+    position: relative;
+    top: -0.15em;
+  }
+  .caret-above {
     position: absolute;
-    bottom: 85%;
-    left: -0.3em;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-25%) rotate(-0.5deg);
     font-family: var(--hand);
     font-size: 1.1rem;
     color: rgba(26,26,26,0.45);
     white-space: nowrap;
     pointer-events: none;
-    transform: rotate(-0.5deg);
+    margin-bottom: -0.5em;
   }
 
   @media (max-width: 768px) {
@@ -221,12 +229,12 @@
     </div>
   </div>
   <p class="has-margin-note">I was born and raised in San Francisco, California. I've lived in SF, Amsterdam, Washington D.C., and Oxford, and I hold dual Dutch-American citizenship.<span class="margin-note">amsterdam summer &gt;&gt;</span></p>
-  <p class="has-margin-note">I am fascinated by the techno-ideologies<span class="margin-note-left" style="top: 3.8em; left: -105px;">England...?</span> that constitute a significant part of Valley discourse: transhumanism, effective altruism, accelerationism. I want to understand <span class="underline-word">where</span> these ideologies originate, how they become meaningful and legitimate, and how they instruct the development of <span class="circled has-margin-note">new technologies<span class="margin-note-right">AGI?</span></span> within the Valley. My <a href="https://www.oii.ox.ac.uk/news-events/introducing-the-2025-msc-thesis-prize-winners/">highly commended</a> Master's thesis at Oxford, entitled "Coding Utopia: Effective Accelerationism &amp; Evolving Techno-Optimism in Silicon Valley," drew on Frankfurt School critical theory, elite interviews, and computational methods to investigate and historicize effective accelerationism ("e/acc").</p>
-  <p>My other academic interests include AI personhood<span class="caret-note"><span class="caret-text">^ and consciousness!</span></span>, and what might constitute <a href="assets/llms-electric-speech.pdf">legal speech</a> in an AI-native world; as well as <a href="assets/college-students-depolarize.pdf">political polarization</a> and the conditions under which moderation is possible in democratic societies.</p>
+  <p class="has-margin-note">I am fascinated by the techno-ideologies<span class="margin-note-left" style="top: 3.8em; left: -105px;">England...?</span> that constitute a significant part of Valley discourse: transhumanism, effective altruism, accelerationism. I want to understand <span class="underline-word">where</span> these ideologies originate, how they become meaningful and legitimate, and how they instruct the development of <span class="circled has-margin-note">new technologies<span class="margin-note-right" style="text-decoration: underline; text-decoration-style: double; text-decoration-color: rgba(26,26,26,0.35); text-underline-offset: 3px; text-decoration-thickness: 1px; transform: rotate(-2deg); display: inline-block;">AGI</span></span> within the Valley. My <a href="https://www.oii.ox.ac.uk/news-events/introducing-the-2025-msc-thesis-prize-winners/">highly commended</a> Master's thesis at Oxford, entitled "Coding Utopia: Effective Accelerationism &amp; Evolving Techno-Optimism in Silicon Valley," drew on Frankfurt School critical theory, elite interviews, and computational methods to investigate and historicize effective accelerationism ("e/acc").</p>
+  <p>My other academic interests include AI personhood<span class="caret-note"><span class="caret-symbol">^</span><span class="caret-above">& consciousness!</span></span><span style="margin-left: -0.45em;">,</span> and what might constitute <a href="assets/llms-electric-speech.pdf">legal speech</a> in an AI-native world; as well as <a href="assets/college-students-depolarize.pdf">political polarization</a> and the conditions under which moderation is possible in democratic societies.</p>
   <div class="section-divider"><svg viewBox="0 0 120 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 7 C20 4, 35 9, 55 6 C75 3, 95 8, 118 5" stroke="rgba(26,26,26,0.2)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
   <div class="elsewhere-section">
     <h2>Elsewhere</h2>
-    <p>Beyond academia, I write poetry (<a href="https://www.instagram.com/p/DOGQ0oVDDxT/" target="_blank" rel="noopener">published</a> by the Oxford Poetry Society), contribute to citizen science projects on black hole detection, study the Mesopotamian and Near Eastern empires, and read at least 52 books a year. I am also an avid amateur <a href="photography.html">photographer</a>.</p>
+    <p>Beyond academia, I write poetry (<a href="https://www.instagram.com/p/DOGQ0oVDDxT/" target="_blank" rel="noopener">published</a> by the Oxford Poetry Society), contribute to citizen science projects on black hole detection, study the Mesopotamian and Near Eastern empires, and read at least <a href="https://www.goodreads.com/user/show/120161200-yasi" target="_blank" rel="noopener">52 books a year</a>. I am also an avid amateur <a href="photography.html">photographer</a>.</p>
     <p>I love the outdoors: I spent a month in Patagonia in 2024, which felt like a natural extension of growing up with Yosemite as my backyard. These days, I run regularly through Golden Gate Park and play tennis whenever the weather cooperates.</p>
   </div>
 </div>
