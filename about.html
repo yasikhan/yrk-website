@@ -11,12 +11,63 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=IBM+Plex+Mono:wght@300;400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,400&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <style>
-  .about-photo {
-    width: 220px; height: auto;
-    border-radius: 4px;
+  .about-photo-wrap {
     float: right;
-    margin: 0 0 1.5rem 2rem;
-    mix-blend-mode: multiply;
+    margin: 1.8rem -1.5rem 1.2rem 2rem;
+    width: 210px;
+    transform: rotate(1.8deg);
+    position: relative;
+    z-index: 2;
+  }
+  .about-photo-inner {
+    background: #fff;
+    padding: 8px 8px 28px;
+    box-shadow:
+      1px 2px 6px rgba(0,0,0,0.10),
+      0 0 0 0.5px rgba(0,0,0,0.05);
+    position: relative;
+  }
+  /* Subtle worn edge via clipping */
+  .about-photo-inner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 8px rgba(160,140,120,0.12);
+    pointer-events: none;
+  }
+  .about-photo {
+    width: 100%; height: auto;
+    display: block;
+    filter: saturate(0.85) contrast(1.05);
+  }
+  /* Single tape strip */
+  .photo-tape {
+    position: absolute;
+    width: 56px; height: 18px;
+    background: rgba(255,248,220,0.92);
+    border: 0.5px solid rgba(200,180,140,0.45);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    z-index: 3;
+    top: -8px; left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+  }
+  /* Handwritten caption inside polaroid */
+  .photo-caption {
+    font-family: var(--hand);
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--ink);
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-0.5deg);
+    letter-spacing: 0.01em;
   }
 
   /* Margin annotation */
@@ -25,8 +76,8 @@
     left: -170px;
     top: 2.9em;
     font-family: var(--hand);
-    font-size: 0.95rem;
-    color: rgba(26,26,26,0.35);
+    font-size: 1.05rem;
+    color: rgba(26,26,26,0.45);
     transform: rotate(-2deg);
     pointer-events: none;
     line-height: 1.5;
@@ -86,8 +137,8 @@
   .margin-note-left {
     position: absolute;
     font-family: var(--hand);
-    font-size: 0.95rem;
-    color: rgba(26,26,26,0.35);
+    font-size: 1.05rem;
+    color: rgba(26,26,26,0.45);
     white-space: nowrap;
     pointer-events: none;
     padding: 6px 8px 0 0;
@@ -117,8 +168,8 @@
     right: -100px;
     top: -0.2em;
     font-family: var(--hand);
-    font-size: 0.95rem;
-    color: rgba(26,26,26,0.35);
+    font-size: 1.05rem;
+    color: rgba(26,26,26,0.45);
     white-space: nowrap;
     pointer-events: none;
     padding: 6px 0 0 8px;
@@ -135,19 +186,19 @@
     bottom: 85%;
     left: -0.3em;
     font-family: var(--hand);
-    font-size: 1rem;
-    color: rgba(26,26,26,0.35);
+    font-size: 1.1rem;
+    color: rgba(26,26,26,0.45);
     white-space: nowrap;
     pointer-events: none;
     transform: rotate(-0.5deg);
   }
 
   @media (max-width: 768px) {
-    .about-photo {
+    .about-photo-wrap {
       float: none;
-      display: block;
       margin: 0 auto 1.5rem;
-      width: 180px;
+      width: 170px;
+      transform: rotate(1.2deg);
     }
     .margin-note, .margin-note-right, .margin-note-left {
       display: none;
@@ -162,7 +213,13 @@
 </nav>
 <div class="content-body">
   <h1>About Me</h1>
-  <img class="about-photo" src="assets/yasi-image.jpg" alt="Yasi Khan">
+  <div class="about-photo-wrap">
+    <div class="about-photo-inner">
+      <div class="photo-tape"></div>
+      <img class="about-photo" src="assets/yasi-image.jpg" alt="Yasi Khan">
+      <div class="photo-caption">OXFORD 2025</div>
+    </div>
+  </div>
   <p class="has-margin-note">I was born and raised in San Francisco, California. I've lived in SF, Amsterdam, Washington D.C., and Oxford, and I hold dual Dutch-American citizenship.<span class="margin-note">amsterdam summer &gt;&gt;</span></p>
   <p class="has-margin-note">I am fascinated by the techno-ideologies<span class="margin-note-left" style="top: 3.8em; left: -105px;">England...?</span> that constitute a significant part of Valley discourse: transhumanism, effective altruism, accelerationism. I want to understand <span class="underline-word">where</span> these ideologies originate, how they become meaningful and legitimate, and how they instruct the development of <span class="circled has-margin-note">new technologies<span class="margin-note-right">AGI?</span></span> within the Valley. My <a href="https://www.oii.ox.ac.uk/news-events/introducing-the-2025-msc-thesis-prize-winners/">highly commended</a> Master's thesis at Oxford, entitled "Coding Utopia: Effective Accelerationism &amp; Evolving Techno-Optimism in Silicon Valley," drew on Frankfurt School critical theory, elite interviews, and computational methods to investigate and historicize effective accelerationism ("e/acc").</p>
   <p>My other academic interests include AI personhood<span class="caret-note"><span class="caret-text">^ and consciousness!</span></span>, and what might constitute <a href="assets/llms-electric-speech.pdf">legal speech</a> in an AI-native world; as well as <a href="assets/college-students-depolarize.pdf">political polarization</a> and the conditions under which moderation is possible in democratic societies.</p>
