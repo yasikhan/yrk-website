@@ -31,6 +31,15 @@
   }
   .research-section { display: none; }
   .research-section.active { display: block; }
+  #academic .entry {
+    display: block;
+  }
+  #academic .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
   .org-header {
     font-size: 1rem; font-weight: 500; color: var(--ink);
     margin-top: 1.5rem; margin-bottom: 0.2rem;
@@ -52,6 +61,43 @@
     padding-left: 0.8rem;
     border-left: 2px solid rgba(0,0,0,0.06);
   }
+  .entry-outputs {
+    display: flex;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+    margin-top: 0.6rem;
+  }
+  .entry-output {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: #3a4f6a;
+    text-decoration: none;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid rgba(58,79,106,0.25);
+    border-radius: 3px;
+    transition: all 0.15s;
+    letter-spacing: 0.01em;
+  }
+  .entry-output:hover {
+    background: rgba(58,79,106,0.08);
+    border-color: rgba(58,79,106,0.45);
+    text-decoration: none;
+  }
+  .entry-output::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .entry-output[data-type="paper"]::before { background: #7a6fa0; }
+  .entry-output[data-type="pdf"]::before { background: #b07a5b; }
+  .entry-output[data-type="talk"]::before { background: #5a9e6f; }
+  .entry-output[data-type="presentation"]::before { background: #8b7355; }
 </style>
 </head>
 <body>
@@ -70,28 +116,49 @@
 
   <div class="research-section active" id="academic">
     <div class="entry">
-      <div>
-        <div class="entry-title"><a href="assets/llms-electric-speech.pdf">Do LLMs Dream of Electric Speech?</a></div>
-        <div class="entry-desc">Vacuous ghosts, selfhood, and freedom of speech jurisprudence</div>
-        <div class="abstract">This paper investigates the philosophical underpinnings of selfhood and large language models in light of evolving First Amendment and European Union jurisprudence on freedom of speech and freedom of expression. It argues that traditional free-speech doctrines are predicated on core assumptions (intentionality and selfhood) that LLMs categorically lack, and proposes establishing LLM outputs as a new category of <em>language</em> as opposed to <em>speech</em>.</div>
+      <div class="entry-header">
+        <div class="entry-title">Manifesto of (Cyber)Futurism</div>
+        <div class="entry-meta">Clarendon-Gates Conference, 2025</div>
       </div>
-      <div class="entry-meta">Oxford, 2025</div>
+      <div class="entry-desc"><em>Effective accelerationism, ideology, and Silicon Valley</em></div>
+      <div class="abstract">A talk given at the inaugural 2025 Clarendon-Gates conference on the links between Italian futurism and modern Silicon Valley ideologies.</div>
+      <div class="entry-outputs">
+        <a href="https://youtu.be/lOOs6wqKU8Q?si=3i_ASzgP-I3OvXEK&t=2004" class="entry-output" data-type="talk">talk</a>
+        <a href="assets/Khan_Clarendon-Gates_2025.pdf" class="entry-output" data-type="presentation">presentation</a>
+      </div>
     </div>
     <div class="entry">
-      <div>
-        <div class="entry-title"><a href="assets/college-students-depolarize.pdf">How College Students Can Depolarize</a></div>
-        <div class="entry-desc">Evidence for political moderation within homogeneous groups</div>
-        <div class="abstract">This paper demonstrates that, after deliberation (using an AI-moderated platform), college students showed immense moderation potential and affective depolarization, especially even given their homogeneity as a bloc within American politics. These findings offer optimism for future research in homogeneous groups through understanding that group polarization can be avoided with the right precautionary measures.</div>
+      <div class="entry-header">
+        <div class="entry-title">Do LLMs Dream of Electric Speech?</div>
+        <div class="entry-meta">Oxford, 2025</div>
       </div>
-      <div class="entry-meta">Khan &amp; Siu, 2023</div>
+      <div class="entry-desc">Vacuous ghosts, selfhood, and freedom of speech jurisprudence</div>
+      <div class="abstract">This paper investigates the philosophical underpinnings of selfhood and large language models in light of evolving First Amendment and European Union jurisprudence on freedom of speech and freedom of expression. It argues that traditional free-speech doctrines are predicated on core assumptions (intentionality and selfhood) that LLMs categorically lack, and proposes establishing LLM outputs as a new category of <em>language</em> as opposed to <em>speech</em>.</div>
+      <div class="entry-outputs">
+        <a href="assets/llms-electric-speech.pdf" class="entry-output" data-type="pdf">pdf</a>
+      </div>
     </div>
     <div class="entry">
-      <div>
-        <div class="entry-title"><a href="assets/corporation-state.pdf">The Rise of the Corporation-State</a></div>
-        <div class="entry-desc">How the British East India Company colonized the Subcontinent</div>
-        <div class="abstract">This paper explores the creation of a novel type of governance structure: the corporation-state, which combines private ownership with sovereign power. Through archival and theoretical analysis, it investigates how the British East India Company presented the first example of this structure, underscoring broader tensions about empire, legitimacy, and corporate autonomy.</div>
+      <div class="entry-header">
+        <div class="entry-title">How College Students Can Depolarize</div>
+        <div class="entry-meta">Khan &amp; Siu, 2023</div>
       </div>
-      <div class="entry-meta">Stanford, 2022</div>
+      <div class="entry-desc">Evidence for political moderation within homogeneous groups</div>
+      <div class="abstract">This paper demonstrates that, after deliberation (using an AI-moderated platform), college students showed immense moderation potential and affective depolarization, especially even given their homogeneity as a bloc within American politics. These findings offer optimism for future research in homogeneous groups through understanding that group polarization can be avoided with the right precautionary measures.</div>
+      <div class="entry-outputs">
+        <a href="assets/college-students-depolarize.pdf" class="entry-output" data-type="paper">paper</a>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-header">
+        <div class="entry-title">The Rise of the Corporation-State</div>
+        <div class="entry-meta">Stanford, 2022</div>
+      </div>
+      <div class="entry-desc">How the British East India Company colonized the subcontinent</div>
+      <div class="abstract">This paper explores the creation of a novel type of governance structure: the corporation-state, which combines private ownership with sovereign power. Through archival and theoretical analysis, it investigates how the British East India Company presented the first example of this structure, underscoring broader tensions about empire, legitimacy, and corporate autonomy.</div>
+      <div class="entry-outputs">
+        <a href="assets/corporation-state.pdf" class="entry-output" data-type="pdf">pdf</a>
+      </div>
     </div>
   </div>
 
