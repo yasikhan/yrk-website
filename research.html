@@ -216,7 +216,8 @@ if (location.hash) {
   var id = location.hash.slice(1);
   var tab = document.querySelector('.section-tab[data-section="' + id + '"]');
   if (tab) tab.click();
-  setTimeout(function() { window.scrollTo(0, 0); }, 0);
+  history.replaceState(null, '', location.pathname);
+  window.scrollTo(0, 0);
 }
 </script>
 <footer class="site-footer">designed and coded by yasmeena khan &copy; 2026 &ndash; <a href="https://github.com/yasikhan/yrk-website">repo</a></footer>

@@ -343,7 +343,8 @@ if (location.hash) {
   var id = location.hash.slice(1);
   var tab = document.querySelector('.section-tab[data-section="' + id + '"]');
   if (tab) switchTab(tab);
-  setTimeout(function() { window.scrollTo(0, 0); }, 0);
+  history.replaceState(null, '', location.pathname);
+  window.scrollTo(0, 0);
 }
 
 var galleryLoaded = false;
