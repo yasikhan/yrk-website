@@ -121,6 +121,8 @@
     gap: 2.5rem;
     max-width: 700px;
     margin-bottom: 2rem;
+    position: relative;
+    z-index: 2;
   }
   .intro-text {
     flex: 1;
@@ -161,6 +163,18 @@
     padding: 0.05em 0.2em;
     border-radius: 2px;
   }
+  .intro-bio a.bio-link {
+    text-decoration: none;
+    color: #8b4513;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  }
+  .intro-bio a.bio-link:hover {
+    color: #6b2f0a;
+    text-decoration: underline;
+    text-decoration-color: #6b2f0a;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
   .intro-photo {
     width: 200px;
     height: 200px;
@@ -174,7 +188,7 @@
     position: relative;
     width: 700px; max-width: 96vw;
     aspect-ratio: 920 / 520;
-    margin-top: -6rem;
+    margin-top: -7rem;
   }
   .scene canvas {
     position: absolute; top: 0; left: 0;
@@ -395,7 +409,7 @@
       <div class="intro-bio">
         I am currently researching accelerationism in Silicon Valley and its impact on the race for AGI, as part of a broader project investigating the origins of techno-ideologies and their relationship to modern political movements. I hold an MSc with Distinction from the University of Oxford in Social Science of the Internet, and a Bachelor's with Honors and Distinction from Stanford University in Symbolic Systems (Human-Centered AI), with a minor in Poetry.
         <br><br>
-        I've worked as a business analyst at McKinsey &amp; Company, focusing on responsible artificial intelligence and helping establish the AI Trust practice, and in Product &amp; Analytics at Interaction, a seed-stage consumer AI startup. I have also been a sabermetrics baseball journalist with Vox Media for the San Francisco Giants.
+        I've worked as a business analyst at McKinsey &amp; Company, focusing on responsible artificial intelligence and helping establish the AI Trust practice, and in Product &amp; Analytics at Interaction, a seed-stage consumer AI startup. I have also been a sabermetrics baseball journalist with Vox Media for the San Francisco Giants. More about me <a href="about.html" class="bio-link">here</a>.
       </div>
     </div>
     <img class="intro-photo" src="assets/yasi-image.jpg" alt="Yasi Khan">
