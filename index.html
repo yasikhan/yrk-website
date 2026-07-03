@@ -206,11 +206,11 @@
     object-fit: contain; object-position: bottom;
     mix-blend-mode: multiply;
   }
-  /* Camera & phone sketches: disable multiply blend so they
-     render opaque on Chrome's off-white background */
+  /* Camera & phone sketches share the same multiply blend as the
+     books; their fills are pure white so they adapt to any page tint */
   #cameraImg img,
   #phoneImg img {
-    mix-blend-mode: normal;
+    mix-blend-mode: multiply;
   }
 
   /* Books */

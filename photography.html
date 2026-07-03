@@ -30,9 +30,12 @@
   .polaroid {
     display: inline-block;
     width: 100%;
-    background: #fff;
+    background: linear-gradient(150deg, #fafafa 0%, #e7e7e7 52%, #dedede 100%);
     padding: 0.8rem 0.8rem 2.5rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.75),
+      inset 0 0 0 0.5px rgba(0,0,0,0.06),
+      0 2px 8px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.07);
     break-inside: avoid;
     -webkit-column-break-inside: avoid;
     page-break-inside: avoid;
