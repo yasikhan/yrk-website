@@ -216,11 +216,16 @@
   /* Books */
   .book-img {
     transform-origin: bottom center;
+    container-type: size;
   }
   .book-spine-label {
     position: absolute;
-    left: 50%; top: 50%;
-    transform: translate(-50%, -50%) rotate(-90deg);
+    left: 50%; bottom: 50%;
+    /* Center on the drawn book, not the div: the sketch (120x605) is
+       bottom-anchored via object-fit contain, so its rendered height is
+       min(div height, div width x 605/120) */
+    bottom: min(50cqh, 252cqw);
+    transform: translate(-50%, 50%) rotate(-90deg);
     font-family: var(--hand); font-size: clamp(0.7rem, 1.6vw, 1.15rem);
     font-weight: 700;
     color: rgba(26,26,26,0.55);
