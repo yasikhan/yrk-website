@@ -30,8 +30,16 @@
     font-family: var(--hand);
     font-size: 1.8rem;
     color: var(--ink2);
-    display: block;
+    display: inline-block;
     margin-top: 0.5rem;
+    text-decoration: none;
+    padding: 0.1rem 0.6rem;
+    border-radius: 4px 2px 5px 3px;
+    transition: background 0.15s, color 0.15s;
+  }
+  a.contact-handwritten:hover, a.contact-handwritten:focus-visible {
+    background: var(--highlight);
+    color: var(--ink);
   }
 </style>
 </head>
@@ -43,7 +51,7 @@
 <div class="content-body">
   <h1>Contact</h1>
   <p>I always love hearing from people that share any of my interests &mdash; whether that's Silicon Valley ideology, ancient empires, baseball, photography, poetry, or something completely unrelated. Please feel free to drop me a line any time, you can reach me at</p>
-  <p class="contact-line"><span class="contact-handwritten">yasi (at) yrkhan (dot) com</span></p>
+  <p class="contact-line"><a class="contact-handwritten" href="mailto:yasi@yrkhan.com">yasi@yrkhan.com</a></p>
 </div>
 <footer class="site-footer">designed and coded by yasmeena khan &copy; 2026 &ndash; <a href="https://github.com/yasikhan/yrk-website">repo</a></footer>
 </body>
