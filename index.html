@@ -102,7 +102,8 @@
     right: 0;
     height: 0.4rem;
   }
-  .nav-item:hover .nav-dropdown {
+  .nav-item:hover .nav-dropdown,
+  .nav-item:focus-within .nav-dropdown {
     display: block;
   }
   .nav-dropdown a {
@@ -199,8 +200,14 @@
     position: absolute; cursor: pointer;
     display: flex; align-items: flex-end; justify-content: center;
     transition: filter 0.2s ease;
+    text-decoration: none; color: inherit;
   }
   .scene-img:hover { filter: brightness(0.92); }
+  .scene-img:focus-visible {
+    outline: 2px solid var(--ink3);
+    outline-offset: 5px;
+    border-radius: 4px;
+  }
   .scene-img img {
     width: 100%; height: 100%;
     object-fit: contain; object-position: bottom;
@@ -248,12 +255,6 @@
     padding: 0.15rem 0.65rem; border-radius: 3px 1px 4px 2px;
   }
 
-  .shelf-hint {
-    margin-top: -6rem; font-family: var(--mono);
-    font-size: 0.64rem; color: var(--ink4);
-    text-align: center; letter-spacing: 0.02em;
-    position: relative; z-index: 10;
-  }
   .shelf-footer {
     position: fixed; bottom: 0; left: 0; right: 0;
     display: flex; align-items: center; justify-content: center;
@@ -291,7 +292,14 @@
 
   @media (max-width: 768px) {
     .shelf-view {
-      padding: 1.5rem 1rem 5rem;
+      padding: 1.5rem 1rem 2rem;
+    }
+    /* In-flow footer on mobile so it can't overlap the shelf */
+    .shelf-footer {
+      position: static;
+      background: none;
+      flex-wrap: wrap;
+      margin-top: -2.5rem;
     }
     .flourish { width: 90px; margin-bottom: 0.6rem; }
     .shelf-greeting { font-size: 1.8rem; }
@@ -300,10 +308,6 @@
       gap: 0.4rem 0.8rem;
       margin-bottom: 1.5rem;
       font-size: 0.65rem;
-    }
-    .notebook-section {
-      width: 100%; max-width: 100%;
-      margin-bottom: 1rem;
     }
     .intro-section {
       gap: 1.5rem;
@@ -319,10 +323,6 @@
       aspect-ratio: 920 / 620;
     }
     .hover-label { display: none; }
-    .shelf-hint {
-      margin-top: -4rem;
-      font-size: 0.55rem;
-    }
     .book-spine-label {
       font-size: 0.55rem;
     }
@@ -365,9 +365,6 @@
     .book-spine-label {
       font-size: 0.45rem;
     }
-    .shelf-hint {
-      margin-top: -3rem;
-    }
     .shelf-footer .sep { display: none; }
     .shelf-footer {
       gap: 0.8rem;
@@ -406,7 +403,7 @@
       <a href="projects.html">Projects</a>
       <div class="nav-dropdown">
         <a href="projects.html#technical">Technical</a>
-        <a href="projects.html#photography">Photography</a>
+        <a href="photography.html">Photography</a>
       </div>
     </span>
     <span class="sep">&ndash;</span>
@@ -431,65 +428,66 @@
     <canvas id="shelfCanvas"></canvas>
 
     <!-- Camera (left end) -->
-    <div class="scene-img" id="cameraImg"
-         style="left: 1%; bottom: 25%; width: 26%; height: 45%;"
-         data-nav="photography" data-label="photography">
-      <img src="assets/camera-sketch.png" alt="Fujifilm X-T50">
-    </div>
+    <a class="scene-img" id="cameraImg" href="photography.html"
+       style="left: 1%; bottom: 25%; width: 26%; height: 45%;"
+       data-label="photography" aria-label="Photography">
+      <img src="assets/camera-sketch.png" alt="">
+    </a>
 
     <!-- About Me (leaning right) -->
-    <div class="scene-img book-img" id="aboutBook"
-         style="left: 33%; bottom: 25%; width: 6%; height: 44%; transform: rotate(8deg); transform-origin: bottom left; z-index: 10;"
-         data-nav="about" data-label="about me">
-      <img src="assets/book-sketch.png" alt="About Me">
+    <a class="scene-img book-img" id="aboutBook" href="about.html"
+       style="left: 33%; bottom: 25%; width: 6%; height: 44%; transform: rotate(8deg); transform-origin: bottom left; z-index: 10;"
+       data-label="about me" aria-label="About Me">
+      <img src="assets/book-sketch.png" alt="">
       <span class="book-spine-label">about me</span>
-    </div>
+    </a>
 
     <!-- Academic Research -->
-    <div class="scene-img book-img" id="academicBook"
-         style="left: 41%; bottom: 25%; width: 7%; height: 54%; z-index: 15;"
-         data-nav="research-academic" data-label="academic research">
-      <img src="assets/book-sketch.png" alt="Academic Research">
+    <a class="scene-img book-img" id="academicBook" href="research.html#academic"
+       style="left: 41%; bottom: 25%; width: 7%; height: 54%; z-index: 15;"
+       data-label="academic research" aria-label="Academic research">
+      <img src="assets/book-sketch.png" alt="">
       <span class="book-spine-label">academic</span>
-    </div>
+    </a>
 
     <!-- Professional Research -->
-    <div class="scene-img book-img" id="professionalBook"
-         style="left: 48.5%; bottom: 25%; width: 6%; height: 52%; z-index: 16;"
-         data-nav="research-professional" data-label="professional research">
-      <img src="assets/book-sketch.png" alt="Professional Research">
+    <a class="scene-img book-img" id="professionalBook" href="research.html#professional"
+       style="left: 48.5%; bottom: 25%; width: 6%; height: 52%; z-index: 16;"
+       data-label="professional research" aria-label="Professional research">
+      <img src="assets/book-sketch.png" alt="">
       <span class="book-spine-label">professional</span>
-    </div>
+    </a>
 
     <!-- Technology Writing -->
-    <div class="scene-img book-img" id="technologyBook"
-         style="left: 55%; bottom: 25%; width: 6.5%; height: 50%; z-index: 17;"
-         data-nav="writing-technology" data-label="technology writing">
-      <img src="assets/book-sketch.png" alt="Technology Writing">
+    <a class="scene-img book-img" id="technologyBook" href="writing.html#technology"
+       style="left: 55%; bottom: 25%; width: 6.5%; height: 50%; z-index: 17;"
+       data-label="technology writing" aria-label="Technology writing">
+      <img src="assets/book-sketch.png" alt="">
       <span class="book-spine-label">technology</span>
-    </div>
+    </a>
 
     <!-- Baseball Writing -->
-    <div class="scene-img book-img" id="baseballBook"
-         style="left: 62%; bottom: 25%; width: 5.5%; height: 42%; z-index: 18;"
-         data-nav="writing-baseball" data-label="baseball writing">
-      <img src="assets/book-sketch.png" alt="Baseball Writing">
+    <a class="scene-img book-img" id="baseballBook" href="writing.html#baseball"
+       style="left: 62%; bottom: 25%; width: 5.5%; height: 42%; z-index: 18;"
+       data-label="baseball writing" aria-label="Baseball writing">
+      <img src="assets/book-sketch.png" alt="">
       <span class="book-spine-label">baseball</span>
-    </div>
+    </a>
 
     <!-- Technical Projects (leaning left) -->
-    <div class="scene-img book-img" id="projectsBook"
-         style="left: 69.5%; bottom: 25%; width: 6%; height: 48%; transform: rotate(-8deg); transform-origin: bottom right; z-index: 19;"
-         data-nav="projects-technical" data-label="technical projects">
-      <img src="assets/book-sketch.png" alt="Technical Projects">
+    <a class="scene-img book-img" id="projectsBook" href="projects.html#technical"
+       style="left: 69.5%; bottom: 25%; width: 6%; height: 48%; transform: rotate(-8deg); transform-origin: bottom right; z-index: 19;"
+       data-label="technical projects" aria-label="Technical projects">
+      <img src="assets/book-sketch.png" alt="">
       <span class="book-spine-label">projects</span>
-    </div>
+    </a>
 
     <!-- Phone (right end) -->
-    <div class="scene-img" id="phoneImg"
-         style="right: 3%; bottom: 25%; width: 15%; height: 45%;">
-      <img src="assets/phone-sketch.png" alt="Rotary phone">
-    </div>
+    <a class="scene-img" id="phoneImg" href="contact.html"
+       style="right: 3%; bottom: 25%; width: 15%; height: 45%;"
+       data-label="contact me" aria-label="Contact">
+      <img src="assets/phone-sketch.png" alt="">
+    </a>
 
     <div class="hover-label" id="hoverLabel"><span id="hoverText"></span></div>
   </div>
@@ -509,7 +507,7 @@
 
 <footer class="site-footer" style="padding-bottom:4rem;">designed and coded by yasmeena khan &copy; 2026 &ndash; <a href="https://github.com/yasikhan/yrk-website">repo</a></footer>
 
-<script src="https://unpkg.com/roughjs/bundled/rough.js" defer onerror="var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/roughjs/bundled/rough.js';s.defer=true;document.head.appendChild(s);"></script>
+<script src="js/rough.js" defer></script>
 <script src="js/shelf.js" defer></script>
 </body>
 </html>

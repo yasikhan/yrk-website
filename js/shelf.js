@@ -32,52 +32,21 @@ function draw() {
   rc.line(CW - 100, SHELF_Y, CW - 100, SHELF_Y + 14, ink(SEED + 3, { strokeWidth: 2.2 }));
 }
 
-// ============ NAVIGATION ============
-const pageMap = {
-  about: 'about.html',
-  'research-academic': 'research.html#academic',
-  'research-professional': 'research.html#professional',
-  'writing-technology': 'writing.html#technology',
-  'writing-baseball': 'writing.html#baseball',
-  'projects-technical': 'projects.html#technical',
-  photography: 'projects.html#photography',
-  contact: 'contact.html'
-};
-
-function navigateTo(id) {
-  const page = pageMap[id];
-  if (page) window.location.href = page;
-}
-
-// ============ HOVER LABELS ============
-function bindHover(el, label) {
-  el.addEventListener('mouseenter', () => {
-    hoverText.textContent = label;
+// ============ HOVER / FOCUS LABELS ============
+// Navigation is handled by the <a> elements themselves.
+function bindLabel(el) {
+  const show = () => {
+    hoverText.textContent = el.dataset.label;
     hoverLabel.classList.add('visible');
-  });
-  el.addEventListener('mouseleave', () => {
-    hoverLabel.classList.remove('visible');
-  });
+  };
+  const hide = () => hoverLabel.classList.remove('visible');
+  el.addEventListener('mouseenter', show);
+  el.addEventListener('focus', show);
+  el.addEventListener('mouseleave', hide);
+  el.addEventListener('blur', hide);
 }
 
-// Camera & phone
-const cameraImg = document.getElementById('cameraImg');
-const phoneImg = document.getElementById('phoneImg');
-
-if (cameraImg) {
-  bindHover(cameraImg, 'photography');
-  cameraImg.addEventListener('click', () => navigateTo('photography'));
-}
-if (phoneImg) {
-  bindHover(phoneImg, 'contact me');
-  phoneImg.addEventListener('click', () => navigateTo('contact'));
-}
-
-// Books
-document.querySelectorAll('.book-img').forEach(el => {
-  bindHover(el, el.dataset.label);
-  el.addEventListener('click', () => navigateTo(el.dataset.nav));
-});
+document.querySelectorAll('.scene-img').forEach(bindLabel);
 
 // ============ INIT ============
 draw();
