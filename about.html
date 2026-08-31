@@ -29,7 +29,7 @@
 <style>
   .about-photo-wrap {
     float: right;
-    margin: 1.8rem -1.5rem 1.2rem 2rem;
+    margin: 1.8rem -1.5rem 0.75rem 2rem;
     width: 210px;
     transform: rotate(1.8deg);
     position: relative;
@@ -186,7 +186,8 @@
   /* Right margin note — L-shaped line */
   .margin-note-right {
     position: absolute;
-    right: -100px;
+    left: 100%;
+    margin-left: 1.5rem;
     top: -0.2em;
     font-family: var(--hand);
     font-size: 1.05rem;
@@ -195,6 +196,14 @@
     pointer-events: none;
     padding: 6px 0 0 8px;
     border-left: 1px solid rgba(26,26,26,0.2);
+  }
+  .agi-note {
+    text-decoration: underline;
+    text-decoration-style: double;
+    text-decoration-color: rgba(26,26,26,0.35);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    transform: rotate(-2deg);
   }
 
   /* Caret insertion note */
@@ -224,6 +233,14 @@
   /* Tucks the comma under the caret; reset on mobile where the caret is hidden */
   .caret-comma { margin-left: -0.45em; }
 
+  /* The notes hang ~170px outside a 640px column, so below ~920px there is no
+     margin left to hold them and they get clipped by the window edge. */
+  @media (max-width: 920px) {
+    .margin-note, .margin-note-right, .margin-note-left {
+      display: none;
+    }
+  }
+
   @media (max-width: 768px) {
     .about-photo-wrap {
       float: none;
@@ -240,9 +257,6 @@
     .caret-comma { margin-left: 0; }
     .circled::before {
       display: none;
-    }
-    .agi-note {
-      display: none !important;
     }
   }
 </style>
@@ -262,17 +276,34 @@
     </div>
   </div>
   <p class="has-margin-note">I was born and raised in San Francisco, California. I've lived in SF, Amsterdam, Washington D.C., and Oxford.<span class="margin-note">amsterdam summer &gt;&gt;</span></p>
-  <p class="has-margin-note">I study the techno-ideologies<span class="margin-note-left" style="top: 3.3em; left: -105px;">England...?</span> that constitute Valley discourse: transhumanism, effective altruism, accelerationism. My research project aims to understand <span class="underline-word">where</span> these ideologies originate, how they become meaningful and legitimized, and how they influence the development of <span class="circled">new technologies</span><span class="agi-note" style="position: relative; display: inline-block; width: 0; overflow: visible;"><span class="margin-note-right" style="text-decoration: underline; text-decoration-style: double; text-decoration-color: rgba(26,26,26,0.35); text-underline-offset: 3px; text-decoration-thickness: 1px; transform: rotate(-2deg); display: inline-block; right: auto; left: 242px; top: -1.4em;">AGI</span></span> within the Valley. My <a href="https://www.oii.ox.ac.uk/news-events/introducing-the-2025-msc-thesis-prize-winners/">highly commended</a> Master's thesis at Oxford, entitled "Coding Utopia: Effective Accelerationism &amp; Evolving Techno-Optimism in Silicon Valley," drew on Frankfurt School critical theory, elite interviews, and computational methods to investigate and historicize effective accelerationism ("e/acc").</p>
+  <p class="has-margin-note">I study the techno-ideologies<span class="margin-note-left" style="top: 3.3em; left: -105px;">England...?</span> that constitute Valley discourse: transhumanism, effective altruism, accelerationism. My research project aims to understand <span class="underline-word">where</span> these ideologies originate, how they become meaningful and legitimized, and how they influence the development of <span class="circled" id="anchor-agi">new technologies</span> within the Valley. My <a href="https://www.oii.ox.ac.uk/news-events/introducing-the-2025-msc-thesis-prize-winners/">highly commended</a> Master's thesis at Oxford, entitled "Coding Utopia: Effective Accelerationism &amp; Evolving Techno-Optimism in Silicon Valley," drew on Frankfurt School critical theory, elite interviews, and computational methods to investigate and historicize effective accelerationism ("e/acc").<span class="margin-note-right agi-note" data-anchor="anchor-agi">AGI</span></p>
   <p>My other academic research circles the same fundamental questions: where does AI come from, and how will it change us? Inquiries include questions of AI personhood<span class="caret-note"><span class="caret-symbol">^</span><span class="caret-above">& consciousness!</span></span><span class="caret-comma">,</span> and what might constitute <a href="assets/llms-electric-speech.pdf">legal speech</a> in an AI-native world. My undergraduate research focused on political polarization and the conditions under which moderation is possible in democratic societies, and <a href="assets/college-students-depolarize.pdf">AI's role in decreasing polarization</a>.</p>
   <div class="section-divider"><svg viewBox="0 0 120 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 7 C20 4, 35 9, 55 6 C75 3, 95 8, 118 5" stroke="rgba(26,26,26,0.2)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
   <div class="elsewhere-section">
     <h2>Elsewhere</h2>
     <p>Beyond academia, I write poetry (published by the <a href="https://issuu.com/lelandquarterly/docs/lqwinter2022_5_3_final" target="_blank" rel="noopener">Leland Quarterly</a> and the <a href="https://www.instagram.com/p/DOGQ0oVDDxT/" target="_blank" rel="noopener">Oxford Poetry Society</a>), contribute to citizen science projects on black hole detection, am a certified Storm Spotter with the NWS SKYWARN&reg; program, study the Mesopotamian and Near Eastern empires, and read at least <a href="https://www.goodreads.com/user/show/120161200-yasi" target="_blank" rel="noopener">52 books a year</a>. I am also an avid amateur <a href="photography.html">photographer</a>.</p>
-    <p>I love the outdoors: I walked the Camino de Santiago (on the Camino del Norte route) in the summer of 2026, from Ribadeo to Santiago de Compostela. I also spent a month in Patagonia in 2024. These days, I run regularly through Golden Gate Park and play tennis whenever I can.</p>
+    <p>I love the outdoors: I walked the Camino de Santiago (on the Camino del Norte route) in the summer of 2026, from Ribadeo to Santiago de Compostela. I also spent a month in Patagonia in 2024. These days, I run regularly through Golden Gate Park and play tennis whenever the weather cooperates.</p>
   </div>
 </div>
 <footer class="site-footer">designed and coded by yasmeena khan &copy; 2026 &ndash; <a href="https://github.com/yasikhan/yrk-website">repo</a></footer>
 <script>
+  // Keep anchored margin notes level with the line of the word they annotate,
+  // so they survive reflow instead of relying on a fixed offset.
+  function placeMarginNotes() {
+    document.querySelectorAll('[data-anchor]').forEach(function(note) {
+      var anchor = document.getElementById(note.getAttribute('data-anchor'));
+      var parent = note.offsetParent;
+      if (!anchor || !parent) return;           // hidden (mobile) or missing anchor
+      var rect = anchor.getClientRects()[0];    // first line box of the anchor
+      if (!rect) return;
+      var base = parent.getBoundingClientRect();
+      note.style.top = (rect.top - base.top + (rect.height - note.offsetHeight) / 2) + 'px';
+    });
+  }
+  placeMarginNotes();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeMarginNotes);
+  window.addEventListener('resize', placeMarginNotes);
+
   const el = document.querySelector('.elsewhere-section');
   if (el) {
     const obs = new IntersectionObserver(([e]) => {

@@ -61,6 +61,24 @@ won't break year detection.
 
 Use JPEG. Do not convert to WebP.
 
+## about.html margin annotations
+
+The handwritten marginalia are absolutely positioned outside the 640px text column, and the
+photo in paragraph 1 is a right float — so **editing the prose reflows the text and can strand
+a note away from the word it points at**. Re-render and look at the page after any copy change
+there.
+
+Notes that must stay level with a specific word carry `data-anchor="<id>"` pointing at an inline
+span wrapping that word; a small script at the end of the file sets their `top` from the anchor's
+line box on load, after fonts settle, and on resize. Horizontal placement stays in CSS
+(`left: 100%` for the right margin, negative `left` for the left margin). To add one, wrap the
+target word in a span with an id and give the note a matching `data-anchor` — do not hand-tune a
+pixel offset, that is exactly what breaks on reflow.
+
+The remaining notes (`.margin-note`, `.margin-note-left`) still use fixed `top` offsets in `em`
+relative to their paragraph and are not anchored. All margin notes hide below 920px, where there
+is no margin left to hold them.
+
 ## Adding a project card
 
 Copy an existing `.project-card` in `projects.html#technical` (header + year, desc, footer with
