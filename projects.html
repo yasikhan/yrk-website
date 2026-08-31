@@ -62,6 +62,8 @@
   .project-card:nth-child(3) { animation-delay: 0.15s; }
   .project-card:nth-child(4) { animation-delay: 0.2s; }
   .project-card:nth-child(5) { animation-delay: 0.25s; }
+  .project-card:nth-child(6) { animation-delay: 0.3s; }
+  .project-card:nth-child(7) { animation-delay: 0.35s; }
   @keyframes cardIn {
     to { opacity: 1; transform: translateY(0); }
   }
@@ -182,11 +184,6 @@
     text-align: center;
     margin-top: 0.6rem;
   }
-  .polaroid-title {
-    font-family: var(--hand);
-    font-size: 0.9rem;
-    color: var(--ink2);
-  }
   .polaroid-meta {
     font-family: var(--mono);
     font-size: 0.55rem;
@@ -236,6 +233,44 @@
   </div>
 
   <div class="projects-section active" id="technical">
+    <div class="project-card">
+      <div class="project-card-header">
+        <div class="project-card-title">Inflation Calculator</div>
+        <span class="project-card-year">2026</span>
+      </div>
+      <div class="project-card-desc">An alternative inflation calculator that measures the dollar against gold and silver rather than CPI &mdash; converting an amount into ounces at one year's price and back into dollars at another's, with the official CPI shown alongside for contrast. Historical price data from the LBMA, USGS, and FRED.</div>
+      <div class="project-card-footer">
+        <div class="project-outputs">
+          <a href="https://yasikhan.github.io/inflation-calculator/" class="project-output" data-type="website">website</a>
+          <a href="https://github.com/yasikhan/inflation-calculator" class="project-output" data-type="repo">repo</a>
+        </div>
+        <div class="project-card-tags">
+          <span class="project-tag" data-kind="lang">javascript</span>
+          <span class="project-tag" data-kind="lang">python</span>
+          <span class="project-tag" data-kind="subject">economics</span>
+          <span class="project-tag" data-kind="subject">monetary history</span>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-card-header">
+        <div class="project-card-title">LaTeX Website Template</div>
+        <span class="project-card-year">2026</span>
+      </div>
+      <div class="project-card-desc">An open-source academic website template that renders as a typeset LaTeX document &mdash; plain HTML and CSS built on LaTeX.css, with KaTeX math, numbered theorems, sidenotes, and a dark mode toggle. No build step and no dependencies.</div>
+      <div class="project-card-footer">
+        <div class="project-outputs">
+          <a href="https://yasikhan.github.io/latex-website/index.html" class="project-output" data-type="website">website</a>
+          <a href="https://github.com/yasikhan/latex-website" class="project-output" data-type="repo">repo</a>
+        </div>
+        <div class="project-card-tags">
+          <span class="project-tag" data-kind="lang">html/css</span>
+          <span class="project-tag" data-kind="lang">javascript</span>
+          <span class="project-tag" data-kind="subject">design</span>
+          <span class="project-tag" data-kind="subject">open source</span>
+        </div>
+      </div>
+    </div>
     <div class="project-card">
       <div class="project-card-header">
         <div class="project-card-title">Personal Website</div>
@@ -378,21 +413,22 @@ function loadGallery() {
         return;
       }
       files.forEach(function(file) {
-        var raw = file.replace(/\.[^.]+$/, '');
+        var raw = file.replace(/\.[^.]+$/, '').trim();
         var isDefault = /^(IMG|DSCF|DSC|P)\s*\d+$/i.test(raw.replace(/[-_]/g, ' '));
         var caption = '';
         if (!isDefault) {
+          // Parse "title, location - year"; the title is dropped from the caption
           var yearMatch = raw.match(/[\s,\-]+(\d{4})$/);
           var year = yearMatch ? yearMatch[1] : '';
           var rest = yearMatch ? raw.substring(0, raw.length - yearMatch[0].length).trim() : raw;
           var comma = rest.indexOf(',');
-          var title = comma > -1 ? rest.substring(0, comma).trim() : rest.trim();
-          var location = comma > -1 ? rest.substring(comma + 1).trim() : '';
+          var location = comma > -1 ? rest.substring(comma + 1).trim() : rest.trim();
           var meta = [location, year].filter(Boolean).join(', ');
-          caption = '<div class="polaroid-caption">' +
-            '<div class="polaroid-title">' + title + '</div>' +
-            (meta ? '<div class="polaroid-meta">' + meta + '</div>' : '') +
-            '</div>';
+          if (meta) {
+            caption = '<div class="polaroid-caption">' +
+              '<div class="polaroid-meta">' + meta + '</div>' +
+              '</div>';
+          }
         }
         var polaroid = document.createElement('div');
         polaroid.className = 'polaroid';

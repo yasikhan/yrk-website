@@ -57,11 +57,6 @@
     text-align: center;
     margin-top: 0.6rem;
   }
-  .polaroid-title {
-    font-family: var(--hand);
-    font-size: 0.9rem;
-    color: var(--ink2);
-  }
   .polaroid-meta {
     font-family: var(--mono);
     font-size: 0.55rem;
@@ -119,22 +114,22 @@
       }
 
       files.forEach(file => {
-        const raw = file.replace(/\.[^.]+$/, '');
+        const raw = file.replace(/\.[^.]+$/, '').trim();
         const isDefault = /^(IMG|DSCF|DSC|P)\s*\d+$/i.test(raw.replace(/[-_]/g, ' '));
         var caption = '';
         if (!isDefault) {
-          // Parse "title, location - year" or "title, location, year"
+          // Parse "title, location - year"; the title is dropped from the caption
           var yearMatch = raw.match(/[\s,\-]+(\d{4})$/);
           var year = yearMatch ? yearMatch[1] : '';
           var rest = yearMatch ? raw.substring(0, raw.length - yearMatch[0].length).trim() : raw;
           var comma = rest.indexOf(',');
-          var title = comma > -1 ? rest.substring(0, comma).trim() : rest.trim();
-          var location = comma > -1 ? rest.substring(comma + 1).trim() : '';
+          var location = comma > -1 ? rest.substring(comma + 1).trim() : rest.trim();
           var meta = [location, year].filter(Boolean).join(', ');
-          caption = '<div class="polaroid-caption">' +
-            '<div class="polaroid-title">' + title + '</div>' +
-            (meta ? '<div class="polaroid-meta">' + meta + '</div>' : '') +
-            '</div>';
+          if (meta) {
+            caption = '<div class="polaroid-caption">' +
+              '<div class="polaroid-meta">' + meta + '</div>' +
+              '</div>';
+          }
         }
         var polaroid = document.createElement('div');
         polaroid.className = 'polaroid';
