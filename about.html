@@ -88,6 +88,28 @@
     letter-spacing: 0.01em;
   }
 
+  /* Second polaroid, hanging off the left margin of the Elsewhere section.
+     Mirrors .about-photo-wrap: opposite float, opposite tilt, and a taller
+     caption band so the longer caption can wrap instead of overflowing. */
+  .about-photo-wrap-left {
+    float: left;
+    margin: 0.4rem 2rem 0.9rem -1.5rem;
+    transform: rotate(-2.1deg);
+  }
+  .about-photo-wrap-left .about-photo-inner {
+    padding-bottom: 38px;
+  }
+  .about-photo-wrap-left .photo-tape {
+    transform: translateX(-50%) rotate(2.5deg);
+  }
+  .about-photo-wrap-left .photo-caption {
+    height: 38px;
+    padding: 0 8px;
+    font-size: 0.82rem;
+    line-height: 1.15;
+    transform: rotate(0.5deg);
+  }
+
   /* Margin annotation */
   .margin-note {
     position: absolute;
@@ -248,6 +270,10 @@
       width: 170px;
       transform: rotate(1.2deg);
     }
+    /* keep the two polaroids tilting opposite ways once they stack */
+    .about-photo-wrap-left {
+      transform: rotate(-1.2deg);
+    }
     .margin-note, .margin-note-right, .margin-note-left {
       display: none;
     }
@@ -282,6 +308,13 @@
   <div class="elsewhere-section">
     <h2>Elsewhere</h2>
     <p>Beyond academia, I write poetry (published by the <a href="https://issuu.com/lelandquarterly/docs/lqwinter2022_5_3_final" target="_blank" rel="noopener">Leland Quarterly</a> and the <a href="https://www.instagram.com/p/DOGQ0oVDDxT/" target="_blank" rel="noopener">Oxford Poetry Society</a>), contribute to citizen science projects on black hole detection, am a certified Storm Spotter with the NWS SKYWARN&reg; program, play in fantasy football and baseball leagues, and read at least <a href="https://www.goodreads.com/user/show/120161200-yasi" target="_blank" rel="noopener">52 books a year</a>. I enjoy coding fun website projects, including an <a href="https://yasikhan.github.io/inflation-calculator/" target="_blank" rel="noopener">inflation calculator</a> based on the gold standard and <a href="https://literatusapp.com" target="_blank" rel="noopener">Literatus</a>, an alternative to Goodreads that implements binary search for book rankings. I am also an avid amateur <a href="photography.html">photographer</a>.</p>
+    <div class="about-photo-wrap about-photo-wrap-left">
+      <div class="about-photo-inner">
+        <div class="photo-tape"></div>
+        <img class="about-photo" src="assets/camino.jpg" alt="Yasi Khan on the Camino del Norte">
+        <div class="photo-caption">summer 2026, camino del norte</div>
+      </div>
+    </div>
     <p>I also love the outdoors. In the summer of 2026, I walked the Camino de Santiago, on the Camino del Norte route, from Ribadeo to Santiago de Compostela (~200km in 9 days!) I also spent a month traveling through Patagonia in 2024. These days, I run regularly through Golden Gate Park and play tennis whenever the weather cooperates.</p>
   </div>
 </div>
