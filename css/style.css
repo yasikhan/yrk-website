@@ -1,8 +1,8 @@
 /* ============ FONTS (self-hosted, latin subset) ============ */
 @font-face {
   font-family: 'YasiHand';
-  src: url('../assets/YasiHand-Regular.woff2') format('woff2'),
-       url('../assets/YasiHand-Regular.ttf') format('truetype');
+  src: url('../assets/fonts/YasiHand-Regular.woff2') format('woff2'),
+       url('../assets/fonts/YasiHand-Regular.ttf') format('truetype');
   font-weight: normal; font-style: normal; font-display: swap;
 }
 @font-face {

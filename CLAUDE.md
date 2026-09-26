@@ -30,7 +30,9 @@ galleries silently render their "no photos" empty state when opened directly fro
 | `contact.html` | Links |
 | `css/style.css` | The only shared stylesheet: `:root` design tokens, content-page layout, `.entry` lists, footer, responsive rules |
 | `photos/` | Gallery images + `manifest.json` |
-| `assets/fonts/`, `assets/YasiHand-*` | Self-hosted woff2 fonts |
+| `assets/img/` | Site images — photos, sketches, logo, favicon |
+| `assets/docs/` | PDFs — resume, papers, posters |
+| `assets/fonts/` | Self-hosted woff2/ttf fonts, including `YasiHand-*` |
 
 Each page carries its own inline `<style>` block for page-specific rules and pulls shared
 tokens/layout from `css/style.css`. Colors and fonts come from CSS variables (`--ink`,

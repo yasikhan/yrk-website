@@ -28,7 +28,9 @@ contact.html        links
 css/style.css       shared design tokens and layout
 js/shelf.js         bookshelf illustration
 js/rough.js         rough.js, vendored
-assets/             images, PDFs, self-hosted fonts
+assets/img/         images — photos, sketches, logo, favicon
+assets/docs/        PDFs — resume, papers, posters
+assets/fonts/       self-hosted fonts
 photos/             gallery images + manifest.json
 ```
 
