@@ -42,9 +42,10 @@ rather than hardcoding values.
 
 Three typefaces, each with one job: `--serif` (Libre Caslon Display) is for h1/h2 **only**. It
 ships a single 400 weight and is too thin at small sizes, so never give it `font-weight` 500+.
-`--body` (Newsreader) is for everything else, including dates, tags and meta (italic, old-style
-figures). `--hand` (YasiHand) is for handwritten accents and tabs. There is no monospace face;
-don't reintroduce one.
+`--body` (Newsreader) is for prose, titles, and list dates/meta (italic, old-style figures).
+`--hand` (YasiHand) is for handwritten accents and tabs. `--mono` (IBM Plex Mono) is kept, by
+preference, for the homepage nav and social links and for the project/research output pills,
+tags and project years. Pages using it preload `ibm-plex-mono-400.woff2`.
 
 On mobile, keep body copy at ≥1rem and small meta at ≥0.72rem. Don't shrink type to fit phones.
 

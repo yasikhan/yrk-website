@@ -11,6 +11,16 @@
   font-weight: 400; font-style: normal; font-display: swap;
 }
 @font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('../assets/fonts/ibm-plex-mono-300.woff2') format('woff2');
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('../assets/fonts/ibm-plex-mono-400.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
   font-family: 'Newsreader';
   src: url('../assets/fonts/newsreader.woff2') format('woff2');
   font-weight: 300 400; font-style: normal; font-display: swap;
@@ -35,6 +45,7 @@
   --hand: 'YasiHand', cursive;
   --serif: 'Libre Caslon Display', Georgia, serif;
   --body: 'Newsreader', Georgia, serif;
+  --mono: 'IBM Plex Mono', monospace;
 }
 
 /* ============ RESET & BASE ============ */

@@ -29,6 +29,7 @@
 <link rel="preload" as="image" href="assets/img/book-sketch.png" fetchpriority="high">
 <link rel="preload" as="image" href="assets/img/camera-sketch.png">
 <link rel="preload" as="image" href="assets/img/phone-sketch.png">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/ibm-plex-mono-400.woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
 <style>
   .shelf-view {
@@ -57,7 +58,8 @@
   .site-nav {
     display: flex; align-items: center; gap: 1.4rem;
     margin-bottom: 2rem;
-    font-family: var(--body); font-size: 0.95rem;
+    font-family: var(--mono); font-size: 0.75rem;
+    letter-spacing: 0.03em;
   }
   .site-nav a {
     color: var(--ink3); text-decoration: none;
@@ -112,7 +114,7 @@
     display: block;
     padding: 0.25rem 0.8rem;
     white-space: nowrap;
-    font-size: 0.85rem;
+    font-size: 0.68rem;
     color: var(--ink3);
     text-align: center;
   }
@@ -257,7 +259,7 @@
     display: flex; align-items: center; justify-content: center;
     gap: 1.1rem;
     padding: 0.8rem 1rem;
-    font-family: var(--body); font-size: 0.85rem;
+    font-family: var(--mono); font-size: 0.66rem;
     color: var(--ink3);
     background: linear-gradient(to top, var(--page) 60%, transparent);
     z-index: 100;
@@ -304,7 +306,7 @@
       flex-wrap: wrap; justify-content: center;
       gap: 0.4rem 0.8rem;
       margin-bottom: 1.5rem;
-      font-size: 0.9rem;
+      font-size: 0.72rem;
     }
     .intro-section {
       gap: 1.5rem;
@@ -325,7 +327,7 @@
     }
     .shelf-footer {
       gap: 0.6rem;
-      font-size: 0.8rem;
+      font-size: 0.66rem;
       padding: 0.6rem 0.5rem;
     }
   }
@@ -335,7 +337,7 @@
     .flourish { width: 70px; }
     .site-nav {
       gap: 0.3rem 0.9rem;
-      font-size: 0.88rem;
+      font-size: 0.7rem;
     }
     .site-nav .sep { display: none; }
     .intro-section {
@@ -365,7 +367,7 @@
     .shelf-footer .sep { display: none; }
     .shelf-footer {
       gap: 0.4rem 0.8rem;
-      font-size: 0.78rem;
+      font-size: 0.64rem;
     }
   }
 </style>
