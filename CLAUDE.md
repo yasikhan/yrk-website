@@ -25,7 +25,8 @@ galleries silently render their "no photos" empty state when opened directly fro
 | --- | --- |
 | `index.html` | Landing page — hand-drawn bookshelf on `<canvas>`, drawn by `js/shelf.js` on top of `js/rough.js` |
 | `about.html` | Prose page with handwritten margin annotations positioned absolutely |
-| `research.html`, `writing.html`, `projects.html` | Tabbed list pages |
+| `research.html`, `writing.html` | Tabbed list pages (tabs driven by `js/tabs.js`) |
+| `projects.html` | Technical project cards |
 | `photography.html` | Photo gallery |
 | `contact.html` | Links |
 | `css/style.css` | The only shared stylesheet: `:root` design tokens, content-page layout, `.entry` lists, footer, responsive rules |
@@ -36,17 +37,21 @@ galleries silently render their "no photos" empty state when opened directly fro
 
 Each page carries its own inline `<style>` block for page-specific rules and pulls shared
 tokens/layout from `css/style.css`. Colors and fonts come from CSS variables (`--ink`,
-`--ink2`…`--ink4`, `--highlight`, `--hand`, `--serif`, `--body`, `--mono`) — use those rather
-than hardcoding values.
+`--ink2`…`--ink4`, `--highlight`, `--link`, `--link-soft`, `--hand`, `--serif`, `--body`) — use those
+rather than hardcoding values.
 
-## The gallery script is duplicated
+Three typefaces, each with one job: `--serif` (Libre Caslon Display) is for h1/h2 **only**. It
+ships a single 400 weight and is too thin at small sizes, so never give it `font-weight` 500+.
+`--body` (Newsreader) is for everything else, including dates, tags and meta (italic, old-style
+figures). `--hand` (YasiHand) is for handwritten accents and tabs. There is no monospace face;
+don't reintroduce one.
 
-`photography.html` and `projects.html` (Photography tab) each contain their **own copy** of the
-gallery rendering script and the `.polaroid*` CSS. They are not shared. Any change to caption
-rendering, parsing, or polaroid styling must be made in both files or the two galleries drift
-apart.
+On mobile, keep body copy at ≥1rem and small meta at ≥0.72rem. Don't shrink type to fit phones.
 
 ## Adding a photo
+
+The gallery lives only on `photography.html`. `projects.html#photography` redirects there.
+
 
 1. Drop the image in `photos/`.
 2. Add the filename to `photos/manifest.json` by hand — there is no generator, and the
@@ -56,7 +61,7 @@ Filenames follow `title, location - year.ext`, e.g. `still water, kyoto, japan -
 The parser splits the trailing year, then treats everything before the first comma as the title
 and everything after as the location.
 
-**Captions display only `location, year`** (small mono, `.polaroid-meta`). The title portion of
+**Captions display only `location, year`** (small italic, `.polaroid-meta`). The title portion of
 the filename survives only as the image `alt` text — keep writing descriptive titles, they just
 aren't rendered. The parsed filename is `.trim()`ed, so a stray space before the extension
 won't break year detection.
@@ -83,12 +88,8 @@ is no margin left to hold them.
 
 ## Adding a project card
 
-Copy an existing `.project-card` in `projects.html#technical` (header + year, desc, footer with
+Copy an existing `.project-card` in `projects.html` (header + year, desc, footer with
 `.project-outputs` and `.project-card-tags`). Cards are ordered newest-first by year.
-
-The entrance animation is staggered with an explicit `.project-card:nth-child(N)` delay list in
-that file's `<style>` block. It is not generated — when the card count grows past the last
-declared `N`, add the new delays or the trailing cards animate in with no stagger.
 
 Output links carry `data-type` (`website` / `repo` / `paper` / `poster`), which drives the
 colored dot. Tags carry `data-kind` (`lang` / `subject`).
@@ -101,10 +102,12 @@ relevant tab container — `.writing-section` in `writing.html`, `.research-sect
 
 ## Tabbed pages
 
-`research.html`, `writing.html`, and `projects.html` use `.section-tab[data-section]` buttons
-that toggle an `.active` class on the matching section. All of them support hash deep links
-(`/writing.html#technology`, `/projects.html#photography`). `projects.html` additionally widens
-the container and lazy-loads the gallery on first switch to the Photography tab.
+`research.html` and `writing.html` load the shared `js/tabs.js`. A `.section-tabs[role=tablist]`
+holds `.section-tab[role=tab][data-section][aria-controls]` buttons, and each panel is the element
+with that id plus `role="tabpanel"`. The script toggles `.active` + `aria-selected`, supports
+arrow keys, and mirrors the open tab into the URL hash, so `/writing.html#baseball` both opens
+and shares that tab. Tab styling (handwritten label + highlighter swipe) lives in
+`css/style.css`. Don't restyle it per page.
 
 ## New pages
 

@@ -23,27 +23,8 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/newsreader.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/libre-caslon-display-400.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/YasiHand-Regular.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="assets/fonts/ibm-plex-mono-400.woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
 <style>
-  .section-tabs {
-    display: flex; gap: 0.5rem;
-    margin-bottom: 2rem;
-    font-family: var(--mono); font-size: 0.72rem;
-  }
-  .section-tab {
-    padding: 0.3rem 0.8rem;
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 3px;
-    background: none; color: var(--ink3);
-    cursor: pointer; transition: all 0.15s;
-    font-family: inherit; font-size: inherit;
-  }
-  .section-tab:hover { border-color: rgba(0,0,0,0.2); color: var(--ink2); }
-  .section-tab.active {
-    background: var(--highlight-strong);
-    border-color: transparent; color: var(--ink);
-  }
   .writing-section { display: none; }
   .writing-section.active { display: block; }
 </style>
@@ -56,13 +37,13 @@
 <div class="content-body">
   <h1>Writing</h1>
 
-  <div class="section-tabs">
-    <button class="section-tab active" data-section="technology">Technology</button>
-    <button class="section-tab" data-section="baseball">Baseball</button>
-    <!-- <button class="section-tab" data-section="personal">personal</button> -->
+  <div class="section-tabs" role="tablist">
+    <button class="section-tab active" role="tab" data-section="technology" aria-controls="technology" aria-selected="true">Technology</button>
+    <button class="section-tab" role="tab" data-section="baseball" aria-controls="baseball" aria-selected="false">Baseball</button>
+    <!-- <button class="section-tab" role="tab" data-section="personal" aria-controls="personal" aria-selected="false">personal</button> -->
   </div>
 
-  <div class="writing-section" id="baseball">
+  <div class="writing-section" id="baseball" role="tabpanel">
     <p>I was a paid site writer with <a href="https://www.mccoveychronicles.com">Vox Media's McCovey Chronicles</a>, covering the San Francisco Giants.</p>
     <div class="entry">
       <div>
@@ -108,7 +89,7 @@
     </div>
   </div>
 
-  <div class="writing-section active" id="technology">
+  <div class="writing-section active" id="technology" role="tabpanel">
     <p>Writing on the ideologies, culture, and political stakes of Silicon Valley. More on <a href="https://codingutopia.substack.com/">Coding Utopia</a>, my Substack.</p>
     <div class="entry">
       <div>
@@ -140,28 +121,13 @@
     </div>
   </div>
 
-  <div class="writing-section" id="personal">
-    <p>Poetry and personal essays — an extension of my minor in Creative Writing at Stanford.</p>
+  <div class="writing-section" id="personal" role="tabpanel">
+    <p>Poetry and personal essays — an extension of my minor in Poetry at Stanford.</p>
     <p style="font-size:0.88rem;color:var(--ink3);font-style:italic;">Work forthcoming.</p>
   </div>
 </div>
 
-<script>
-document.querySelectorAll('.section-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.writing-section').forEach(s => s.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById(tab.dataset.section).classList.add('active');
-  });
-});
-if (location.hash) {
-  var id = location.hash.slice(1);
-  var tab = document.querySelector('.section-tab[data-section="' + id + '"]');
-  if (tab) tab.click();
-  window.scrollTo(0, 0);
-}
-</script>
+<script src="js/tabs.js"></script>
 <footer class="site-footer">designed and coded by yasmeena khan &copy; 2026 &ndash; <a href="https://github.com/yasikhan/yrk-website">repo</a></footer>
 </body>
 </html>

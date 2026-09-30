@@ -23,27 +23,8 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/newsreader.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/libre-caslon-display-400.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/YasiHand-Regular.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="assets/fonts/ibm-plex-mono-400.woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
 <style>
-  .section-tabs {
-    display: flex; gap: 0.5rem;
-    margin-bottom: 2rem;
-    font-family: var(--mono); font-size: 0.72rem;
-  }
-  .section-tab {
-    padding: 0.3rem 0.8rem;
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 3px;
-    background: none; color: var(--ink3);
-    cursor: pointer; transition: all 0.15s;
-    font-family: inherit; font-size: inherit;
-  }
-  .section-tab:hover { border-color: rgba(0,0,0,0.2); color: var(--ink2); }
-  .section-tab.active {
-    background: var(--highlight-strong);
-    border-color: transparent; color: var(--ink);
-  }
   .research-section { display: none; }
   .research-section.active { display: block; }
   #academic .entry {
@@ -56,7 +37,7 @@
     gap: 1rem;
   }
   .org-header {
-    font-size: 1rem; font-weight: 500; color: var(--ink);
+    font-size: 1rem; font-weight: 400; color: var(--ink);
     margin-top: 1.5rem; margin-bottom: 0.2rem;
   }
   .org-header .entry-meta {
@@ -70,6 +51,9 @@
     gap: 1rem; align-items: baseline;
   }
   .sub-entry .entry-title { font-size: 0.92rem; }
+  @media (max-width: 480px) {
+    #academic .entry-header { flex-direction: column; gap: 0.1rem; }
+  }
   .abstract {
     font-size: 0.88rem; line-height: 1.7;
     color: var(--ink3); margin-top: 0.5rem;
@@ -86,19 +70,19 @@
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    color: #3a4f6a;
+    font-family: var(--body);
+    font-size: 0.78rem;
+    color: var(--link);
     text-decoration: none;
-    padding: 0.2rem 0.6rem;
-    border: 1px solid rgba(58,79,106,0.25);
+    padding: 0.1rem 0.6rem;
+    border: 1px solid var(--link-soft);
     border-radius: 3px;
     transition: all 0.15s;
-    letter-spacing: 0.01em;
   }
+  .content-body a.entry-output { text-decoration: none; }
   .entry-output:hover {
     background: rgba(58,79,106,0.08);
-    border-color: rgba(58,79,106,0.45);
+    border-color: var(--link);
     text-decoration: none;
   }
   .entry-output::before {
@@ -126,12 +110,12 @@
   <h1>Research</h1>
   <p>My research explores how AI systems shape political discourse and public reason, and the ideologies underlying their construction.</p>
 
-  <div class="section-tabs">
-    <button class="section-tab active" data-section="academic">Academic</button>
-    <button class="section-tab" data-section="professional">Professional</button>
+  <div class="section-tabs" role="tablist">
+    <button class="section-tab active" role="tab" data-section="academic" aria-controls="academic" aria-selected="true">Academic</button>
+    <button class="section-tab" role="tab" data-section="professional" aria-controls="professional" aria-selected="false">Professional</button>
   </div>
 
-  <div class="research-section active" id="academic">
+  <div class="research-section active" id="academic" role="tabpanel">
     <div class="entry">
       <div class="entry-header">
         <div class="entry-title">Coding Utopia: Effective Accelerationism &amp; Evolving Techno-Optimism in Silicon Valley</div>
@@ -191,7 +175,7 @@
     </div>
   </div>
 
-  <div class="research-section" id="professional">
+  <div class="research-section" id="professional" role="tabpanel">
     <div class="entry org-header">
       <div>Deliberative Democracy Lab, Stanford</div>
       <div class="entry-meta">ongoing</div>
@@ -232,23 +216,7 @@
   </div>
 </div>
 
-<script>
-document.querySelectorAll('.section-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.research-section').forEach(s => s.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById(tab.dataset.section).classList.add('active');
-  });
-});
-if (location.hash) {
-  var id = location.hash.slice(1);
-  var tab = document.querySelector('.section-tab[data-section="' + id + '"]');
-  if (tab) tab.click();
-  history.replaceState(null, '', location.pathname);
-  window.scrollTo(0, 0);
-}
-</script>
+<script src="js/tabs.js"></script>
 <footer class="site-footer">designed and coded by yasmeena khan &copy; 2026 &ndash; <a href="https://github.com/yasikhan/yrk-website">repo</a></footer>
 </body>
 </html>

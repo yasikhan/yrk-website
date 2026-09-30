@@ -11,6 +11,7 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if (location.hash === '#photography') location.replace('photography.html');</script>
 <title>Projects — Yasi Khan</title>
 <meta name="description" content="Projects by Yasmeena Khan — technical projects and photography.">
 <meta property="og:title" content="Projects — Yasi Khan">
@@ -23,50 +24,15 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/newsreader.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/libre-caslon-display-400.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/YasiHand-Regular.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="assets/fonts/ibm-plex-mono-400.woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
 <style>
-  .section-tabs {
-    display: flex; gap: 0.5rem;
-    margin-bottom: 2rem;
-    font-family: var(--mono); font-size: 0.72rem;
-  }
-  .section-tab {
-    padding: 0.3rem 0.8rem;
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 3px;
-    background: none; color: var(--ink3);
-    cursor: pointer; transition: all 0.15s;
-    font-family: inherit; font-size: inherit;
-  }
-  .section-tab:hover { border-color: rgba(0,0,0,0.2); color: var(--ink2); }
-  .section-tab.active {
-    background: var(--highlight-strong);
-    border-color: transparent; color: var(--ink);
-  }
-  .projects-section { display: none; }
-  .projects-section.active { display: block; }
-
   /* Technical cards */
   .project-card {
     position: relative;
     padding: 1.6rem 0;
     border-bottom: 1px solid rgba(0,0,0,0.06);
-    opacity: 0;
-    transform: translateY(12px);
-    animation: cardIn 0.4s ease forwards;
   }
   .project-card:first-child { border-top: 1px solid rgba(0,0,0,0.06); }
-  .project-card:nth-child(1) { animation-delay: 0.05s; }
-  .project-card:nth-child(2) { animation-delay: 0.1s; }
-  .project-card:nth-child(3) { animation-delay: 0.15s; }
-  .project-card:nth-child(4) { animation-delay: 0.2s; }
-  .project-card:nth-child(5) { animation-delay: 0.25s; }
-  .project-card:nth-child(6) { animation-delay: 0.3s; }
-  .project-card:nth-child(7) { animation-delay: 0.35s; }
-  @keyframes cardIn {
-    to { opacity: 1; transform: translateY(0); }
-  }
   .project-card-header {
     display: flex;
     justify-content: space-between;
@@ -75,16 +41,18 @@
     margin-bottom: 0.45rem;
   }
   .project-card-title {
-    font-family: var(--serif);
+    font-family: var(--body);
     font-size: 1.2rem;
-    font-weight: 500;
+    font-weight: 400;
     color: var(--ink);
     line-height: 1.3;
   }
   .project-card-year {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    color: var(--ink4);
+    font-family: var(--body);
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--ink3);
+    font-variant-numeric: oldstyle-nums;
     white-space: nowrap;
     flex-shrink: 0;
   }
@@ -110,19 +78,19 @@
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    color: #3a4f6a;
+    font-family: var(--body);
+    font-size: 0.78rem;
+    color: var(--link);
     text-decoration: none;
-    padding: 0.2rem 0.6rem;
-    border: 1px solid rgba(58,79,106,0.25);
+    padding: 0.1rem 0.6rem;
+    border: 1px solid var(--link-soft);
     border-radius: 3px;
     transition: all 0.15s;
-    letter-spacing: 0.01em;
   }
+  .content-body a.project-output { text-decoration: none; }
   .project-output:hover {
     background: rgba(58,79,106,0.08);
-    border-color: rgba(58,79,106,0.45);
+    border-color: var(--link);
     text-decoration: none;
   }
   .project-output::before {
@@ -143,9 +111,9 @@
     flex-wrap: wrap;
   }
   .project-tag {
-    font-family: var(--mono);
-    font-size: 0.55rem;
-    padding: 0.12rem 0.45rem;
+    font-family: var(--body);
+    font-size: 0.75rem;
+    padding: 0.05rem 0.45rem;
     border-radius: 3px;
   }
   .project-tag[data-kind="lang"] {
@@ -157,65 +125,14 @@
     background: var(--highlight);
   }
 
-  /* Gallery */
-  .content-body.gallery-wide { max-width: 1100px; }
-  .gallery {
-    columns: 4;
-    column-gap: 2rem;
-    margin-top: 2rem;
-  }
-  .polaroid {
-    display: inline-block;
-    width: 100%;
-    background: #fff;
-    padding: 0.8rem 0.8rem 2.5rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06);
-    break-inside: avoid;
-    -webkit-column-break-inside: avoid;
-    page-break-inside: avoid;
-    margin-bottom: 2rem;
-    overflow: hidden;
-  }
-  .polaroid img {
-    width: 100%;
-    display: block;
-  }
-  .polaroid-caption {
-    text-align: center;
-    margin-top: 0.6rem;
-  }
-  .polaroid-meta {
-    font-family: var(--mono);
-    font-size: 0.55rem;
-    color: var(--ink4);
-    margin-top: 0.15rem;
-  }
-  .gallery-empty {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: var(--ink4);
-    margin-top: 2rem;
-  }
-
-  @media (max-width: 1000px) {
-    .gallery { columns: 3; }
-  }
   @media (max-width: 768px) {
-    .gallery { columns: 2; column-gap: 1.5rem; }
-    .polaroid { margin-bottom: 1.5rem; }
     .project-card-footer { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
     .project-card-title { font-size: 1.05rem; }
   }
   @media (max-width: 480px) {
-    .gallery {
-      columns: 1;
-      max-width: 300px;
-      margin-left: auto;
-      margin-right: auto;
-    }
     .project-card { padding: 1.2rem 0; }
-    .project-card-title { font-size: 0.95rem; }
-    .project-card-desc { font-size: 0.82rem; }
+    .project-card-title { font-size: 1.05rem; }
+    .project-card-desc { font-size: 0.95rem; }
   }
 </style>
 </head>
@@ -224,15 +141,12 @@
   <a class="back-btn" href="index.html">&larr; homepage</a>
   <span class="content-title">Projects</span>
 </nav>
-<div class="content-body" id="contentBody">
+<div class="content-body">
   <h1>Projects</h1>
 
-  <div class="section-tabs">
-    <button class="section-tab active" data-section="technical">Technical</button>
-    <button class="section-tab" data-section="photography">Photography</button>
-  </div>
+  <p>Photography lives on <a href="photography.html">its own page</a>.</p>
 
-  <div class="projects-section active" id="technical">
+  <div class="projects-section" id="technical">
     <div class="project-card">
       <div class="project-card-header">
         <div class="project-card-title">Inflation Calculator</div>
@@ -362,90 +276,7 @@
     </div>
   </div>
 
-  <div class="projects-section" id="photography">
-    <p>Things I thought were worth looking at again.</p>
-    <div class="gallery" id="gallery"></div>
-    <p class="gallery-empty" id="galleryEmpty" style="display:none;">No photos yet.</p>
-  </div>
 </div>
-
-<script>
-var contentBody = document.getElementById('contentBody');
-
-function switchTab(tab) {
-  document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.projects-section').forEach(s => s.classList.remove('active'));
-  tab.classList.add('active');
-  document.getElementById(tab.dataset.section).classList.add('active');
-  if (tab.dataset.section === 'photography') {
-    contentBody.classList.add('gallery-wide');
-    loadGallery();
-  } else {
-    contentBody.classList.remove('gallery-wide');
-  }
-}
-
-document.querySelectorAll('.section-tab').forEach(tab => {
-  tab.addEventListener('click', () => switchTab(tab));
-});
-
-if (location.hash) {
-  var id = location.hash.slice(1);
-  var tab = document.querySelector('.section-tab[data-section="' + id + '"]');
-  if (tab) switchTab(tab);
-  history.replaceState(null, '', location.pathname);
-  window.scrollTo(0, 0);
-}
-
-var galleryLoaded = false;
-function loadGallery() {
-  if (galleryLoaded) return;
-  galleryLoaded = true;
-  var gallery = document.getElementById('gallery');
-  var emptyMsg = document.getElementById('galleryEmpty');
-  var photoDir = 'photos/';
-
-  fetch(photoDir + 'manifest.json')
-    .then(function(r) { return r.json(); })
-    .then(function(files) {
-      if (files.length === 0) {
-        emptyMsg.style.display = 'block';
-        return;
-      }
-      files.forEach(function(file) {
-        var raw = file.replace(/\.[^.]+$/, '').trim();
-        var isDefault = /^(IMG|DSCF|DSC|P)\s*\d+$/i.test(raw.replace(/[-_]/g, ' '));
-        var caption = '';
-        if (!isDefault) {
-          // Parse "title, location - year"; the title is dropped from the caption
-          var yearMatch = raw.match(/[\s,\-]+(\d{4})$/);
-          var year = yearMatch ? yearMatch[1] : '';
-          var rest = yearMatch ? raw.substring(0, raw.length - yearMatch[0].length).trim() : raw;
-          var comma = rest.indexOf(',');
-          var location = comma > -1 ? rest.substring(comma + 1).trim() : rest.trim();
-          var meta = [location, year].filter(Boolean).join(', ');
-          if (meta) {
-            caption = '<div class="polaroid-caption">' +
-              '<div class="polaroid-meta">' + meta + '</div>' +
-              '</div>';
-          }
-        }
-        var polaroid = document.createElement('div');
-        polaroid.className = 'polaroid';
-        var img = new Image();
-        img.loading = 'lazy';
-        img.alt = isDefault ? '' : raw;
-        img.src = photoDir + encodeURIComponent(file);
-        polaroid.appendChild(img);
-        if (caption) polaroid.insertAdjacentHTML('beforeend', caption);
-        gallery.appendChild(polaroid);
-      });
-    })
-    .catch(function() {
-      emptyMsg.style.display = 'block';
-    });
-}
-</script>
 <footer class="site-footer">designed and coded by yasmeena khan &copy; 2026 &ndash; <a href="https://github.com/yasikhan/yrk-website">repo</a></footer>
 </body>
 </html>
