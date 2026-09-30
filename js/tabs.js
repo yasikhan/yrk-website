@@ -30,6 +30,12 @@
     return t.dataset.section === location.hash.slice(1);
   })[0];
   select(fromHash || tabs.filter(function(t) { return t.classList.contains('active'); })[0] || tabs[0], false);
-  // A hash matching a panel id makes the browser jump to it; keep the page at the top.
-  if (fromHash) window.scrollTo(0, 0);
+  // A hash matching a panel id makes the browser jump to it, and that jump can land after
+  // this script runs, so reset again once the page has loaded.
+  if (fromHash) {
+    window.scrollTo(0, 0);
+    window.addEventListener('load', function() {
+      requestAnimationFrame(function() { window.scrollTo(0, 0); });
+    });
+  }
 })();
