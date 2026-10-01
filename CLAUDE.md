@@ -89,8 +89,13 @@ is no margin left to hold them.
 
 ## Adding a project card
 
-Copy an existing `.project-card` in `projects.html` (header + year, desc, footer with
-`.project-outputs` and `.project-card-tags`). Cards are ordered newest-first by year.
+Copy an existing `.project-card` in `projects.html` (header, desc, footer with
+`.project-outputs` and `.project-card-tags`). Cards sit inside a `<section class="project-year">`
+whose `.project-year-label` h2 carries the year — add to the matching year's section, or create a
+new section in newest-first order. The hand-drawn timeline rail in the left margin, its dots, and
+the year labels' vertical position are all computed by the script at the end of the page from the
+card titles, so nothing needs hand positioning. Below 920px the rail hides and years become inline
+handwritten headings.
 
 Output links carry `data-type` (`website` / `repo` / `paper` / `poster`), which drives the
 colored dot. Tags carry `data-kind` (`lang` / `subject`).

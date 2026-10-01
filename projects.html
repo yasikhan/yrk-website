@@ -33,7 +33,6 @@
     padding: 1.6rem 0;
     border-bottom: 1px solid rgba(0,0,0,0.06);
   }
-  .project-card:first-child { border-top: 1px solid rgba(0,0,0,0.06); }
   .project-card-header {
     display: flex;
     justify-content: space-between;
@@ -47,13 +46,6 @@
     font-weight: 400;
     color: var(--ink);
     line-height: 1.3;
-  }
-  .project-card-year {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    color: var(--ink3);
-    white-space: nowrap;
-    flex-shrink: 0;
   }
   .project-card-desc {
     font-size: 0.88rem;
@@ -124,6 +116,44 @@
     background: var(--highlight);
   }
 
+  /* Year timeline: a hand-drawn rail in the left margin, one dot per project,
+     with each year written beside its first project. Dots and year labels are
+     positioned by the script at the end of the file from each title's line box. */
+  .projects-section { position: relative; }
+  .timeline-rail {
+    position: absolute; top: 0; bottom: 0;
+    left: -64px; width: 28px;
+    pointer-events: none;
+  }
+  .timeline-rail svg { display: block; overflow: visible; }
+  .timeline-rail .dot path:first-child { transition: fill 0.15s; }
+  .timeline-rail .dot.on path:first-child { fill: var(--highlight-strong); }
+  .project-year { position: relative; }
+  .content-body .project-year-label {
+    position: absolute; top: 1.5rem;
+    right: calc(100% + 84px);
+    margin: 0;
+    font-family: var(--hand); font-size: 1.55rem; line-height: 1;
+    color: var(--ink2);
+  }
+  .content-body .project-year-label::after {
+    left: -4px; right: -4px; bottom: 0.05em; height: 0.4em;
+    border-radius: 2px 1px 3px 1px;
+    transform: rotate(-2deg);
+  }
+  .project-year:first-child .project-card:first-of-type { padding-top: 0.6rem; }
+
+  @media (max-width: 920px) {
+    .timeline-rail { display: none; }
+    .content-body .project-year-label {
+      position: relative; top: auto !important; right: auto;
+      margin: 2.2rem 0 0.2rem;
+      font-size: 1.35rem;
+    }
+    .project-year:first-of-type .project-year-label { margin-top: 1rem; }
+    .project-year:first-child .project-card:first-of-type { padding-top: 1rem; }
+  }
+
   @media (max-width: 768px) {
     .project-card-footer { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
     .project-card-title { font-size: 1.05rem; }
@@ -146,136 +176,280 @@
   <p>Photography lives on <a href="photography.html">its own page</a>.</p>
 
   <div class="projects-section" id="technical">
-    <div class="project-card">
-      <div class="project-card-header">
-        <div class="project-card-title">Inflation Calculator</div>
-        <span class="project-card-year">2026</span>
-      </div>
-      <div class="project-card-desc">An alternative inflation calculator that measures the dollar against gold and silver rather than CPI &mdash; converting an amount into ounces at one year's price and back into dollars at another's, with the official CPI shown alongside for contrast. Historical price data from the LBMA, USGS, and FRED.</div>
-      <div class="project-card-footer">
-        <div class="project-outputs">
-          <a href="https://yasikhan.github.io/inflation-calculator/" class="project-output" data-type="website">website</a>
-          <a href="https://github.com/yasikhan/inflation-calculator" class="project-output" data-type="repo">repo</a>
+    <div class="timeline-rail" aria-hidden="true"></div>
+    <section class="project-year" aria-labelledby="y2026">
+      <h2 class="project-year-label" id="y2026">2026</h2>
+      <div class="project-card">
+        <div class="project-card-header">
+          <div class="project-card-title">AI Governance Lab Website</div>
         </div>
-        <div class="project-card-tags">
-          <span class="project-tag" data-kind="lang">javascript</span>
-          <span class="project-tag" data-kind="lang">python</span>
-          <span class="project-tag" data-kind="subject">economics</span>
-          <span class="project-tag" data-kind="subject">monetary history</span>
-        </div>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-card-header">
-        <div class="project-card-title">LaTeX Website Template</div>
-        <span class="project-card-year">2026</span>
-      </div>
-      <div class="project-card-desc">An open-source academic website template that renders as a typeset LaTeX document &mdash; plain HTML and CSS built on LaTeX.css, with KaTeX math, numbered theorems, sidenotes, and a dark mode toggle. No build step and no dependencies.</div>
-      <div class="project-card-footer">
-        <div class="project-outputs">
-          <a href="https://yasikhan.github.io/latex-website/index.html" class="project-output" data-type="website">website</a>
-          <a href="https://github.com/yasikhan/latex-website" class="project-output" data-type="repo">repo</a>
-        </div>
-        <div class="project-card-tags">
-          <span class="project-tag" data-kind="lang">html/css</span>
-          <span class="project-tag" data-kind="lang">javascript</span>
-          <span class="project-tag" data-kind="subject">design</span>
-          <span class="project-tag" data-kind="subject">open source</span>
+        <div class="project-card-desc">Website for Stanford's AI Governance Lab, an interdisciplinary research center at HAI and Stanford Law School &mdash; the lab's people, news, events, research, teaching, and newsletter.</div>
+        <div class="project-card-footer">
+          <div class="project-outputs">
+            <a href="https://aigovlab.stanford.edu/" class="project-output" data-type="website">website</a>
+          </div>
+          <div class="project-card-tags">
+            <span class="project-tag" data-kind="lang">html/css</span>
+            <span class="project-tag" data-kind="subject">ai governance</span>
+            <span class="project-tag" data-kind="subject">design</span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="project-card">
-      <div class="project-card-header">
-        <div class="project-card-title">Personal Website</div>
-        <span class="project-card-year">2026</span>
-      </div>
-      <div class="project-card-desc">Personal website with a hand-illustrated bookshelf UI, custom typography, and interactive sketch-style navigation. Built from scratch with static HTML, CSS, and JavaScript.</div>
-      <div class="project-card-footer">
-        <div class="project-outputs">
-          <a href="https://yrkhan.com" class="project-output" data-type="website">website</a>
-          <a href="https://github.com/yasikhan/yrk-website" class="project-output" data-type="repo">repo</a>
+      <div class="project-card">
+        <div class="project-card-header">
+          <div class="project-card-title">CS283 Course Website</div>
         </div>
-        <div class="project-card-tags">
-          <span class="project-tag" data-kind="lang">html/css</span>
-          <span class="project-tag" data-kind="lang">javascript</span>
-          <span class="project-tag" data-kind="subject">design</span>
-          <span class="project-tag" data-kind="subject">personal</span>
+        <div class="project-card-desc">Course website for <em>Governing Artificial Intelligence</em> (CS283 / LAW4052), a cross-listed Stanford course on AI law, policy, and institutions &mdash; lecture schedule with readings, assignments, sections, and resources. Built with Jekyll.</div>
+        <div class="project-card-footer">
+          <div class="project-outputs">
+            <a href="https://cs-ai-governance.github.io/cs-283-website/" class="project-output" data-type="website">website</a>
+          </div>
+          <div class="project-card-tags">
+            <span class="project-tag" data-kind="lang">jekyll</span>
+            <span class="project-tag" data-kind="lang">html/css</span>
+            <span class="project-tag" data-kind="subject">ai governance</span>
+            <span class="project-tag" data-kind="subject">teaching</span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="project-card">
-      <div class="project-card-header">
-        <div class="project-card-title">Literatus</div>
-        <span class="project-card-year">2024</span>
-      </div>
-      <div class="project-card-desc">Designed, created, and hosted Literatus &mdash; a new way to rate and keep track of books using a binary search algorithm.</div>
-      <div class="project-card-footer">
-        <div class="project-outputs">
-          <a href="https://literatusapp.com" class="project-output" data-type="website">website</a>
+      <div class="project-card">
+        <div class="project-card-header">
+          <div class="project-card-title">Inflation Calculator</div>
         </div>
-        <div class="project-card-tags">
-          <span class="project-tag" data-kind="lang">python</span>
-          <span class="project-tag" data-kind="lang">javascript</span>
-          <span class="project-tag" data-kind="subject">literature</span>
-          <span class="project-tag" data-kind="subject">humanities</span>
-        </div>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-card-header">
-        <div class="project-card-title">Depolarization Analytics</div>
-        <span class="project-card-year">2022</span>
-      </div>
-      <div class="project-card-desc">Statistical analysis of a deliberative democracy event with a representative sample of college students to measure depolarization. Analysis completed for undergraduate thesis, awarded the Robert Glushko Prize and later published in a peer-reviewed journal.</div>
-      <div class="project-card-footer">
-        <div class="project-outputs">
-          <a href="assets/docs/college-students-depolarize.pdf" class="project-output" data-type="paper">paper</a>
-          <a href="https://github.com/yasmeenakhan/thesis" class="project-output" data-type="repo">repo</a>
-        </div>
-        <div class="project-card-tags">
-          <span class="project-tag" data-kind="lang">R</span>
-          <span class="project-tag" data-kind="subject">political science</span>
-          <span class="project-tag" data-kind="subject">deliberative democracy</span>
+        <div class="project-card-desc">An alternative inflation calculator that measures the dollar against gold and silver rather than CPI &mdash; converting an amount into ounces at one year's price and back into dollars at another's, with the official CPI shown alongside for contrast. Historical price data from the LBMA, USGS, and FRED.</div>
+        <div class="project-card-footer">
+          <div class="project-outputs">
+            <a href="https://yasikhan.github.io/inflation-calculator/" class="project-output" data-type="website">website</a>
+            <a href="https://github.com/yasikhan/inflation-calculator" class="project-output" data-type="repo">repo</a>
+          </div>
+          <div class="project-card-tags">
+            <span class="project-tag" data-kind="lang">javascript</span>
+            <span class="project-tag" data-kind="lang">python</span>
+            <span class="project-tag" data-kind="subject">economics</span>
+            <span class="project-tag" data-kind="subject">monetary history</span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="project-card">
-      <div class="project-card-header">
-        <div class="project-card-title">College Baseball Sabermetrics</div>
-        <span class="project-card-year">2020</span>
-      </div>
-      <div class="project-card-desc">Computed run expectancy tables in order to create xwOBA+ and WAR statistics for D1 college baseball. Work completed as part of my time as Co-President of the Stanford Sports Analytics Club.</div>
-      <div class="project-card-footer">
-        <div class="project-outputs">
-          <a href="https://github.com/yasmeenakhan/ncaa-re24" class="project-output" data-type="repo">repo</a>
+      <div class="project-card">
+        <div class="project-card-header">
+          <div class="project-card-title">LaTeX Website Template</div>
         </div>
-        <div class="project-card-tags">
-          <span class="project-tag" data-kind="lang">R</span>
-          <span class="project-tag" data-kind="subject">sabermetrics</span>
-          <span class="project-tag" data-kind="subject">baseball</span>
-        </div>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-card-header">
-        <div class="project-card-title">Protein Sequestration in Yeast</div>
-        <span class="project-card-year">2019</span>
-      </div>
-      <div class="project-card-desc">Studied how misfolded proteins, implicated in Alzheimer's, Huntington's, and Parkinson's disease, are sequestered into the juxtanuclear quality control compartment (JUNQ) in <em>S. cerevisiae</em> under proteotoxic stress. Research completed as part of the Biology Undergraduate Summer Research Program at the Frydman Lab, Stanford.</div>
-      <div class="project-card-footer">
-        <div class="project-outputs">
-          <a href="assets/docs/protein_sequestration.pdf" class="project-output" data-type="poster">poster</a>
-        </div>
-        <div class="project-card-tags">
-          <span class="project-tag" data-kind="lang">wet lab</span>
-          <span class="project-tag" data-kind="subject">neuroscience</span>
-          <span class="project-tag" data-kind="subject">biology</span>
+        <div class="project-card-desc">An open-source academic website template that renders as a typeset LaTeX document &mdash; plain HTML and CSS built on LaTeX.css, with KaTeX math, numbered theorems, sidenotes, and a dark mode toggle. No build step and no dependencies.</div>
+        <div class="project-card-footer">
+          <div class="project-outputs">
+            <a href="https://yasikhan.github.io/latex-website/index.html" class="project-output" data-type="website">website</a>
+            <a href="https://github.com/yasikhan/latex-website" class="project-output" data-type="repo">repo</a>
+          </div>
+          <div class="project-card-tags">
+            <span class="project-tag" data-kind="lang">html/css</span>
+            <span class="project-tag" data-kind="lang">javascript</span>
+            <span class="project-tag" data-kind="subject">design</span>
+            <span class="project-tag" data-kind="subject">open source</span>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
+    <section class="project-year" aria-labelledby="y2025">
+      <h2 class="project-year-label" id="y2025">2025</h2>
+      <div class="project-card">
+        <div class="project-card-header">
+          <div class="project-card-title">Personal Website</div>
+        </div>
+        <div class="project-card-desc">Personal website with a hand-illustrated bookshelf UI, custom typography, and interactive sketch-style navigation. Built from scratch with static HTML, CSS, and JavaScript.</div>
+        <div class="project-card-footer">
+          <div class="project-outputs">
+            <a href="https://yrkhan.com" class="project-output" data-type="website">website</a>
+            <a href="https://github.com/yasikhan/yrk-website" class="project-output" data-type="repo">repo</a>
+          </div>
+          <div class="project-card-tags">
+            <span class="project-tag" data-kind="lang">html/css</span>
+            <span class="project-tag" data-kind="lang">javascript</span>
+            <span class="project-tag" data-kind="subject">design</span>
+            <span class="project-tag" data-kind="subject">personal</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="project-year" aria-labelledby="y2024">
+      <h2 class="project-year-label" id="y2024">2024</h2>
+      <div class="project-card">
+        <div class="project-card-header">
+          <div class="project-card-title">Literatus</div>
+        </div>
+        <div class="project-card-desc">Designed, created, and hosted Literatus &mdash; a new way to rate and keep track of books using a binary search algorithm.</div>
+        <div class="project-card-footer">
+          <div class="project-outputs">
+            <a href="https://literatusapp.com" class="project-output" data-type="website">website</a>
+          </div>
+          <div class="project-card-tags">
+            <span class="project-tag" data-kind="lang">python</span>
+            <span class="project-tag" data-kind="lang">javascript</span>
+            <span class="project-tag" data-kind="subject">literature</span>
+            <span class="project-tag" data-kind="subject">humanities</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="project-year" aria-labelledby="y2022">
+      <h2 class="project-year-label" id="y2022">2022</h2>
+      <div class="project-card">
+        <div class="project-card-header">
+          <div class="project-card-title">Depolarization Analytics</div>
+        </div>
+        <div class="project-card-desc">Statistical analysis of a deliberative democracy event with a representative sample of college students to measure depolarization. Analysis completed for undergraduate thesis, awarded the Robert Glushko Prize and later published in a peer-reviewed journal.</div>
+        <div class="project-card-footer">
+          <div class="project-outputs">
+            <a href="assets/docs/college-students-depolarize.pdf" class="project-output" data-type="paper">paper</a>
+            <a href="https://github.com/yasmeenakhan/thesis" class="project-output" data-type="repo">repo</a>
+          </div>
+          <div class="project-card-tags">
+            <span class="project-tag" data-kind="lang">R</span>
+            <span class="project-tag" data-kind="subject">political science</span>
+            <span class="project-tag" data-kind="subject">deliberative democracy</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="project-year" aria-labelledby="y2020">
+      <h2 class="project-year-label" id="y2020">2020</h2>
+      <div class="project-card">
+        <div class="project-card-header">
+          <div class="project-card-title">College Baseball Sabermetrics</div>
+        </div>
+        <div class="project-card-desc">Computed run expectancy tables in order to create xwOBA+ and WAR statistics for D1 college baseball. Work completed as part of my time as Co-President of the Stanford Sports Analytics Club.</div>
+        <div class="project-card-footer">
+          <div class="project-outputs">
+            <a href="https://github.com/yasmeenakhan/ncaa-re24" class="project-output" data-type="repo">repo</a>
+          </div>
+          <div class="project-card-tags">
+            <span class="project-tag" data-kind="lang">R</span>
+            <span class="project-tag" data-kind="subject">sabermetrics</span>
+            <span class="project-tag" data-kind="subject">baseball</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="project-year" aria-labelledby="y2019">
+      <h2 class="project-year-label" id="y2019">2019</h2>
+      <div class="project-card">
+        <div class="project-card-header">
+          <div class="project-card-title">Protein Sequestration in Yeast</div>
+        </div>
+        <div class="project-card-desc">Studied how misfolded proteins, implicated in Alzheimer's, Huntington's, and Parkinson's disease, are sequestered into the juxtanuclear quality control compartment (JUNQ) in <em>S. cerevisiae</em> under proteotoxic stress. Research completed as part of the Biology Undergraduate Summer Research Program at the Frydman Lab, Stanford.</div>
+        <div class="project-card-footer">
+          <div class="project-outputs">
+            <a href="assets/docs/protein_sequestration.pdf" class="project-output" data-type="poster">poster</a>
+          </div>
+          <div class="project-card-tags">
+            <span class="project-tag" data-kind="lang">wet lab</span>
+            <span class="project-tag" data-kind="subject">neuroscience</span>
+            <span class="project-tag" data-kind="subject">biology</span>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 
 </div>
 <footer class="site-footer">designed and coded by yasmeena khan &copy; 2026 &ndash; <a href="https://github.com/yasikhan/yrk-website">repo</a></footer>
+<script src="js/rough.js"></script>
+<script>
+(function () {
+  var section = document.getElementById('technical');
+  var rail = section.querySelector('.timeline-rail');
+  var wide = window.matchMedia('(min-width: 921px)');
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var NS = 'http://www.w3.org/2000/svg';
+  var drawn = false;
+
+  function draw() {
+    rail.innerHTML = '';
+    if (!wide.matches || typeof rough === 'undefined') return;
+    var css = getComputedStyle(document.documentElement);
+    var ink = css.getPropertyValue('--ink3').trim();
+    var page = css.getPropertyValue('--page').trim();
+    var top = section.getBoundingClientRect().top;
+    var cards = section.querySelectorAll('.project-card');
+
+    // y of each title's first line, relative to the section
+    var ys = Array.prototype.map.call(cards, function (card) {
+      var title = card.querySelector('.project-card-title');
+      var lh = parseFloat(getComputedStyle(title).lineHeight);
+      return title.getBoundingClientRect().top - top + lh / 2;
+    });
+
+    // level each year label with its first project's title
+    section.querySelectorAll('.project-year').forEach(function (group) {
+      var label = group.querySelector('.project-year-label');
+      var i = Array.prototype.indexOf.call(cards, group.querySelector('.project-card'));
+      label.style.top = (ys[i] - (group.getBoundingClientRect().top - top) - label.offsetHeight * 0.55) + 'px';
+    });
+
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('width', 28);
+    svg.setAttribute('height', section.offsetHeight);
+    rail.appendChild(svg);
+    var rc = rough.svg(svg);
+    var x = 14;
+    var segs = [];
+    for (var i = 0; i < ys.length; i++) {
+      var y1 = i ? ys[i - 1] : ys[0] - 18;
+      segs.push(svg.appendChild(rc.line(x, y1, x, ys[i], {
+        stroke: ink, strokeWidth: 1.1, roughness: 0.9, bowing: 1.4, seed: 7 + i
+      })));
+    }
+    segs.push(svg.appendChild(rc.line(x, ys[ys.length - 1], x, ys[ys.length - 1] + 26, {
+      stroke: ink, strokeWidth: 1.1, roughness: 0.9, bowing: 1.4, seed: 3
+    })));
+    var dots = ys.map(function (y, i) {
+      var dot = svg.appendChild(rc.circle(x, y, 10, {
+        stroke: ink, strokeWidth: 1.1, fill: page, fillStyle: 'solid', roughness: 0.6, seed: 40 + i
+      }));
+      dot.classList.add('dot');
+      cards[i].dot = dot;
+      return dot;
+    });
+
+    // one orchestrated moment: the rail draws itself downward on first load
+    if (!drawn && !still.matches) {
+      var step = 110;
+      segs.forEach(function (seg, i) {
+        seg.querySelectorAll('path').forEach(function (p) {
+          var len = p.getTotalLength();
+          p.style.strokeDasharray = len;
+          p.style.strokeDashoffset = len;
+          p.getBoundingClientRect();
+          p.style.transition = 'stroke-dashoffset ' + step + 'ms linear ' + (i * step) + 'ms';
+          p.style.strokeDashoffset = 0;
+        });
+      });
+      dots.forEach(function (dot, i) {
+        dot.style.opacity = 0;
+        dot.style.transition = 'opacity 160ms ease ' + ((i + 1) * step) + 'ms';
+        requestAnimationFrame(function () { dot.style.opacity = 1; });
+      });
+    }
+    drawn = true;
+  }
+
+  section.querySelectorAll('.project-card').forEach(function (card) {
+    function on() { if (card.dot) card.dot.classList.add('on'); }
+    function off() { if (card.dot) card.dot.classList.remove('on'); }
+    card.addEventListener('mouseenter', on);
+    card.addEventListener('mouseleave', off);
+    card.addEventListener('focusin', on);
+    card.addEventListener('focusout', off);
+  });
+
+  var pending = false;
+  function redraw() {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(function () { pending = false; draw(); });
+  }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw); else draw();
+  window.addEventListener('resize', redraw);
+})();
+</script>
 </body>
 </html>
