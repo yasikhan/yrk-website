@@ -71,8 +71,65 @@
     margin-top: 0.4rem; padding-left: 5px;
   }
 
+  /* Technology: essays zigzag down the page, each photo printed as an
+     ink-and-highlighter duotone that shows its real color on hover/focus */
+  .essay {
+    display: grid; grid-template-columns: repeat(12, 1fr);
+    margin: 2.2rem 0 4rem;
+  }
+  .essay:last-child { margin-bottom: 1rem; }
+  .essay-photo { grid-column: 1 / 9; grid-row: 1; margin: 0; }
+  .essay-text  { grid-column: 7 / 13; grid-row: 1; align-self: end; margin-bottom: -2.2rem; }
+  .essay:nth-of-type(even) .essay-photo { grid-column: 5 / 13; }
+  .essay:nth-of-type(even) .essay-text  { grid-column: 1 / 7; }
+
+  .essay-photo a { display: block; position: relative; }
+  .essay-photo img {
+    display: block; width: 100%; height: auto; aspect-ratio: 4 / 3;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.08);
+    transition: filter 0.35s ease;
+  }
+  .essay-photo a::after {
+    content: ''; position: absolute; inset: 0;
+    background: var(--highlight-strong); mix-blend-mode: multiply;
+    transition: opacity 0.35s ease;
+  }
+  .essay:hover .essay-photo img,
+  .essay:focus-within .essay-photo img { filter: none; }
+  .essay:hover .essay-photo a::after,
+  .essay:focus-within .essay-photo a::after { opacity: 0; }
+  .essay-photo figcaption {
+    font-family: var(--body); font-style: italic;
+    font-size: 0.72rem; color: var(--ink3); margin-top: 0.45rem;
+  }
+  .essay:nth-of-type(even) .essay-photo figcaption { text-align: right; }
+  /* captioned odd photos: keep the caption clear of the overlapping text */
+  .essay:nth-of-type(odd) .essay-photo figcaption { max-width: 70%; }
+  .essay:nth-of-type(even) .essay-photo figcaption { margin-left: 30%; }
+
+  .essay-text {
+    position: relative; z-index: 1;
+    background: var(--page); padding: 1.1rem 1.3rem 1.2rem;
+  }
+  .essay-text .entry-title { font-size: 1.3rem; line-height: 1.25; margin-top: 0.15rem; }
+  .essay-text .entry-desc { font-size: 0.95rem; line-height: 1.45; margin-top: 0.35rem; }
+
   @media (prefers-reduced-motion: reduce) {
-    .clip-photo { transition: none; }
+    .clip-photo, .essay-photo img, .essay-photo a::after { transition: none; }
+  }
+  @media (max-width: 600px) {
+    .essay { margin: 1.8rem 0 2.6rem; }
+    .essay-photo,
+    .essay:nth-of-type(even) .essay-photo { grid-column: 1 / 13; }
+    .essay-text,
+    .essay:nth-of-type(even) .essay-text {
+      grid-column: 2 / 13; grid-row: 2; margin: -2rem 0 0; padding: 0.9rem 0 0 1rem;
+    }
+    .essay-photo figcaption,
+    .essay:nth-of-type(odd) .essay-photo figcaption,
+    .essay:nth-of-type(even) .essay-photo figcaption { display: none; }
+    .essay-text .entry-title { font-size: 1.15rem; }
   }
   @media (max-width: 768px) {
     .clip { grid-template-columns: 150px 1fr; grid-template-rows: auto 1fr; gap: 0.3rem 1.1rem; }
@@ -175,34 +232,48 @@
 
   <div class="writing-section active" id="technology" role="tabpanel">
     <p>Writing on the ideologies, culture, and political stakes of Silicon Valley. More on <a href="https://codingutopia.substack.com/">Coding Utopia</a>, my Substack.</p>
-    <div class="entry">
-      <div>
+    <article class="essay">
+      <figure class="essay-photo">
+        <a href="https://codingutopia.substack.com/p/a-case-for-compulsory-voting" tabindex="-1" aria-hidden="true"><img src="assets/img/technology/compulsory-voting.jpg" alt="An official ballot drop box outside San Francisco City Hall" width="640" height="859" loading="eager" style="object-position:50% 62%"></a>
+        <figcaption>Ballot drop box, San Francisco</figcaption>
+      </figure>
+      <div class="essay-text">
+        <div class="entry-meta">Aug 2026</div>
         <div class="entry-title"><a href="https://codingutopia.substack.com/p/a-case-for-compulsory-voting">A Case for Compulsory Voting</a></div>
         <div class="entry-desc">And why this might be the greatest impediment to Silicon Valley's power</div>
       </div>
-      <div class="entry-meta">Aug 2026</div>
-    </div>
-    <div class="entry">
-      <div>
+    </article>
+    <article class="essay">
+      <figure class="essay-photo">
+        <a href="https://codingutopia.substack.com/p/the-right-against-ai" tabindex="-1" aria-hidden="true"><img src="assets/img/technology/right-against-ai.jpg" alt="Protesters holding signs reading “Workers rights are human rights” above a banner reading “Amazon is not Prime”" width="738" height="415" loading="eager" style="object-position:50% 40%"></a>
+      </figure>
+      <div class="essay-text">
+        <div class="entry-meta">Jul 2026</div>
         <div class="entry-title"><a href="https://codingutopia.substack.com/p/the-right-against-ai">The Right Against AI</a></div>
         <div class="entry-desc">Or why workers should have the right to opt out of AI</div>
       </div>
-      <div class="entry-meta">Jul 2026</div>
-    </div>
-    <div class="entry">
-      <div>
+    </article>
+    <article class="essay">
+      <figure class="essay-photo">
+        <a href="https://codingutopia.substack.com/p/we-didnt-have-to-build-ai-like-this" tabindex="-1" aria-hidden="true"><img src="assets/img/technology/build-ai-differently.jpg" alt="A worn manual typewriter on a desk by a window" width="900" height="549" loading="lazy" style="object-position:50% 60%"></a>
+      </figure>
+      <div class="essay-text">
+        <div class="entry-meta">Apr 2026</div>
         <div class="entry-title"><a href="https://codingutopia.substack.com/p/we-didnt-have-to-build-ai-like-this">We Didn't Have to Build AI Like This</a></div>
         <div class="entry-desc">On an alternative world where AI is pro-human</div>
       </div>
-      <div class="entry-meta">Apr 2026</div>
-    </div>
-    <div class="entry">
-      <div>
+    </article>
+    <article class="essay">
+      <figure class="essay-photo">
+        <a href="https://codingutopia.substack.com/p/reflections-on-hiroshima" tabindex="-1" aria-hidden="true"><img src="assets/img/technology/hiroshima.jpg" alt="The ruins of the Atomic Bomb Dome across the river in Hiroshima" width="640" height="853" loading="lazy" style="object-position:50% 55%"></a>
+        <figcaption>Atomic Bomb Dome, Hiroshima, January 2026</figcaption>
+      </figure>
+      <div class="essay-text">
+        <div class="entry-meta">Jan 2026</div>
         <div class="entry-title"><a href="https://codingutopia.substack.com/p/reflections-on-hiroshima">Reflections on Hiroshima</a></div>
         <div class="entry-desc">And how we never learn from our greatest mistakes</div>
       </div>
-      <div class="entry-meta">Jan 2026</div>
-    </div>
+    </article>
   </div>
 
   <div class="writing-section" id="personal" role="tabpanel">
