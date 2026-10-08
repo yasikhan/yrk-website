@@ -2,37 +2,72 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://yrkhan.com/</loc>
-    <lastmod>2026-09-30</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://yrkhan.com/about.html</loc>
-    <lastmod>2026-09-30</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://yrkhan.com/research.html</loc>
-    <lastmod>2026-09-30</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://yrkhan.com/writing.html</loc>
-    <lastmod>2026-09-30</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://yrkhan.com/projects.html</loc>
-    <lastmod>2026-09-30</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://yrkhan.com/photography.html</loc>
-    <lastmod>2026-09-30</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yrkhan.com/contact.html</loc>
-    <lastmod>2026-09-30</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://yrkhan.com/assets/docs/college-students-depolarize.pdf</loc>
+    <lastmod>2026-09-25</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://yrkhan.com/assets/docs/corporation-state.pdf</loc>
+    <lastmod>2026-09-25</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://yrkhan.com/assets/docs/Khan_Clarendon-Gates_2025.pdf</loc>
+    <lastmod>2026-09-25</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://yrkhan.com/assets/docs/llms-electric-speech.pdf</loc>
+    <lastmod>2026-09-25</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://yrkhan.com/assets/docs/protein_sequestration.pdf</loc>
+    <lastmod>2026-09-25</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://yrkhan.com/assets/docs/twitter-gender-classifier.pdf</loc>
+    <lastmod>2026-10-01</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://yrkhan.com/assets/docs/resume.pdf</loc>
+    <lastmod>2026-09-25</lastmod>
+    <priority>0.6</priority>
   </url>
 </urlset>
