@@ -37,7 +37,7 @@ galleries silently render their "no photos" empty state when opened directly fro
 
 Each page carries its own inline `<style>` block for page-specific rules and pulls shared
 tokens/layout from `css/style.css`. Colors and fonts come from CSS variables (`--ink`,
-`--ink2`…`--ink4`, `--highlight`, `--link`, `--link-soft`, `--hand`, `--serif`, `--body`) — use those
+`--ink2`…`--ink4`, `--highlight`, `--link`, `--link-soft`, `--link-hover`, `--hand`, `--serif`, `--body`) — use those
 rather than hardcoding values.
 
 Three typefaces, each with one job: `--serif` (Libre Caslon Display) is for h1/h2 **only**. It

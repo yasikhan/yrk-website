@@ -42,6 +42,7 @@
   --highlight-strong: rgba(147, 197, 222, 0.7);
   --link: #8b4513;
   --link-soft: rgba(139, 69, 19, 0.3);
+  --link-hover: #6b2f0a;
   --hand: 'YasiHand', cursive;
   --serif: 'Libre Caslon Display', Georgia, serif;
   --body: 'Newsreader', Georgia, serif;
@@ -111,11 +112,10 @@ body {
   color: var(--ink2); margin-bottom: 1rem;
 }
 .content-body a {
-  color: var(--link); text-decoration: underline;
-  text-decoration-color: var(--link-soft);
-  text-underline-offset: 3px;
+  color: var(--link); text-decoration: none;
+  transition: color 0.2s ease;
 }
-.content-body a:hover { text-decoration-color: var(--link); }
+.content-body a:hover { color: var(--link-hover); }
 
 /* ============ ENTRIES (research, writing, projects) ============ */
 .entry {
