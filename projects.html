@@ -169,7 +169,17 @@
 <body>
 <nav class="content-nav">
   <a class="back-btn" href="/">&larr; homepage</a>
-  <span class="content-title">Technical Projects</span>
+  <div class="page-menu">
+    <button class="page-menu-btn" type="button" aria-expanded="false" aria-controls="page-menu-list" aria-label="Menu"><svg width="22" height="16" viewBox="0 0 22 16" aria-hidden="true"><path d="M1.5 2.6 Q11 1.6 20.5 2.3 M1.5 8.3 Q11 7.6 20.5 8.1 M1.5 13.7 Q11 14.4 20.5 13.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+    <ul class="page-menu-list" id="page-menu-list" hidden>
+      <li><a href="/about.html">About Me</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/writing.html">Writing</a></li>
+      <li><a href="/projects.html" aria-current="page">Projects</a></li>
+      <li><a href="/photography.html">Photography</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
 </nav>
 <div class="content-body">
   <h1>Technical Projects</h1>
@@ -208,6 +218,24 @@
             <span class="project-tag" data-kind="lang">html/css</span>
             <span class="project-tag" data-kind="subject">ai governance</span>
             <span class="project-tag" data-kind="subject">teaching</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-card-header">
+          <div class="project-card-title">Seeking Vermeer</div>
+        </div>
+        <div class="project-card-desc">A record of my lifelong quest to see all 37 known Vermeers &mdash; a world map of every city where one hangs, with each painting marked as I stand in front of it.</div>
+        <div class="project-card-footer">
+          <div class="project-outputs">
+            <a href="https://seekingvermeer.com/" class="project-output" data-type="website">website</a>
+            <a href="https://github.com/yasikhan/vermeer" class="project-output" data-type="repo">repo</a>
+          </div>
+          <div class="project-card-tags">
+            <span class="project-tag" data-kind="lang">javascript</span>
+            <span class="project-tag" data-kind="lang">python</span>
+            <span class="project-tag" data-kind="subject">art history</span>
+            <span class="project-tag" data-kind="subject">design</span>
           </div>
         </div>
       </div>
@@ -469,5 +497,6 @@
   window.addEventListener('resize', redraw);
 })();
 </script>
+<script src="/js/nav.js"></script>
 </body>
 </html>

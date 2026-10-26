@@ -22,12 +22,23 @@
 <body>
 <nav class="content-nav">
   <a class="back-btn" href="/">&larr; homepage</a>
-  <span class="content-title">Not found</span>
+  <div class="page-menu">
+    <button class="page-menu-btn" type="button" aria-expanded="false" aria-controls="page-menu-list" aria-label="Menu"><svg width="22" height="16" viewBox="0 0 22 16" aria-hidden="true"><path d="M1.5 2.6 Q11 1.6 20.5 2.3 M1.5 8.3 Q11 7.6 20.5 8.1 M1.5 13.7 Q11 14.4 20.5 13.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+    <ul class="page-menu-list" id="page-menu-list" hidden>
+      <li><a href="/about.html">About Me</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/writing.html">Writing</a></li>
+      <li><a href="/projects.html">Projects</a></li>
+      <li><a href="/photography.html">Photography</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
 </nav>
 <div class="content-body">
   <h1>Page not found</h1>
   <p>This page has moved or never existed. Papers and my resume now live on the <a href="/research.html">research</a> and <a href="/projects.html">projects</a> pages.</p>
 </div>
 <footer class="site-footer">designed and coded by yasi khan &copy; 2026 &ndash; <a href="https://github.com/yasikhan/yrk-website">repo</a></footer>
+<script src="/js/nav.js"></script>
 </body>
 </html>

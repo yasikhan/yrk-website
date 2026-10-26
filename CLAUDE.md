@@ -29,6 +29,7 @@ galleries silently render their "no photos" empty state when opened directly fro
 | `projects.html` | Technical project cards |
 | `photography.html` | Photo gallery |
 | `contact.html` | Links |
+| `js/nav.js` | Header menu dropdown (three-line button) on content pages |
 | `css/style.css` | The only shared stylesheet: `:root` design tokens, content-page layout, `.entry` lists, footer, responsive rules |
 | `photos/` | Gallery images + `manifest.json` |
 | `assets/img/` | Site images — photos, sketches, logo, favicon |
@@ -120,3 +121,8 @@ and shares that tab. Tab styling (handwritten label + highlighter swipe) lives i
 Copy the `<head>` boilerplate from an existing page — it is repeated per page, not templated:
 the inline Google Analytics tag, `<title>`, description, OpenGraph + Twitter card meta, favicon,
 four font `<link rel="preload">` tags, then `css/style.css`. Also add the page to `sitemap.xml`.
+
+Content pages share a header: `nav.content-nav` with the `← homepage` link on the left and a
+`menu` dropdown (`.page-menu`) on the right listing every page, with `aria-current="page"` on the
+current one. `js/nav.js` (loaded just before `</body>`) handles open/close. The menu list is
+repeated in each page — when adding a page, add it to every page's list.
