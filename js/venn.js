@@ -241,7 +241,16 @@
   });
 
   // ---- state ----
-  var selected = null, hovered = null;
+  var selected = null, hovered = null, kind = null;
+
+  // Type filters: each entry's type is the first word of its date line ("essay, Aug 2026").
+  var KINDS = { thesis: 'papers', paper: 'papers', research: 'papers', talk: 'talks', essay: 'essays',
+    article: 'articles', moderator: 'polls', expert: 'polls', analysis: 'projects', project: 'projects' };
+  var filters = Array.prototype.slice.call(document.querySelectorAll('.type-filter'));
+  document.querySelectorAll('.region-group .entry').forEach(function (entry) {
+    var word = entry.querySelector(':scope > .entry-meta').textContent.split(',')[0].trim();
+    entry.dataset.kind = KINDS[word] || '';
+  });
 
   function showTip(text, x, y) {
     var s = svg.getBoundingClientRect().width / W;
@@ -266,23 +275,66 @@
   function select(key, fromUser) {
     if (key && !regions[key]) key = null;
     selected = key;
-    var related = key ? regions[key].related : [];
+    apply(fromUser);
+  }
+
+  function filterBy(type, fromUser) {
+    kind = type || null;
+    apply(fromUser);
+  }
+
+  // Show what matches both the picked region (and everything inside its circles) and the picked type.
+  function apply(fromUser) {
+    var key = selected, related = key ? regions[key].related : ORDER;
+    function inRegion(r) { return related.indexOf(r) > -1; }
+    function shown(entry) { return (!kind || entry.dataset.kind === kind); }
+
     ORDER.forEach(function (k) {
-      var on = related.indexOf(k) > -1;
+      var on = !!key && inRegion(k);
       regions[k].el.classList.toggle('is-selected', on);
       regions[k].el.setAttribute('aria-pressed', k === key ? 'true' : 'false');
-      if (!groups[k]) return;
-      groups[k].hidden = !!key && !on;
-      groups[k].style.order = on ? circlesOf(k).length : '';
-      groups[k].classList.remove('is-first');
+      var group = groups[k];
+      if (!group) return;
+      var any = false;
+      group.querySelectorAll('.entry').forEach(function (entry) {
+        var vis = inRegion(k) && shown(entry);
+        entry.hidden = !vis;
+        any = any || vis;
+      });
+      group.querySelectorAll('.entry-group').forEach(function (g) {
+        g.hidden = !g.querySelector('.entry:not([hidden])');
+      });
+      group.hidden = !any;
+      group.style.order = key && on ? circlesOf(k).length : '';
+      group.classList.remove('is-first');
     });
-    if (key) groups[related.slice().sort(function (a, b) { return circlesOf(a).length - circlesOf(b).length; })[0]].classList.add('is-first');
-    marks.forEach(function (m) { m.el.classList.toggle('is-out', !!key && related.indexOf(m.region) < 0); });
-    if (key) fig.dataset.selected = key; else delete fig.dataset.selected;
-    list.classList.toggle('is-filtered', !!key);
-    reset.hidden = !key;
-    status.textContent = key ? 'Showing ' + regions[key].total + ' in ' + regions[key].label + ' and the regions inside it' : 'Showing everything';
-    if (fromUser) history.replaceState(null, '', key ? '#' + key : location.pathname);
+    var visible = ORDER.map(function (k) { return groups[k]; }).filter(function (g) { return g && !g.hidden; });
+    visible.sort(function (a, b) { return (+a.style.order || 0) - (+b.style.order || 0); });
+    if (visible[0]) visible[0].classList.add('is-first');
+
+    dots.forEach(function (d) { d.el.classList.toggle('is-out', d.entry.hidden); });
+    marks.forEach(function (m) { m.el.classList.toggle('is-out', m.entries.every(function (e) { return e.hidden; })); });
+
+    // a type with nothing in the picked region can't be chosen
+    filters.forEach(function (btn) {
+      var type = btn.dataset.kind || null;
+      btn.setAttribute('aria-pressed', type === kind ? 'true' : 'false');
+      var count = 0;
+      document.querySelectorAll('.region-group .entry').forEach(function (entry) {
+        if (inRegion(entry.closest('.region-group').dataset.region) && (!type || entry.dataset.kind === type)) count++;
+      });
+      btn.disabled = count === 0;
+    });
+
+    if (key || kind) fig.dataset.selected = key || 'all'; else delete fig.dataset.selected;
+    list.classList.toggle('is-filtered', !!(key || kind));
+    reset.hidden = !(key || kind);
+    var n = document.querySelectorAll('.region-group .entry:not([hidden])').length;
+    status.textContent = 'Showing ' + n + (kind ? ' ' + kind : ' pieces') + (key ? ' in ' + regions[key].label + ' and the regions inside it' : '');
+    if (fromUser) {
+      var hash = [key, kind].filter(Boolean).join('+');
+      history.replaceState(null, '', hash ? '#' + hash : location.pathname);
+    }
   }
 
   function reveal(node) {
@@ -372,9 +424,20 @@
     item.addEventListener('mouseleave', function () { entry.dot.el.classList.remove('on'); });
   });
 
-  reset.addEventListener('click', function () { select(null, true); });
+  reset.addEventListener('click', function () { selected = null; kind = null; apply(true); });
+  filters.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var type = btn.dataset.kind || null;
+      filterBy(type === kind ? null : type, true);
+    });
+  });
 
-  select(location.hash.slice(1) || null, false);
+  // the hash holds a region, a type, or both: #ai, #papers, #ai+papers
+  location.hash.slice(1).split('+').forEach(function (part) {
+    if (regions[part]) selected = part;
+    else if (filters.some(function (b) { return b.dataset.kind === part; })) kind = part;
+  });
+  apply(false);
 
   // one orchestrated moment: the circles draw themselves, then the marks arrive
   if (!still) {

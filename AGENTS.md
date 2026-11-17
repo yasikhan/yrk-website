@@ -115,6 +115,12 @@ Entry pattern: `entry-title` (wrap in `a` if there's a primary link), `entry-des
 `presentation` / `award` / `website` / `repo`, which color the dot). `entry-meta` reads `kind, date`,
 e.g. `essay, Aug 2026`. Use commas, not middle dots. Newest-first.
 
+Type filters sit above the list: papers, talks, essays, articles, polls, projects. An entry's
+type comes from the first word of its `entry-meta` (`KINDS` in `js/venn.js` maps `thesis`, `paper`
+and `research` to papers, `moderator` and `expert` to polls, `analysis` and `project` to
+projects), so a new kind word needs adding there. A type and a region combine, and a type with
+nothing in the picked region is disabled. The hash holds either or both: `#papers`, `#ai+papers`.
+
 Selecting a region also brings in every region that sits inside all of its circles: `ai` shows ai,
 democracy & ai, ai & analytics, and the center; `democracy-ai` shows that lens plus the center.
 Those regions fill with the `--highlight` wash (hover previews the same set), the list filters to

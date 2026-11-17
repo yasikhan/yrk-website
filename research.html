@@ -85,7 +85,8 @@
   .venn-region.is-hover .wash { opacity: 0.55; }
   .venn-region.is-selected .wash { opacity: 1; }
   .venn-mark { cursor: pointer; transition: opacity 0.25s; }
-  .venn[data-selected] .venn-mark.is-out { opacity: 0.22; }
+  .venn-mark.is-out { opacity: 0.22; }
+  .venn-mark:not(.is-out) .venn-dot.is-out { opacity: 0.25; }
   .venn-dot path { transition: fill 0.15s; }
   .venn-dot.on path:first-child { fill: var(--ink3); }
   .venn-lasso path { transition: stroke 0.15s; }
@@ -114,8 +115,29 @@
 
   /* ---- the list ---- */
   .research-list { position: relative; display: flex; flex-direction: column; }
-  .region-bar { position: absolute; top: 0.1rem; right: 0; }
-  .region-bar .hand-btn[hidden] { display: none; }
+  /* type filters and the reset share one row above the list */
+  .list-tools {
+    order: -1;
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    margin-bottom: 1.6rem;
+  }
+  .list-tools .hand-btn { white-space: nowrap; flex-shrink: 0; }
+  .list-tools .hand-btn[hidden] { display: none; }
+  .type-filters { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  /* same face and box as the output pills below, so they read as buttons */
+  .type-filter {
+    font-family: var(--mono); font-size: 0.62rem; line-height: 1.4;
+    color: var(--ink2); background: transparent;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid rgba(0,0,0,0.22); border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .type-filter:hover:not(:disabled) { border-color: var(--ink3); color: var(--ink); background: rgba(0,0,0,0.03); }
+  .type-filter[aria-pressed="true"] { background: var(--highlight); border-color: var(--ink3); color: var(--ink); }
+  .type-filter:disabled { opacity: 0.35; cursor: default; }
+  .type-filter:focus-visible { outline: 2px solid var(--ink3); outline-offset: 2px; }
+  .region-group .entry[hidden], .entry-group[hidden] { display: none; }
   .region-group[hidden] { display: none; }
   .research-list:not(.is-filtered) .region-group:first-of-type .region-heading,
   .region-group.is-first .region-heading { margin-top: 0; }
@@ -240,9 +262,17 @@
     </figure>
 
     <div class="research-list">
-      <div class="region-bar">
-        <p class="sr-only" id="vennStatus" aria-live="polite"></p>
+      <div class="list-tools">
+        <div class="type-filters" role="group" aria-label="Filter by type">
+          <button class="type-filter" type="button" data-kind="papers" aria-pressed="false">papers</button>
+          <button class="type-filter" type="button" data-kind="talks" aria-pressed="false">talks</button>
+          <button class="type-filter" type="button" data-kind="essays" aria-pressed="false">essays</button>
+          <button class="type-filter" type="button" data-kind="articles" aria-pressed="false">articles</button>
+          <button class="type-filter" type="button" data-kind="polls" aria-pressed="false">polls</button>
+          <button class="type-filter" type="button" data-kind="projects" aria-pressed="false">projects</button>
+        </div>
         <button class="hand-btn" type="button" id="vennReset" hidden>show all</button>
+        <p class="sr-only" id="vennStatus" aria-live="polite"></p>
       </div>
 
       <section class="region-group" data-region="all-three" aria-labelledby="h-all-three">
