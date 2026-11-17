@@ -364,6 +364,14 @@
     d.entry.addEventListener('focusout', off);
   });
 
+  // the selected-work folder points at entries by id; hovering a piece lights its dot
+  document.querySelectorAll('.selected-item[data-ref]').forEach(function (item) {
+    var entry = document.getElementById(item.dataset.ref);
+    if (!entry || !entry.dot) return;
+    item.addEventListener('mouseenter', function () { entry.dot.el.classList.add('on'); });
+    item.addEventListener('mouseleave', function () { entry.dot.el.classList.remove('on'); });
+  });
+
   reset.addEventListener('click', function () { select(null, true); });
 
   select(location.hash.slice(1) || null, false);
