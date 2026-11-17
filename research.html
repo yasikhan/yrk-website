@@ -12,10 +12,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Research — Yasmeena (Yasi) Khan</title>
-<meta name="description" content="Academic and professional research by Yasi Khan — LLMs and free speech, political depolarization, corporation-states, and AI strategy.">
+<meta name="description" content="Research, writing, and analysis by Yasi Khan, filed where democracy, AI, and analytics meet: Silicon Valley ideology, deliberative democracy, LLMs and free speech, AI strategy, and baseball sabermetrics.">
 <link rel="canonical" href="https://yrkhan.com/research.html">
 <meta property="og:title" content="Research — Yasmeena (Yasi) Khan">
-<meta property="og:description" content="Academic and professional research — LLMs and free speech, political depolarization, corporation-states, and AI strategy.">
+<meta property="og:description" content="Research, writing, and analysis filed where democracy, AI, and analytics meet.">
 <meta property="og:image" content="https://yrkhan.com/assets/img/yasi-image.jpg">
 <meta property="og:url" content="https://yrkhan.com/research.html">
 <meta property="og:type" content="website">
@@ -27,80 +27,118 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/ibm-plex-mono-400.woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
 <style>
-  .research-section { display: none; }
-  .research-section.active { display: block; }
-  #academic .entry {
-    display: block;
+  .content-body.research-page { max-width: 1180px; }
+  .research-page > p { max-width: 640px; }
+  .research-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 33rem) minmax(0, 1fr);
+    gap: 4rem;
+    align-items: start;
+    margin-top: 1.5rem;
   }
-  #academic .entry-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
+
+  /* ---- the diagram ---- */
+  .venn { position: sticky; top: 4.5rem; margin: 0; }
+  .venn svg { display: block; width: 100%; height: auto; overflow: visible; touch-action: manipulation; }
+  .venn-label { font-family: var(--hand); font-size: 30px; fill: var(--ink2); }
+  .venn-region { outline: none; cursor: pointer; }
+  .venn-region .wash { fill: var(--highlight); opacity: 0; transition: opacity 0.2s; }
+  .venn-region.is-hover .wash { opacity: 0.55; }
+  .venn-region.is-selected .wash { opacity: 1; }
+  .venn-mark { cursor: pointer; transition: opacity 0.25s; }
+  .venn[data-selected] .venn-mark.is-out { opacity: 0.22; }
+  .venn-dot path { transition: fill 0.15s; }
+  .venn-dot.on path:first-child { fill: var(--ink3); }
+  .venn-lasso path { transition: stroke 0.15s; }
+  .venn-group-label {
+    font-family: var(--hand); font-size: 19px; fill: var(--ink3);
+    transition: fill 0.15s;
   }
-  .org-header {
-    font-size: 1rem; font-weight: 400; color: var(--ink);
-    margin-top: 1.5rem; margin-bottom: 0.2rem;
+  .venn-mark.on .venn-group-label { fill: var(--ink); }
+  .venn-mark.on .venn-lasso path { stroke: var(--ink); }
+  .venn-tip {
+    position: absolute; left: 0; top: 0;
+    transform: translate(-50%, calc(-100% - 12px));
+    font-family: var(--hand); font-size: 1.1rem; line-height: 1.15;
+    color: var(--ink); text-align: center;
+    max-width: 15rem; width: max-content;
+    padding: 0.1rem 0.4rem;
+    background: var(--page);
+    pointer-events: none;
+    opacity: 0; transition: opacity 0.12s;
   }
-  .org-header .entry-meta {
-    font-weight: 300;
+  .venn-tip.visible { opacity: 1; }
+  .venn-hint {
+    font-family: var(--hand); font-size: 1.05rem; color: var(--ink4);
+    text-align: center; margin-top: 0.4rem;
   }
-  .sub-entry {
-    padding-left: 1.2rem;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-    padding-top: 0.6rem; padding-bottom: 0.6rem;
-    display: grid; grid-template-columns: 1fr auto;
-    gap: 1rem; align-items: baseline;
+
+  /* ---- the list ---- */
+  .research-list { position: relative; display: flex; flex-direction: column; }
+  .region-bar { position: absolute; top: 0.1rem; right: 0; }
+  .region-bar .hand-btn[hidden] { display: none; }
+  .region-group[hidden] { display: none; }
+  .research-list:not(.is-filtered) .region-group:first-of-type .region-heading,
+  .region-group.is-first .region-heading { margin-top: 0; }
+  .content-body h2.region-heading {
+    font-family: var(--hand); font-size: 1.5rem; line-height: 1.1;
+    color: var(--ink2);
+    margin: 2.6rem 0 0.5rem;
   }
-  .sub-entry .entry-title { font-size: 0.92rem; }
-  @media (max-width: 480px) {
-    #academic .entry-header { flex-direction: column; gap: 0.1rem; }
+  .content-body h2.region-heading::after { bottom: 0.05em; height: 0.4em; transform: rotate(-1deg); }
+
+  /* a named body of work (one lasso in the diagram) with its pieces indented beneath */
+  .region-group .entry { border-top: none; }
+  .entry-group { border-bottom: 1px solid rgba(0,0,0,0.06); padding: 1rem 0 0.4rem; }
+  .region-heading + * { border-top: 1px solid rgba(0,0,0,0.06); }
+  .entry-group {
+    scroll-margin-top: 6rem;
   }
-  .abstract {
-    font-size: 0.88rem; line-height: 1.7;
-    color: var(--ink3); margin-top: 0.5rem;
-    padding-left: 0.8rem;
-    border-left: 2px solid rgba(0,0,0,0.06);
+  .group-head {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
   }
-  .entry-outputs {
-    display: flex;
-    gap: 0.45rem;
-    flex-wrap: wrap;
-    margin-top: 0.6rem;
+  .group-title { font-size: 1.1rem; color: var(--ink); line-height: 1.3; transition: background-color 0.6s; }
+  .entry-group.is-flash .group-title { background-color: var(--highlight); transition: none; }
+  .content-body .group-desc { font-size: 0.92rem; line-height: 1.6; color: var(--ink3); margin: 0.15rem 0 0.3rem; }
+  .entry-group .entry {
+    margin-left: 0.35rem; padding: 0.7rem 0 0.7rem 1rem;
+    border-bottom: none;
+    border-left: 1px solid rgba(0,0,0,0.12);
   }
-  .entry-output {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    color: var(--link);
-    text-decoration: none;
-    padding: 0.2rem 0.6rem;
-    border: 1px solid var(--link-soft);
-    border-radius: 3px;
-    transition: all 0.15s;
+  .entry-group .entry:hover { padding-left: 1.3rem; }
+  .entry-group .entry-title { font-size: 0.97rem; }
+
+  .region-group .entry { scroll-margin-top: 6rem; }
+  .region-group .entry-title { transition: background-color 0.6s; }
+  .region-group .entry.is-flash .entry-title { background-color: var(--highlight); transition: none; }
+  .abstract { margin-top: 0.35rem; }
+  .abstract summary {
+    display: inline-block; cursor: pointer; list-style: none;
+    font-family: var(--hand); font-size: 1rem; color: var(--ink3);
   }
-  .content-body a.entry-output { text-decoration: none; }
-  .entry-output:hover {
-    background: rgba(58,79,106,0.08);
-    border-color: var(--link);
-    text-decoration: none;
+  .abstract summary::-webkit-details-marker { display: none; }
+  .abstract summary::before { content: '+ '; }
+  .abstract[open] summary::before { content: '\2013\00a0'; }
+  .abstract summary:hover { color: var(--ink); }
+  .abstract summary:focus-visible { outline: 2px solid var(--ink3); outline-offset: 2px; border-radius: 2px; }
+  .content-body .abstract p {
+    font-size: 0.9rem; line-height: 1.7; color: var(--ink3);
+    margin: 0.3rem 0 0; padding-left: 0.8rem;
+    border-left: 2px solid rgba(0,0,0,0.07);
   }
-  .entry-output::before {
-    content: '';
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    flex-shrink: 0;
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap;
   }
-  .entry-output[data-type="paper"]::before { background: #7a6fa0; }
-  .entry-output[data-type="pdf"]::before { background: #b07a5b; }
-  .entry-output[data-type="talk"]::before { background: #5a9e6f; }
-  .entry-output[data-type="presentation"]::before { background: #8b7355; }
-  .entry-output[data-type="journal"]::before { background: #4a7a96; }
-  .entry-output[data-type="award"]::before { background: #c9a227; }
+
+  @media (max-width: 1000px) {
+    .research-grid { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+    .venn { position: relative; top: auto; width: 100%; max-width: 34rem; margin: 0 auto; }
+    .research-list { max-width: 640px; width: 100%; margin: 0 auto; }
+  }
+  @media (hover: none) {
+    .venn-tip { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -111,157 +149,299 @@
     <ul class="page-menu-list" id="page-menu-list" hidden>
       <li><a href="/about.html">About Me</a></li>
       <li><a href="/research.html" aria-current="page">Research</a></li>
-      <li><a href="/writing.html">Writing</a></li>
-      <li><a href="/projects.html">Projects</a></li>
-      <li><a href="/photography.html">Photography</a></li>
+      <li><a href="/portfolio.html">Portfolio</a></li>
+      <li class="sub"><a href="/websites.html">Websites</a></li>
+      <li class="sub"><a href="/photography.html">Photography</a></li>
       <li><a href="/contact.html">Contact</a></li>
     </ul>
   </div>
 </nav>
-<div class="content-body">
+<div class="content-body research-page">
   <h1>Research</h1>
-  <p>My research explores how AI systems shape political discourse and public reason, and the ideologies underlying their construction.</p>
+  <p>In short, my research has focused on the interplay between democracy, AI, and analytics.</p>
 
-  <div class="section-tabs" role="tablist">
-    <button class="section-tab active" role="tab" data-section="academic" aria-controls="academic" aria-selected="true">Academic</button>
-    <button class="section-tab" role="tab" data-section="professional" aria-controls="professional" aria-selected="false">Professional</button>
-  </div>
+  <div class="research-grid">
+    <figure class="venn" id="venn">
+      <svg viewBox="0 0 600 530" role="group" aria-label="Venn diagram of democracy, AI, and analytics"></svg>
+      <div class="venn-tip" id="vennTip" aria-hidden="true"></div>
+      <figcaption class="venn-hint">both dots and regions are clickable</figcaption>
+    </figure>
 
-  <div class="research-section active" id="academic" role="tabpanel">
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">Coding Utopia: Effective Accelerationism, Techno-Optimism, and Strategic Incoherence in Silicon Valley</div>
-        <div class="entry-meta">4S Toronto, 2026</div>
+    <div class="research-list">
+      <div class="region-bar">
+        <p class="sr-only" id="vennStatus" aria-live="polite"></p>
+        <button class="hand-btn" type="button" id="vennReset" hidden>show all</button>
       </div>
-      <div class="entry-desc"><em>Panel: &ldquo;How critique stabilizes technoscientific power&rdquo;</em></div>
-      <div class="abstract">Presented at the Society for Social Studies of Science (4S) annual meeting in Toronto on October 7, 2026, on a panel convened by Theodore Kalaitzidis of Brown University.</div>
-      <div class="entry-outputs">
-        <a href="assets/docs/4S_presentation.pdf" class="entry-output" data-type="presentation">presentation</a>
-      </div>
-    </div>
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">Coding Utopia: Effective Accelerationism &amp; Evolving Techno-Optimism in Silicon Valley</div>
-        <div class="entry-meta">MSc thesis, Oxford, 2025</div>
-      </div>
-      <div class="entry-desc"><em>Highly commended, Oxford Internet Institute MSc Thesis Prize</em></div>
-      <div class="abstract">This thesis draws on Frankfurt School critical theory, elite interviews, and computational methods to investigate and historicize effective accelerationism ("e/acc") as an evolving techno-optimist ideology in Silicon Valley.</div>
-      <div class="entry-outputs">
-        <a href="https://www.oii.ox.ac.uk/news-events/introducing-the-2025-msc-thesis-prize-winners/" class="entry-output" data-type="award">thesis prize</a>
-      </div>
-    </div>
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">Manifesto of (Cyber)Futurism</div>
-        <div class="entry-meta">Clarendon-Gates Conference, 2025</div>
-      </div>
-      <div class="entry-desc"><em>Effective accelerationism, ideology, and Silicon Valley</em></div>
-      <div class="abstract">A talk given at the inaugural 2025 Clarendon-Gates conference on the links between Italian futurism and modern Silicon Valley ideologies.</div>
-      <div class="entry-outputs">
-        <a href="https://youtu.be/lOOs6wqKU8Q?si=3i_ASzgP-I3OvXEK&t=2004" class="entry-output" data-type="talk">talk</a>
-        <a href="assets/docs/Khan_Clarendon-Gates_2025.pdf" class="entry-output" data-type="presentation">presentation</a>
-      </div>
-    </div>
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">Do LLMs Dream of Electric Speech?</div>
-        <div class="entry-meta">Oxford, 2025</div>
-      </div>
-      <div class="entry-desc">Vacuous ghosts, selfhood, and freedom of speech jurisprudence</div>
-      <div class="abstract">This paper investigates the philosophical underpinnings of selfhood and large language models in light of evolving First Amendment and European Union jurisprudence on freedom of speech and freedom of expression. It argues that traditional free-speech doctrines are predicated on core assumptions (intentionality and selfhood) that LLMs categorically lack, and proposes establishing LLM outputs as a new category of <em>language</em> as opposed to <em>speech</em>.</div>
-      <div class="entry-outputs">
-        <a href="assets/docs/llms-electric-speech.pdf" class="entry-output" data-type="pdf">pdf</a>
-      </div>
-    </div>
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">How College Students Can Depolarize</div>
-        <div class="entry-meta">Khan &amp; Siu, 2023</div>
-      </div>
-      <div class="entry-desc">Evidence for political moderation within homogeneous groups</div>
-      <div class="abstract">This paper demonstrates that, after deliberation (using an AI-moderated platform), college students showed immense moderation potential and affective depolarization, especially even given their homogeneity as a bloc within American politics. These findings offer optimism for future research in homogeneous groups through understanding that group polarization can be avoided with the right precautionary measures. Published in the <em>Michigan Journal of Community Service Learning</em>, 29(2).</div>
-      <div class="entry-outputs">
-        <a href="https://journals.publishing.umich.edu/mjcsl/article/id/5140/" class="entry-output" data-type="journal">journal</a>
-        <a href="assets/docs/college-students-depolarize.pdf" class="entry-output" data-type="pdf">pdf</a>
-      </div>
-    </div>
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">The Rise of the Corporation-State</div>
-        <div class="entry-meta">Stanford, 2022</div>
-      </div>
-      <div class="entry-desc">How the British East India Company colonized the subcontinent</div>
-      <div class="abstract">This paper explores the creation of a novel type of governance structure: the corporation-state, which combines private ownership with sovereign power. Through archival and theoretical analysis, it investigates how the British East India Company presented the first example of this structure, underscoring broader tensions about empire, legitimacy, and corporate autonomy.</div>
-      <div class="entry-outputs">
-        <a href="assets/docs/corporation-state.pdf" class="entry-output" data-type="pdf">pdf</a>
-      </div>
-    </div>
-  </div>
 
-  <div class="research-section" id="professional" role="tabpanel">
-    <div class="entry org-header">
-      <div>Deliberative Democracy Lab, Stanford</div>
-      <div class="entry-meta">ongoing</div>
-    </div>
-    <div class="sub-entry">
-      <div>
-        <div class="entry-title">San Jose Housing Deliberative Poll</div>
-        <div class="entry-desc">Stanford Deliberative Democracy Lab</div>
-      </div>
-      <div class="entry-meta">moderator · Jun 2026</div>
-    </div>
-    <div class="sub-entry">
-      <div>
-        <div class="entry-title">Stanford Global Student Deliberations</div>
-        <div class="entry-desc">Stanford Deliberative Democracy Lab</div>
-      </div>
-      <div class="entry-meta">expert · May 2026</div>
-    </div>
-    <div class="sub-entry">
-      <div>
-        <div class="entry-title">National Deliberative Poll on AI Policies</div>
-        <div class="entry-desc">Stanford Deliberative Democracy Lab</div>
-      </div>
-      <div class="entry-meta">moderator · Sep 2025</div>
-    </div>
-    <div class="sub-entry">
-      <div>
-        <div class="entry-title">Youth Perspectives on GenAI</div>
-        <div class="entry-desc">Stanford &times; DeepMind &times; CloseUp panel</div>
-      </div>
-      <div class="entry-meta">expert · Jul 2025</div>
-    </div>
-    <div class="sub-entry">
-      <div>
-        <div class="entry-title">Antimicrobial Resistance (AMR) Deliberative Poll</div>
-        <div class="entry-desc">The Trinity Challenge</div>
-      </div>
-      <div class="entry-meta">moderator · Aug 2024</div>
-    </div>
+      <section class="region-group" data-region="all-three" aria-labelledby="h-all-three">
+        <h2 class="region-heading" id="h-all-three">democracy, ai &amp; analytics</h2>
+        <div class="entry-group" id="g-coding-utopia" data-short="e/acc thesis">
+          <div class="group-head"><div class="group-title">Coding Utopia</div><div class="entry-meta">2025&ndash;2026</div></div>
+          <p class="group-desc">My Oxford MSc thesis, and related presentations, on effective accelerationism.</p>
+          <article class="entry">
+            <div>
+              <div class="entry-title">Coding Utopia: Effective Accelerationism, Techno-Optimism, and Strategic Incoherence in Silicon Valley</div>
+              <div class="entry-desc">4S Toronto panel: &ldquo;How critique stabilizes technoscientific power&rdquo;</div>
+              <details class="abstract"><summary>abstract</summary><p>Presented at the Society for Social Studies of Science (4S) annual meeting in Toronto on October 7, 2026, on a panel convened by Theodore Kalaitzidis of Brown University.</p></details>
+              <div class="entry-outputs">
+                <a href="assets/docs/4S_presentation.pdf" class="entry-output" data-type="presentation">presentation</a>
+              </div>
+            </div>
+            <div class="entry-meta">talk, Oct 2026</div>
+          </article>
+          <article class="entry">
+            <div>
+              <div class="entry-title">Coding Utopia: Effective Accelerationism &amp; Evolving Techno-Optimism in Silicon Valley</div>
+              <div class="entry-desc">MSc thesis, Oxford. Highly commended, OII Thesis Prize</div>
+              <details class="abstract"><summary>abstract</summary><p>This thesis draws on Frankfurt School critical theory, elite interviews, and computational methods to investigate and historicize effective accelerationism (&ldquo;e/acc&rdquo;) as an evolving techno-optimist ideology in Silicon Valley.</p></details>
+              <div class="entry-outputs">
+                <a href="https://www.oii.ox.ac.uk/news-events/introducing-the-2025-msc-thesis-prize-winners/" class="entry-output" data-type="award">thesis prize</a>
+              </div>
+            </div>
+            <div class="entry-meta">thesis, 2025</div>
+          </article>
+        </div>
+      </section>
 
-    <div class="entry org-header">
-      <div>McKinsey &amp; Company</div>
-      <div class="entry-meta">2022–2024</div>
-    </div>
-    <div class="sub-entry">
-      <div>
-        <div class="entry-title"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-2024">The State of AI in 2024</a></div>
-        <div class="entry-desc">McKinsey Global Survey on AI adoption and impact</div>
-      </div>
-      <div class="entry-meta">researcher · 2024</div>
-    </div>
-    <div class="sub-entry">
-      <div>
-        <div class="entry-title"><a href="https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/tech-forward/insights-on-responsible-ai-from-the-global-ai-trust-maturity-survey">Insights on Responsible AI</a></div>
-        <div class="entry-desc">From the Global AI Trust Maturity Survey</div>
-      </div>
-      <div class="entry-meta">researcher · 2024</div>
+      <section class="region-group" data-region="democracy-ai" aria-labelledby="h-democracy-ai">
+        <h2 class="region-heading" id="h-democracy-ai">democracy &amp; ai</h2>
+        <div class="entry-group" id="g-substack" data-short="substack">
+          <div class="group-head"><div class="group-title">Essays on Substack</div><div class="entry-meta">2026</div></div>
+          <p class="group-desc">From <a href="https://codingutopia.substack.com/">my Substack</a>, focusing on the ideologies, culture, and politics of Silicon Valley.</p>
+          <article class="entry">
+            <div>
+              <div class="entry-title"><a href="https://codingutopia.substack.com/p/a-case-for-compulsory-voting">A Case for Compulsory Voting</a></div>
+              <div class="entry-desc">And why this might be the greatest impediment to Silicon Valley's power</div>
+            </div>
+            <div class="entry-meta">essay, Aug 2026</div>
+          </article>
+          <article class="entry">
+            <div>
+              <div class="entry-title"><a href="https://codingutopia.substack.com/p/the-right-against-ai">The Right Against AI</a></div>
+              <div class="entry-desc">Or why workers should have the right to opt out of AI</div>
+            </div>
+            <div class="entry-meta">essay, Jul 2026</div>
+          </article>
+          <article class="entry">
+            <div>
+              <div class="entry-title"><a href="https://codingutopia.substack.com/p/we-didnt-have-to-build-ai-like-this">We Didn't Have to Build AI Like This</a></div>
+              <div class="entry-desc">On an alternative world where AI is pro-human</div>
+            </div>
+            <div class="entry-meta">essay, Apr 2026</div>
+          </article>
+          <article class="entry">
+            <div>
+              <div class="entry-title"><a href="https://codingutopia.substack.com/p/reflections-on-hiroshima">Reflections on Hiroshima</a></div>
+              <div class="entry-desc">And how we never learn from our greatest mistakes</div>
+            </div>
+            <div class="entry-meta">essay, Jan 2026</div>
+          </article>
+        </div>
+        <article class="entry">
+          <div>
+            <div class="entry-title">Manifesto of (Cyber)Futurism</div>
+            <div class="entry-desc">Effective accelerationism, ideology, and Silicon Valley</div>
+            <details class="abstract"><summary>abstract</summary><p>A talk given at the inaugural 2025 Clarendon-Gates conference on the links between Italian futurism and modern Silicon Valley ideologies.</p></details>
+            <div class="entry-outputs">
+              <a href="https://youtu.be/lOOs6wqKU8Q?si=3i_ASzgP-I3OvXEK&amp;t=2004" class="entry-output" data-type="talk">talk</a>
+              <a href="assets/docs/Khan_Clarendon-Gates_2025.pdf" class="entry-output" data-type="presentation">presentation</a>
+            </div>
+          </div>
+          <div class="entry-meta">talk, 2025</div>
+        </article>
+        <article class="entry">
+          <div>
+            <div class="entry-title">Do LLMs Dream of Electric Speech?</div>
+            <div class="entry-desc">Vacuous ghosts, selfhood, and freedom of speech jurisprudence</div>
+            <details class="abstract"><summary>abstract</summary><p>This paper investigates the philosophical underpinnings of selfhood and large language models in light of evolving First Amendment and European Union jurisprudence on freedom of speech and freedom of expression. It argues that traditional free-speech doctrines are predicated on core assumptions (intentionality and selfhood) that LLMs categorically lack, and proposes establishing LLM outputs as a new category of <em>language</em> as opposed to <em>speech</em>.</p></details>
+            <div class="entry-outputs">
+              <a href="assets/docs/llms-electric-speech.pdf" class="entry-output" data-type="pdf">pdf</a>
+            </div>
+          </div>
+          <div class="entry-meta">paper, 2025</div>
+        </article>
+        <article class="entry">
+          <div>
+            <div class="entry-title">How College Students Can Depolarize</div>
+            <div class="entry-desc">Evidence for political moderation within homogeneous groups, with Siu</div>
+            <details class="abstract"><summary>abstract</summary><p>This paper demonstrates that, after deliberation (using an AI-moderated platform), college students showed immense moderation potential and affective depolarization, especially even given their homogeneity as a bloc within American politics. These findings offer optimism for future research in homogeneous groups through understanding that group polarization can be avoided with the right precautionary measures. Published in the <em>Michigan Journal of Community Service Learning</em>, 29(2).</p></details>
+            <div class="entry-outputs">
+              <a href="https://journals.publishing.umich.edu/mjcsl/article/id/5140/" class="entry-output" data-type="journal">journal</a>
+              <a href="assets/docs/college-students-depolarize.pdf" class="entry-output" data-type="pdf">pdf</a>
+            </div>
+          </div>
+          <div class="entry-meta">paper, 2023</div>
+        </article>
+      </section>
+
+      <section class="region-group" data-region="democracy-analytics" aria-labelledby="h-democracy-analytics">
+        <h2 class="region-heading" id="h-democracy-analytics">democracy &amp; analytics</h2>
+        <article class="entry">
+          <div>
+            <div class="entry-title">Depolarization Analytics</div>
+            <div class="entry-desc">Statistical analysis of a deliberative democracy event with a representative sample of college students, measuring depolarization. Undergraduate thesis, awarded the Robert Glushko Prize and later published in a peer-reviewed journal.</div>
+            <div class="entry-outputs">
+              <a href="assets/docs/college-students-depolarize.pdf" class="entry-output" data-type="paper">paper</a>
+              <a href="https://github.com/yasmeenakhan/thesis" class="entry-output" data-type="repo">repo</a>
+            </div>
+          </div>
+          <div class="entry-meta">analysis, 2022</div>
+        </article>
+      </section>
+
+      <section class="region-group" data-region="ai-analytics" aria-labelledby="h-ai-analytics">
+        <h2 class="region-heading" id="h-ai-analytics">ai &amp; analytics</h2>
+        <article class="entry">
+          <div>
+            <div class="entry-title">Twitter Gender Classifier</div>
+            <div class="entry-desc">Classified the gender of Twitter users from their bio, latest Tweet, and username, comparing logistic regression, a Gaussian-kernel SVM, and Naive Bayes. Reached 70% accuracy against a published 63%. Co-authored final project for CS129.</div>
+            <div class="entry-outputs">
+              <a href="assets/docs/twitter-gender-classifier.pdf" class="entry-output" data-type="paper">paper</a>
+            </div>
+          </div>
+          <div class="entry-meta">project, 2021</div>
+        </article>
+      </section>
+
+      <section class="region-group" data-region="democracy" aria-labelledby="h-democracy">
+        <h2 class="region-heading" id="h-democracy">democracy</h2>
+        <div class="entry-group" id="g-ddl" data-short="deliberative democracy lab">
+          <div class="group-head"><div class="group-title">Stanford Deliberative Democracy Lab</div><div class="entry-meta">2024&ndash;2026</div></div>
+          <p class="group-desc">Serving as a research assistant, moderator, or expert panelist on varied Deliberative Polls.</p>
+          <article class="entry">
+            <div>
+              <div class="entry-title">San Jose Housing Deliberative Poll</div>
+                          </div>
+            <div class="entry-meta">moderator, Jun 2026</div>
+          </article>
+          <article class="entry">
+            <div>
+              <div class="entry-title">Stanford Global Student Deliberations</div>
+                          </div>
+            <div class="entry-meta">expert, May 2026</div>
+          </article>
+          <article class="entry">
+            <div>
+              <div class="entry-title">National Deliberative Poll on AI Policies</div>
+                          </div>
+            <div class="entry-meta">moderator, Sep 2025</div>
+          </article>
+          <article class="entry">
+            <div>
+              <div class="entry-title">Youth Perspectives on GenAI</div>
+              <div class="entry-desc">Stanford &times; DeepMind &times; CloseUp panel</div>
+            </div>
+            <div class="entry-meta">expert, Jul 2025</div>
+          </article>
+          <article class="entry">
+            <div>
+              <div class="entry-title">Antimicrobial Resistance (AMR) Deliberative Poll</div>
+              <div class="entry-desc">The Trinity Challenge</div>
+            </div>
+            <div class="entry-meta">moderator, Aug 2024</div>
+          </article>
+        </div>
+        <article class="entry">
+          <div>
+            <div class="entry-title">The Rise of the Corporation-State</div>
+            <div class="entry-desc">How the British East India Company colonized the subcontinent</div>
+            <details class="abstract"><summary>abstract</summary><p>This paper explores the creation of a novel type of governance structure: the corporation-state, which combines private ownership with sovereign power. Through archival and theoretical analysis, it investigates how the British East India Company presented the first example of this structure, underscoring broader tensions about empire, legitimacy, and corporate autonomy.</p></details>
+            <div class="entry-outputs">
+              <a href="assets/docs/corporation-state.pdf" class="entry-output" data-type="pdf">pdf</a>
+            </div>
+          </div>
+          <div class="entry-meta">paper, 2022</div>
+        </article>
+      </section>
+
+      <section class="region-group" data-region="ai" aria-labelledby="h-ai">
+        <h2 class="region-heading" id="h-ai">ai</h2>
+        <div class="entry-group" id="g-mckinsey" data-short="mckinsey">
+          <div class="group-head"><div class="group-title">McKinsey &amp; Company</div><div class="entry-meta">2022&ndash;2024</div></div>
+          <p class="group-desc">Research from my time in the AI Trust practice.</p>
+          <article class="entry">
+            <div>
+              <div class="entry-title"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-2024">The State of AI in 2024</a></div>
+              <div class="entry-desc">McKinsey Global Survey on AI adoption and impact</div>
+            </div>
+            <div class="entry-meta">research, 2024</div>
+          </article>
+          <article class="entry">
+            <div>
+              <div class="entry-title"><a href="https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/tech-forward/insights-on-responsible-ai-from-the-global-ai-trust-maturity-survey">Insights on Responsible AI</a></div>
+              <div class="entry-desc">From the Global AI Trust Maturity Survey</div>
+            </div>
+            <div class="entry-meta">research, 2024</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="region-group" data-region="analytics" aria-labelledby="h-analytics">
+        <h2 class="region-heading" id="h-analytics">analytics</h2>
+        <div class="entry-group" id="g-mccovey" data-short="mccovey chronicles">
+          <div class="group-head"><div class="group-title">McCovey Chronicles</div><div class="entry-meta">2021&ndash;2023</div></div>
+          <p class="group-desc">Covering the San Francisco Giants as a sabermetric journalist for <a href="https://www.mccoveychronicles.com">Vox Media</a>.</p>
+          <article class="entry">
+            <div>
+              <div class="entry-title"><a href="https://www.mccoveychronicles.com/2023/6/4/23748691/mlb-statistical-analysis-san-francisco-giants-joey-bart-power-contact-batted-ball">Joey Bart's Missing Power</a></div>
+              <div class="entry-desc">What contact and batted-ball data say about a bat that stopped slugging</div>
+            </div>
+            <div class="entry-meta">article, 2023</div>
+          </article>
+          <article class="entry">
+            <div>
+              <div class="entry-title"><a href="https://www.mccoveychronicles.com/2022/4/12/23023181/mlb-news-san-francisco-giants-alyssa-nakken">Alyssa Nakken Makes History</a></div>
+              <div class="entry-desc">The first female on-field coach in MLB history</div>
+            </div>
+            <div class="entry-meta">article, 2022</div>
+          </article>
+          <article class="entry">
+            <div>
+              <div class="entry-title"><a href="https://www.mccoveychronicles.com/2022/2/10/22927647/mlb-news-designated-hitters-comes-to-national-league">The DH Comes to the National League</a></div>
+              <div class="entry-desc">On the designated hitter arriving in the National League</div>
+            </div>
+            <div class="entry-meta">article, 2022</div>
+          </article>
+          <article class="entry">
+            <div>
+              <div class="entry-title"><a href="https://www.mccoveychronicles.com/2021/12/16/22837986/mlb-analysis-umpires-san-francisco-giants-brandon-belt">Giants vs. Umpires, 2021</a></div>
+              <div class="entry-desc">How much umpires helped or hurt the Giants over a 107-win season</div>
+            </div>
+            <div class="entry-meta">article, 2021</div>
+          </article>
+          <article class="entry">
+            <div>
+              <div class="entry-title"><a href="https://www.mccoveychronicles.com/2021/10/11/22722007/mlb-scores-recap-giants-dodgers-nlds-doval-longoria-crawford-game-three">NLDS Game 3: Giants 1, Dodgers 0</a></div>
+              <div class="entry-desc">A shutout in Los Angeles puts the Giants up 2&#8209;1 in the division series</div>
+            </div>
+            <div class="entry-meta">article, 2021</div>
+          </article>
+          <article class="entry">
+            <div>
+              <div class="entry-title"><a href="https://www.mccoveychronicles.com/2021/8/27/22643748/sf-giants-analysis-gausman-second-half-struggles">Gausman's Second-Half Struggles</a></div>
+              <div class="entry-desc">Analyzing Kevin Gausman's decline in the second half of the season</div>
+            </div>
+            <div class="entry-meta">article, 2021</div>
+          </article>
+        </div>
+        <article class="entry">
+          <div>
+            <div class="entry-title">College Baseball Sabermetrics</div>
+            <div class="entry-desc">Run expectancy tables used to build xwOBA+ and WAR for D1 college baseball, as Co-President of the Stanford Sports Analytics Club.</div>
+            <div class="entry-outputs">
+              <a href="https://github.com/yasmeenakhan/ncaa-re24" class="entry-output" data-type="repo">repo</a>
+            </div>
+          </div>
+          <div class="entry-meta">project, 2020</div>
+        </article>
+      </section>
     </div>
   </div>
 </div>
 
-<script src="js/tabs.js"></script>
 <footer class="site-footer">designed and coded by yasi khan &copy; 2026 &ndash; <a href="https://github.com/yasikhan/yrk-website">repo</a></footer>
+<script src="js/rough.js"></script>
+<script src="js/venn.js"></script>
 <script src="/js/nav.js"></script>
 </body>
 </html>

@@ -19,15 +19,17 @@ Then open <http://localhost:8000>. Opening the files directly with `file://` mos
 ```
 index.html          landing page — bookshelf drawn on <canvas>
 about.html          about, with handwritten margin notes
-research.html       academic and professional research
-writing.html        essays and baseball writing
-projects.html       technical projects
+research.html       research, writing, analysis — the Venn diagram
+portfolio.html      pick websites or photography
+websites.html       website design
 photography.html    photo gallery
 contact.html        links
+writing.html …      redirect stubs for old links (also projects)
 
 css/style.css       shared design tokens and layout
 js/shelf.js         bookshelf illustration
-js/tabs.js          tab switching for research and writing
+js/venn.js          research Venn diagram
+js/frames.js        sketched browser frames around site screenshots
 js/rough.js         rough.js, vendored
 assets/img/         images — photos, sketches, logo, favicon
 assets/docs/        PDFs — resume, papers, posters
@@ -41,7 +43,9 @@ Each page has its own inline `<style>` block for page-specific rules on top of t
 
 **Photos** — add the image to `photos/`, then add its filename to `photos/manifest.json`; the gallery reads that list and won't pick up files that aren't in it. Name files `title, location - year.jpeg`. Captions show the location and year; the title becomes the image's alt text.
 
-**Projects and writing** — copy the nearest existing card or `.entry` block in the relevant page and edit it in place. Both lists are ordered newest-first.
+**Research** — add an `.entry` to the matching `region-group` (or into an `.entry-group` inside it) in `research.html`; its dot appears in the diagram automatically. Newest-first.
+
+**Websites** — copy an `article.site` in `websites.html` and add a screenshot to `assets/img/sites/`.
 
 ## Deployment
 

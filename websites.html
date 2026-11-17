@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HDQVY13387"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HDQVY13387');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Websites — Yasmeena (Yasi) Khan</title>
+<meta name="description" content="Websites designed and built by Yasi Khan, from the Stanford AI Governance Lab to Seeking Vermeer and Literatus.">
+<link rel="canonical" href="https://yrkhan.com/websites.html">
+<meta property="og:title" content="Websites — Yasmeena (Yasi) Khan">
+<meta property="og:description" content="Websites designed and built by Yasi Khan.">
+<meta property="og:image" content="https://yrkhan.com/assets/img/yasi-image.jpg">
+<meta property="og:url" content="https://yrkhan.com/websites.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/newsreader.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/libre-caslon-display-400.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/YasiHand-Regular.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/ibm-plex-mono-400.woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .content-body.websites { max-width: 1080px; }
+  .websites > p { max-width: 640px; }
+  .sites {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
+    gap: 4rem 3.5rem;
+    margin-top: 2.8rem;
+  }
+  .site-frame:hover img, .site-frame:focus-visible img { filter: none; }
+  .site-frame:focus-visible { outline: 2px solid var(--ink3); outline-offset: 4px; border-radius: 2px; }
+  .site-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 1rem; margin-top: 0.9rem;
+  }
+  .site-title { font-size: 1.15rem; color: var(--ink); line-height: 1.3; }
+  .site-desc { font-size: 0.95rem; line-height: 1.6; color: var(--ink2); margin-top: 0.3rem; }
+  .site-foot {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 0.5rem; margin-top: 0.7rem;
+  }
+  .site-foot .entry-outputs { margin-top: 0; }
+  .project-card-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .project-tag {
+    font-family: var(--mono); font-size: 0.6rem;
+    padding: 0.12rem 0.45rem; border-radius: 3px;
+  }
+  .project-tag[data-kind="lang"] { color: #4a6741; background: rgba(90, 130, 80, 0.15); }
+  .project-tag[data-kind="subject"] { color: var(--ink3); background: var(--highlight); }
+
+  @media (max-width: 768px) {
+    .sites { gap: 3rem; margin-top: 2rem; }
+    .site-foot { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<nav class="content-nav">
+  <a class="back-btn" href="/">&larr; homepage</a>
+  <div class="page-menu">
+    <button class="page-menu-btn" type="button" aria-expanded="false" aria-controls="page-menu-list" aria-label="Menu"><svg width="22" height="16" viewBox="0 0 22 16" aria-hidden="true"><path d="M1.5 2.6 Q11 1.6 20.5 2.3 M1.5 8.3 Q11 7.6 20.5 8.1 M1.5 13.7 Q11 14.4 20.5 13.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+    <ul class="page-menu-list" id="page-menu-list" hidden>
+      <li><a href="/about.html">About Me</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/portfolio.html">Portfolio</a></li>
+      <li class="sub"><a href="/websites.html" aria-current="page">Websites</a></li>
+      <li class="sub"><a href="/photography.html">Photography</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="content-body websites">
+  <h1>Websites</h1>
+  <p>Websites I&rsquo;ve designed and built.</p>
+    <div class="sites">
+      <article class="site">
+        <a class="site-frame" href="https://aigovlab.stanford.edu/"><span class="site-url">aigovlab.stanford.edu</span><img src="assets/img/sites/aigovlab.jpg" alt="Home page of the AI Governance Lab website" width="960" height="600" loading="lazy"></a>
+        <div class="site-head"><div class="site-title">AI Governance Lab</div><div class="entry-meta">2026</div></div>
+        <div class="site-desc">Website for Stanford's AI Governance Lab, an interdisciplinary research center between Stanford HAI and Stanford Law School.</div>
+        <div class="site-foot">
+          <div class="entry-outputs"><a href="https://aigovlab.stanford.edu/" class="entry-output" data-type="website">website</a></div>
+          <div class="project-card-tags"><span class="project-tag" data-kind="lang">html/css</span><span class="project-tag" data-kind="subject">ai governance</span><span class="project-tag" data-kind="subject">design</span></div>
+        </div>
+      </article>
+      <article class="site">
+        <a class="site-frame" href="https://literatusapp.com"><span class="site-url">literatusapp.com</span><img src="assets/img/sites/literatus.jpg" alt="Literatus landing page: track what you read, learn what you love" width="960" height="600" loading="lazy"></a>
+        <div class="site-head"><div class="site-title">Literatus</div><div class="entry-meta">2024</div></div>
+        <div class="site-desc">Beli for books: a way to rank and determine your favorite books using binary search.</div>
+        <div class="site-foot">
+          <div class="entry-outputs"><a href="https://literatusapp.com" class="entry-output" data-type="website">website</a></div>
+          <div class="project-card-tags"><span class="project-tag" data-kind="lang">python</span><span class="project-tag" data-kind="lang">javascript</span><span class="project-tag" data-kind="subject">literature</span><span class="project-tag" data-kind="subject">humanities</span></div>
+        </div>
+      </article>
+      <article class="site">
+        <a class="site-frame" href="https://seekingvermeer.com/"><span class="site-url">seekingvermeer.com</span><img src="assets/img/sites/vermeer.jpg" alt="The Hague room in Seeking Vermeer, hung with the three Vermeers at the Mauritshuis" width="960" height="600" loading="lazy"></a>
+        <div class="site-head"><div class="site-title">Seeking Vermeer</div><div class="entry-meta">2026</div></div>
+        <div class="site-desc">A website tracking my progress towards seeing all 37 extant Vermeers.</div>
+        <div class="site-foot">
+          <div class="entry-outputs"><a href="https://seekingvermeer.com/" class="entry-output" data-type="website">website</a><a href="https://github.com/yasikhan/vermeer" class="entry-output" data-type="repo">repo</a></div>
+          <div class="project-card-tags"><span class="project-tag" data-kind="lang">javascript</span><span class="project-tag" data-kind="lang">python</span><span class="project-tag" data-kind="subject">art history</span><span class="project-tag" data-kind="subject">design</span></div>
+        </div>
+      </article>
+      <article class="site">
+        <a class="site-frame" href="https://cs-ai-governance.github.io/cs-283-website/"><span class="site-url">cs-ai-governance.github.io/cs-283-website</span><img src="assets/img/sites/cs283.jpg" alt="Home page of the CS283 Governing Artificial Intelligence course website" width="960" height="600" loading="lazy"></a>
+        <div class="site-head"><div class="site-title">CS283 Course Website</div><div class="entry-meta">2026</div></div>
+        <div class="site-desc">Course website for <em>Governing Artificial Intelligence</em> (CS283 / LAW4052), a cross-listed Stanford course on AI law, policy, and institutions, with the lecture schedule, readings, assignments, and sections.</div>
+        <div class="site-foot">
+          <div class="entry-outputs"><a href="https://cs-ai-governance.github.io/cs-283-website/" class="entry-output" data-type="website">website</a></div>
+          <div class="project-card-tags"><span class="project-tag" data-kind="lang">jekyll</span><span class="project-tag" data-kind="lang">html/css</span><span class="project-tag" data-kind="subject">ai governance</span><span class="project-tag" data-kind="subject">teaching</span></div>
+        </div>
+      </article>
+      <article class="site">
+        <a class="site-frame" href="https://yrkhan.com"><span class="site-url">yrkhan.com</span><img src="assets/img/sites/yrkhan.jpg" alt="This website's home page, a hand-drawn bookshelf" width="960" height="600" loading="lazy"></a>
+        <div class="site-head"><div class="site-title">Personal Website</div><div class="entry-meta">2025</div></div>
+        <div class="site-desc">Personal website designed entirely from scratch. Uses custom handwriting fonts and sketch-style aesthetic.</div>
+        <div class="site-foot">
+          <div class="entry-outputs"><a href="https://github.com/yasikhan/yrk-website" class="entry-output" data-type="repo">repo</a></div>
+          <div class="project-card-tags"><span class="project-tag" data-kind="lang">html/css</span><span class="project-tag" data-kind="lang">javascript</span><span class="project-tag" data-kind="subject">design</span><span class="project-tag" data-kind="subject">personal</span></div>
+        </div>
+      </article>
+      <article class="site">
+        <a class="site-frame" href="https://yasikhan.github.io/inflation-calculator/"><span class="site-url">yasikhan.github.io/inflation-calculator</span><img src="assets/img/sites/inflation.jpg" alt="The Evolution of the Dollar calculator, converting dollars to gold and silver" width="960" height="600" loading="lazy"></a>
+        <div class="site-head"><div class="site-title">Inflation Calculator</div><div class="entry-meta">2026</div></div>
+        <div class="site-desc">An inflation calculator that uses the gold/silver standard instead of the typical CPI multiplier to offer a better comparison between today's prices vs. historical ones.</div>
+        <div class="site-foot">
+          <div class="entry-outputs"><a href="https://yasikhan.github.io/inflation-calculator/" class="entry-output" data-type="website">website</a><a href="https://github.com/yasikhan/inflation-calculator" class="entry-output" data-type="repo">repo</a></div>
+          <div class="project-card-tags"><span class="project-tag" data-kind="lang">javascript</span><span class="project-tag" data-kind="lang">python</span><span class="project-tag" data-kind="subject">economics</span><span class="project-tag" data-kind="subject">monetary history</span></div>
+        </div>
+      </article>
+      <article class="site">
+        <a class="site-frame" href="https://yasikhan.github.io/latex-website/index.html"><span class="site-url">yasikhan.github.io/latex-website</span><img src="assets/img/sites/latex.jpg" alt="The LaTeX website template, rendered as a typeset document" width="960" height="600" loading="lazy"></a>
+        <div class="site-head"><div class="site-title">LaTeX Website Template</div><div class="entry-meta">2026</div></div>
+        <div class="site-desc">Open-source academic website template that follows LaTeX conventions, easy to build using GitHub Pages.</div>
+        <div class="site-foot">
+          <div class="entry-outputs"><a href="https://yasikhan.github.io/latex-website/index.html" class="entry-output" data-type="website">website</a><a href="https://github.com/yasikhan/latex-website" class="entry-output" data-type="repo">repo</a></div>
+          <div class="project-card-tags"><span class="project-tag" data-kind="lang">html/css</span><span class="project-tag" data-kind="lang">javascript</span><span class="project-tag" data-kind="subject">design</span><span class="project-tag" data-kind="subject">open source</span></div>
+        </div>
+      </article>
+</div>
+</div>
+
+<footer class="site-footer">designed and coded by yasi khan &copy; 2026 &ndash; <a href="https://github.com/yasikhan/yrk-website">repo</a></footer>
+<script src="js/rough.js"></script>
+<script src="js/frames.js"></script>
+<script src="/js/nav.js"></script>
+</body>
+</html>

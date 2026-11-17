@@ -25,12 +25,17 @@ galleries silently render their "no photos" empty state when opened directly fro
 | --- | --- |
 | `index.html` | Landing page — hand-drawn bookshelf on `<canvas>`, drawn by `js/shelf.js` on top of `js/rough.js` |
 | `about.html` | Prose page with handwritten margin annotations positioned absolutely |
-| `research.html`, `writing.html` | Tabbed list pages (tabs driven by `js/tabs.js`) |
-| `projects.html` | Technical project cards |
+| `research.html` | Research, writing, and analysis, filed into a Democracy / AI / Analytics Venn diagram drawn by `js/venn.js` |
+| `portfolio.html` | Landing page offering two choices, websites or photography, each shown as a stack that fans out on hover |
+| `websites.html` | Website-design cards, each screenshot in a hand-drawn browser frame |
 | `photography.html` | Photo gallery |
 | `contact.html` | Links |
+| `writing.html`, `projects.html` | Redirect stubs to `research.html` / `websites.html`, mapping old `#tab` hashes. Keep them so old links work |
+| `js/nav.js` | Header menu dropdown (three-line button) on content pages |
+| `js/frames.js` | Draws the sketched browser frame around every `.site-frame` screenshot (websites, portfolio) |
 | `css/style.css` | The only shared stylesheet: `:root` design tokens, content-page layout, `.entry` lists, footer, responsive rules |
 | `photos/` | Gallery images + `manifest.json` |
+| `assets/img/sites/` | Screenshots for the website cards (960×600 JPEG) |
 | `assets/img/` | Site images — photos, sketches, logo, favicon |
 | `assets/docs/` | PDFs — resume, papers, posters |
 | `assets/fonts/` | Self-hosted woff2/ttf fonts, including `YasiHand-*` |
@@ -51,7 +56,7 @@ On mobile, keep body copy at ≥1rem and small meta at ≥0.72rem. Don't shrink 
 
 ## Adding a photo
 
-The gallery lives only on `photography.html`. `projects.html#photography` redirects there.
+The gallery lives on `photography.html`. `projects.html#photography` redirects there.
 
 
 1. Drop the image in `photos/`.
@@ -87,36 +92,51 @@ The remaining notes (`.margin-note`, `.margin-note-left`) still use fixed `top` 
 relative to their paragraph and are not anchored. All margin notes hide below 920px, where there
 is no margin left to hold them.
 
-## Adding a project card
+## Research (the Venn diagram)
 
-Copy an existing `.project-card` in `projects.html` (header, desc, footer with
-`.project-outputs` and `.project-card-tags`). Cards sit inside a `<section class="project-year">`
-whose `.project-year-label` h2 carries the year — add to the matching year's section, or create a
-new section in newest-first order. The hand-drawn timeline rail in the left margin, its dots, and
-the year labels' vertical position are all computed by the script at the end of the page from the
-card titles, so nothing needs hand positioning. Below 920px the rail hides and years become inline
-handwritten headings.
+`research.html` lists every piece of work inside a `<section class="region-group"
+data-region="…">`. The seven regions are `all-three`, `democracy-ai`, `democracy-analytics`,
+`ai-analytics`, `democracy`, `ai`, `analytics`. Within a region, a piece is either a standalone
+`.entry` or part of an `.entry-group`. A group is a named body of work (the Deliberative Democracy
+Lab polls, McCovey Chronicles…) with a `.group-head` and optional `.group-desc`, and its entries
+are indented beneath it.
 
-Output links carry `data-type` (`website` / `repo` / `paper` / `poster`), which drives the
-colored dot. Tags carry `data-kind` (`lang` / `subject`).
+`js/venn.js` reads that list and draws everything from it. The circles are plain pencil outlines.
+A standalone entry becomes one dot; a group becomes a tight huddle of dots with a pencil loop
+around it, named underneath in handwriting from the group's `data-short` attribute. The name wraps
+to two lines if needed, or is dropped if it can't fit inside the region. Marks are placed at
+seeded positions (the same every load), largest first, with room from the circle edges and from
+each other. Nothing is hand-placed: **to add a piece, add an `.entry` to the right region group,
+or inside an existing `.entry-group`.** For a new group, give it a short `data-short` name.
 
-## Adding a writing or research entry
+Entry pattern: `entry-title` (wrap in `a` if there's a primary link), `entry-desc`, optional
+`<details class="abstract"><summary>abstract</summary><p>…</p></details>`, optional
+`.entry-outputs` pills (`a.entry-output[data-type]`: `paper` / `pdf` / `journal` / `talk` /
+`presentation` / `award` / `website` / `repo`, which color the dot). `entry-meta` reads `kind, date`,
+e.g. `essay, Aug 2026`. Use commas, not middle dots. Newest-first.
 
-Use the shared `.entry` pattern (`entry-title` > `a`, `entry-desc`, `entry-meta`) inside the
-relevant tab container — `.writing-section` in `writing.html`, `.research-section` in
-`research.html`. Entries are newest-first; `entry-meta` is a short date like `Aug 2026`.
+Selecting a region also brings in every region that sits inside all of its circles: `ai` shows ai,
+democracy & ai, ai & analytics, and the center; `democracy-ai` shows that lens plus the center.
+Those regions fill with the `--highlight` wash (hover previews the same set), the list filters to
+them, starting with the region picked, and the pick is mirrored to the hash
+(`/research.html#analytics`) so links are shareable.
 
-## Tabbed pages
+## Adding a website
 
-`research.html` and `writing.html` load the shared `js/tabs.js`. A `.section-tabs[role=tablist]`
-holds `.section-tab[role=tab][data-section][aria-controls]` buttons, and each panel is the element
-with that id plus `role="tabpanel"`. The script toggles `.active` + `aria-selected`, supports
-arrow keys, and mirrors the open tab into the URL hash, so `/writing.html#baseball` both opens
-and shares that tab. Tab styling (handwritten label + highlighter swipe) lives in
-`css/style.css`. Don't restyle it per page.
+Copy an `article.site` in `websites.html`. It holds an `a.site-frame` with `.site-url` and a
+screenshot in `assets/img/sites/`, then `.site-head`, `.site-desc`, and `.site-foot` with
+`.entry-outputs` and `.project-card-tags` (`data-kind` `lang` / `subject`). The browser frame
+around the screenshot is drawn by `js/frames.js` at runtime and resizes itself. Screenshots were taken
+with headless Chrome at 1280×800 and saved as 960px-wide JPEG. Newest-first.
 
 ## New pages
 
 Copy the `<head>` boilerplate from an existing page — it is repeated per page, not templated:
 the inline Google Analytics tag, `<title>`, description, OpenGraph + Twitter card meta, favicon,
 four font `<link rel="preload">` tags, then `css/style.css`. Also add the page to `sitemap.xml`.
+
+Content pages share a header: `nav.content-nav` with the `← homepage` link on the left and a
+`menu` dropdown (`.page-menu`) on the right listing every page, with `aria-current="page"` on the
+current one. Websites and Photography sit under Portfolio as `<li class="sub">` items.
+`js/nav.js` (loaded just before `</body>`) handles open/close. The menu list is
+repeated in each page — when adding a page, add it to every page's list.

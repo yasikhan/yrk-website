@@ -112,6 +112,7 @@ body {
 .page-menu-list a:hover,
 .page-menu-list a:focus-visible { background: var(--highlight); color: var(--ink); outline: none; }
 .page-menu-list a[aria-current="page"] { color: var(--ink); font-style: italic; }
+.page-menu-list .sub a { padding-left: 1.9rem; font-size: 0.95rem; color: var(--ink3); }
 .content-body {
   max-width: 640px; margin: 0 auto; padding: 4rem 2rem 6rem;
 }
@@ -183,34 +184,68 @@ body {
   text-underline-offset: 2px;
 }
 
-/* ============ SECTION TABS (research, writing) ============ */
-.section-tabs {
-  display: flex; gap: 1.4rem;
-  margin-bottom: 2rem;
+/* ============ OUTPUT PILLS (scholarship, portfolio) ============ */
+.entry-outputs { display: flex; gap: 0.45rem; flex-wrap: wrap; margin-top: 0.6rem; }
+.content-body a.entry-output {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  font-family: var(--mono); font-size: 0.6rem;
+  color: var(--link); text-decoration: none;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--link-soft); border-radius: 3px;
+  transition: background 0.15s, border-color 0.15s;
 }
-.section-tab {
-  font-family: var(--hand); font-size: 1.2rem;
+.content-body a.entry-output:hover { background: rgba(139,69,19,0.06); border-color: var(--link); }
+.entry-output::before {
+  content: ''; display: inline-block;
+  width: 4px; height: 4px; border-radius: 50%; flex-shrink: 0;
+}
+.entry-output[data-type="paper"]::before { background: #7a6fa0; }
+.entry-output[data-type="pdf"]::before { background: #b07a5b; }
+.entry-output[data-type="talk"]::before { background: #5a9e6f; }
+.entry-output[data-type="presentation"]::before { background: #8b7355; }
+.entry-output[data-type="journal"]::before { background: #4a7a96; }
+.entry-output[data-type="award"]::before { background: #c9a227; }
+.entry-output[data-type="website"]::before { background: #5a9e6f; }
+.entry-output[data-type="repo"]::before { background: #8b7355; }
+
+/* ============ BROWSER FRAMES (websites, portfolio; drawn by js/frames.js) ============ */
+.content-body .site-frame {
+  display: block; position: relative;
+  padding: 1.7rem 0.45rem 0.45rem;
+  color: var(--ink3);
+}
+.site-frame svg { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
+.site-url {
+  position: absolute; top: 0.32rem; left: 3.4rem; right: 0.6rem;
+  font-family: var(--hand); font-size: 0.95rem; line-height: 1;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.site-frame img {
+  display: block; width: 100%; height: auto; aspect-ratio: 16 / 10;
+  object-fit: cover; object-position: top;
+  filter: saturate(0.85);
+  transition: filter 0.2s;
+}
+
+/* ============ HANDWRITTEN BUTTON (scholarship reset, portfolio toggles) ============ */
+.hand-btn {
+  font-family: var(--hand); font-size: 1.15rem;
   color: var(--ink3); background: none; border: none;
-  padding: 0 0.15rem; cursor: pointer;
-  position: relative; isolation: isolate;
-  transition: color 0.15s;
+  padding: 0 0.2rem; cursor: pointer;
+  position: relative; isolation: isolate; transition: color 0.15s;
 }
-.section-tab:hover { color: var(--ink); }
-.section-tab::after {
+.hand-btn::after {
   content: ''; position: absolute;
-  left: -3px; right: -3px; bottom: 0.2em;
-  height: 0.45em; background: var(--highlight); z-index: -1;
-  border-radius: 2px 1px 3px 1px;
-  transform: rotate(-1deg);
+  left: -3px; right: -3px; bottom: 0.2em; height: 0.45em;
+  background: var(--highlight); z-index: -1;
+  border-radius: 2px 1px 3px 1px; transform: rotate(-1deg);
   opacity: 0; transition: opacity 0.15s;
 }
-.section-tab[aria-selected="true"] { color: var(--ink); }
-.section-tab[aria-selected="true"]::after { opacity: 1; }
-.section-tab:focus-visible {
-  outline: 2px solid var(--ink3);
-  outline-offset: 3px; border-radius: 2px;
+.hand-btn:hover { color: var(--ink); }
+.hand-btn:hover::after { opacity: 1; }
+:is(.hand-btn, .page-menu-btn, .back-btn):focus-visible {
+  outline: 2px solid var(--ink3); outline-offset: 3px; border-radius: 2px;
 }
-[role="tabpanel"]:not(.active) { display: none; }
 
 /* ============ RESPONSIVE ============ */
 @media (max-width: 768px) {

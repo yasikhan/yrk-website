@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HDQVY13387"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HDQVY13387');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Yasmeena (Yasi) Khan</title>
+<meta name="description" content="Websites designed and built by Yasi Khan, and her photography.">
+<link rel="canonical" href="https://yrkhan.com/portfolio.html">
+<meta property="og:title" content="Portfolio — Yasmeena (Yasi) Khan">
+<meta property="og:description" content="Websites designed and built by Yasi Khan, and her photography.">
+<meta property="og:image" content="https://yrkhan.com/assets/img/yasi-image.jpg">
+<meta property="og:url" content="https://yrkhan.com/portfolio.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/newsreader.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/libre-caslon-display-400.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/YasiHand-Regular.woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .content-body.portfolio { max-width: 1040px; }
+  .portfolio > p { max-width: 640px; }
+
+  /* Two choices, each a loose stack of what's inside. Hovering or focusing a choice fans its
+     stack out; each card carries its resting (--r, --x, --y) and fanned (--fr, --fx, --fy) pose. */
+  .picks {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4rem;
+    margin-top: 3.5rem;
+  }
+  .content-body a.pick {
+    display: block; color: var(--ink); text-align: center;
+    border-radius: 4px;
+  }
+  .content-body a.pick:focus-visible { outline: 2px solid var(--ink3); outline-offset: 10px; }
+  .stack { display: block; position: relative; height: 20rem; }
+  .stack > .stack-card {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) rotate(var(--r));
+    transition: transform 0.5s cubic-bezier(0.3, 0.7, 0.2, 1);
+  }
+  .pick:hover .stack-card,
+  .pick:focus-visible .stack-card {
+    transform: translate(calc(-50% + var(--fx)), calc(-50% + var(--fy))) rotate(var(--fr));
+  }
+
+  .stack--sites .stack-card { width: 74%; background: var(--page); }
+  .stack--sites .stack-card:nth-child(1) { --r: -5deg; --x: -3%; --y: -6%; --fr: -10deg; --fx: -22%; --fy: -4%; }
+  .stack--sites .stack-card:nth-child(2) { --r: 4deg; --x: 3%; --y: -2%; --fr: 9deg; --fx: 22%; --fy: -2%; }
+  .stack--sites .stack-card:nth-child(3) { --r: -1deg; --x: 0%; --y: 4%; --fr: 0deg; --fx: 0%; --fy: 8%; }
+
+  .stack--photos .stack-card { width: 46%; }
+  .stack--photos .stack-card:nth-child(1) { --r: -7deg; --x: -6%; --y: -3%; --fr: -14deg; --fx: -46%; --fy: 0%; }
+  .stack--photos .stack-card:nth-child(2) { --r: 5deg; --x: 6%; --y: -2%; --fr: 12deg; --fx: 46%; --fy: 1%; }
+  .stack--photos .stack-card:nth-child(3) { --r: -1deg; --x: 0%; --y: 2%; --fr: 1deg; --fx: 0%; --fy: -3%; }
+  .polaroid {
+    display: block;
+    background: linear-gradient(150deg, #fafafa 0%, #e7e7e7 52%, #dedede 100%);
+    padding: 0.7rem 0.7rem 2.2rem;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.75),
+      inset 0 0 0 0.5px rgba(0,0,0,0.06),
+      0 2px 8px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.07);
+  }
+  .polaroid img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+
+  .pick-name {
+    display: inline-block; position: relative; isolation: isolate;
+    font-family: var(--hand); font-size: 2.1rem; line-height: 1;
+    margin-top: 1.6rem;
+  }
+  .pick-name::after {
+    content: ''; position: absolute;
+    left: -4px; right: -4px; bottom: 0.05em; height: 0.4em;
+    background: var(--highlight); z-index: -1;
+    border-radius: 2px 1px 3px 1px; transform: rotate(-1deg);
+    opacity: 0; transition: opacity 0.15s;
+  }
+  .pick:hover .pick-name::after, .pick:focus-visible .pick-name::after { opacity: 1; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stack-card { transition: none; }
+  }
+  @media (max-width: 768px) {
+    .picks { grid-template-columns: minmax(0, 1fr); gap: 3.5rem; margin-top: 2.5rem; }
+    .stack { height: 15rem; }
+    .pick-name { font-size: 1.8rem; margin-top: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+<nav class="content-nav">
+  <a class="back-btn" href="/">&larr; homepage</a>
+  <div class="page-menu">
+    <button class="page-menu-btn" type="button" aria-expanded="false" aria-controls="page-menu-list" aria-label="Menu"><svg width="22" height="16" viewBox="0 0 22 16" aria-hidden="true"><path d="M1.5 2.6 Q11 1.6 20.5 2.3 M1.5 8.3 Q11 7.6 20.5 8.1 M1.5 13.7 Q11 14.4 20.5 13.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+    <ul class="page-menu-list" id="page-menu-list" hidden>
+      <li><a href="/about.html">About Me</a></li>
+      <li><a href="/research.html">Research</a></li>
+      <li><a href="/portfolio.html" aria-current="page">Portfolio</a></li>
+      <li class="sub"><a href="/websites.html">Websites</a></li>
+      <li class="sub"><a href="/photography.html">Photography</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="content-body portfolio">
+  <h1>Portfolio</h1>
+  <p>Websites, designed and built from scratch, and photography on my Fujifilm XT-50.</p>
+
+  <div class="picks">
+    <a class="pick" href="websites.html">
+      <span class="stack stack--sites" aria-hidden="true">
+        <span class="stack-card site-frame"><span class="site-url">literatusapp.com</span><img src="assets/img/sites/literatus.jpg" alt="" width="960" height="600"></span>
+        <span class="stack-card site-frame"><span class="site-url">seekingvermeer.com</span><img src="assets/img/sites/vermeer.jpg" alt="" width="960" height="600"></span>
+        <span class="stack-card site-frame"><span class="site-url">aigovlab.stanford.edu</span><img src="assets/img/sites/aigovlab.jpg" alt="" width="960" height="600"></span>
+      </span>
+      <span class="pick-name">websites</span>
+    </a>
+    <a class="pick" href="photography.html">
+      <span class="stack stack--photos" aria-hidden="true">
+        <span class="stack-card polaroid"><img src="photos/a%20penguin's%20life,%20ushuaia,%20patagonia%20-%202024.jpeg" alt=""></span>
+        <span class="stack-card polaroid"><img src="photos/a%20lotus%20without%20mud,%20grand%20palace,%20thailand%20-%202026.JPG" alt=""></span>
+        <span class="stack-card polaroid"><img src="photos/still%20water,%20kyoto,%20japan%20-%202026.jpeg" alt=""></span>
+      </span>
+      <span class="pick-name">photography</span>
+    </a>
+  </div>
+</div>
+
+<footer class="site-footer">designed and coded by yasi khan &copy; 2026 &ndash; <a href="https://github.com/yasikhan/yrk-website">repo</a></footer>
+<script src="js/rough.js"></script>
+<script src="js/frames.js"></script>
+<script src="/js/nav.js"></script>
+</body>
+</html>
